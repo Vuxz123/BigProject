@@ -1,7 +1,6 @@
 package com.ethnicthv.bigproject;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.dsl.components.EffectComponent;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
@@ -10,42 +9,48 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.particle.ParticleComponent;
-import com.almasb.fxgl.particle.ParticleEmitter;
 import com.almasb.fxgl.particle.ParticleEmitters;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.scene.BoundsAccessor;
-import javafx.event.EventType;
+import com.almasb.fxgl.texture.Texture;
+import com.ethnicthv.bigproject.asset.ParticleProvider;
+import com.ethnicthv.bigproject.asset.TextureProvider;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.Effect;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.RotateEvent;
 import javafx.scene.shape.Rectangle;
-import org.w3c.dom.events.Event;
+import javafx.scene.transform.Rotate;
+
+import static com.almasb.fxgl.core.math.FXGLMath.random;
 
 public class TestFactory implements EntityFactory {
 
     @Spawns("Projectile")
     public Entity spawnProjectile(SpawnData data){
-        Point2D current = new Point2D(10,10);
+        Point2D current = new Point2D(200,200);
         Point2D mouse = FXGL.getInput().getMousePositionWorld();
-        ParticleEmitter a = ParticleEmitters.newFireEmitter();
-        a.setBlendMode(BlendMode.SRC_OVER);
-        a.setEmissionRate(0.5);
-        a.setNumParticles(10);
-        a.setMaxEmissions(100);
+        Point2D dir = current.subtract(mouse);
+        Texture a = TextureProvider.INSTANCE.ROCKET.copy();
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(0);
+        rotate.setPivotY(10);
+        rotate.setAngle(dir.angle(new Point2D(-1,0)));
+        a.getTransforms().add(rotate);
+
         Entity res = FXGL.entityBuilder(data)
                 .type(Type.ROCKET)
-                .view(new Rectangle(100,10))
-                .bbox(BoundingShape.box(100,10))
+                .view(a)
+                .bbox(new HitBox(a.localToParent(new Point2D(90,10)), BoundingShape.box(10,10)))
                 .at(current)
-                .with(new ProjectileComponent(current.subtract(mouse), -400))
+                .with(new ProjectileComponent(dir, -400).allowRotation(false))
                 .with(new OffscreenCleanComponent())
-                .with(new ParticleComponent(a))
+                .with(new ParticleComponent(ParticleProvider.INSTANCE.getEmberEmitter(dir,current)))
                 .with(new CollidableComponent(true))
                 .build();
+        //res.setLocalAnchor(new Point2D(0,10));
         return res;
     }
 
@@ -60,5 +65,13 @@ public class TestFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
         return res;
+    }
+
+    @Spawns("Explosion")
+    public Entity spawnExplosion(SpawnData data){
+        return FXGL.entityBuilder(data)
+                .at(data.get("x"),data.get("y"))
+                .with(new ParticleComponent(ParticleEmitters.newExplosionEmitter(10)))
+                .build();
     }
 }
