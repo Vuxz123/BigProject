@@ -13,7 +13,6 @@ public class PhysicControler {
     public static final PhysicControler INSTACNE = new PhysicControler();
 
     private PhysicControler(){
-        add("RocketWall", new RocketWallCollision());
     }
 
     public void add(String name, CollisionHandler handler) {

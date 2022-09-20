@@ -21,8 +21,8 @@ public class ParticleProvider {
         res.setEndColor(Color.rgb(230, 75, 40));
         res.setSize(5, 8);
         res.setVelocityFunction(i -> {
-            Point2D a = new Point2D(random(-0.5, 0.5) * 0.25 * 60, FXGLMath.randomDouble() * -1 * 60);
-            return FXGLMath.rotate(a,pos, a.angle(dir));
+
+            return dir.multiply(FXGLMath.random(1,1.5));
         });
         res.setSpawnPointFunction(i -> new Point2D(0, 0).add(new Point2D(i * (FXGLMath.randomDouble() - 0.5), FXGLMath.randomDouble() - 1)));
         res.setExpireFunction(i -> Duration.seconds(1));

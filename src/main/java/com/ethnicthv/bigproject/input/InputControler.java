@@ -11,23 +11,5 @@ public class InputControler {
 
     @Deprecated
     public void setup(){
-        FXGL.getInput().addAction(new UserAction("alo") {
-            @Override
-            protected void onActionBegin() {
-                super.onActionBegin();
-                //if(FXGL.getGameWorld().getEntitiesByType(Type.ROCKET).size() > 1) return;
-                FXGL.getGameWorld().spawn(("Projectile"));
-                super.onAction();
-            }
-        }, MouseButton.PRIMARY);
-        FXGL.getInput().addAction(new UserAction("ola") {
-            @Override
-            protected void onActionBegin() {
-                super.onActionBegin();
-                //if(FXGL.getGameWorld().getEntitiesByType(Type.ROCKET).size() > 1) return;
-                FXGL.getGameWorld().spawn(("Block"));
-                super.onAction();
-            }
-        }, MouseButton.SECONDARY);
     }
 }

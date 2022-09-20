@@ -107,7 +107,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.ethnicthv.bigproject/com.ethnicthv.bigproject.HelloApplication</mainClass>
+                            <mainClass>com.ethnicthv.bigproject.client.pri.BommerApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
