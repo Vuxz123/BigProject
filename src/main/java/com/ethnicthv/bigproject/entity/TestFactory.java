@@ -1,4 +1,4 @@
-package com.ethnicthv.bigproject;
+package com.ethnicthv.bigproject.entity;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
@@ -15,12 +15,9 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.ParticleProvider;
 import com.ethnicthv.bigproject.asset.TextureProvider;
-import javafx.event.EventHandler;
+import com.ethnicthv.bigproject.entity.component.DurationComponent;
 import javafx.geometry.Point2D;
-import javafx.geometry.Point3D;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.RotateEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
@@ -41,7 +38,7 @@ public class TestFactory implements EntityFactory {
         a.getTransforms().add(rotate);
 
         Entity res = FXGL.entityBuilder(data)
-                .type(Type.ROCKET)
+                .type(EntityType.ROCKET)
                 .view(a)
                 .bbox(new HitBox(a.localToParent(new Point2D(90,10)), BoundingShape.box(10,10)))
                 .at(current)
@@ -59,7 +56,7 @@ public class TestFactory implements EntityFactory {
         Point2D mouse = FXGL.getInput().getMousePositionWorld();
         Node a = new Rectangle(30,30);
         Entity res = FXGL.entityBuilder(data)
-                .type(Type.BLOCK)
+                .type(EntityType.BLOCK)
                 .viewWithBBox(a)
                 .at(mouse.add(new Point2D(-15,-15)))
                 .with(new CollidableComponent(true))
@@ -69,9 +66,11 @@ public class TestFactory implements EntityFactory {
 
     @Spawns("Explosion")
     public Entity spawnExplosion(SpawnData data){
-        return FXGL.entityBuilder(data)
+        Entity a = FXGL.entityBuilder(data)
                 .at(data.get("x"),data.get("y"))
                 .with(new ParticleComponent(ParticleEmitters.newExplosionEmitter(10)))
                 .build();
+        a.addComponent(new DurationComponent(a, DurationComponent.Type.MILLISECOND ,500));
+        return a;
     }
 }
