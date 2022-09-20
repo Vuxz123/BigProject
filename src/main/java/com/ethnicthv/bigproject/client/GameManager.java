@@ -16,6 +16,7 @@ public class GameManager {
     private GameManager(){}
 
     public static void init(){
+        //init item
 
     }
 
