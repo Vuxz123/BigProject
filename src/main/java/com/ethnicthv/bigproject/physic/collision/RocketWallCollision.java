@@ -16,10 +16,9 @@ public class RocketWallCollision extends CollisionHandler {
     protected void onCollisionBegin(Entity a, Entity b) {
         super.onCollisionBegin(a, b);
         FXGL.getGameWorld().removeEntity(b);
-        b.removeFromWorld();
         a.distance(b);
         Point2D c = a.getBoundingBoxComponent().getCenterWorld().subtract(b.getBoundingBoxComponent().getCenterWorld());
-        Point2D d = b.getBoundingBoxComponent().getCenterWorld().subtract(c.getX()/2, c.getY()/2);
+        Point2D d = b.getBoundingBoxComponent().getCenterWorld().subtract(c.multiply(0.5));
         FXGL.getGameWorld().spawn(("Explosion"), new SpawnData().put("x", d.getX()).put("y", d.getY()));
     }
 }

@@ -11,19 +11,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DurationComponent extends Component {
     private Duration duration;
-    private final Entity entity;
 
     /**
      * Hàm khởi tạo nhận vào một duration.
-     * @param entity   Phần từ đang có Component này chỉ tới;
-     * @param duration Quãng thời gian entity này tồn tại;
-     *                 duration là hằng số, sẽ không thể thay đổi được;
-     *                 duration được tính bằng đơn vị Nanosecond.
      * @param type Kiểu đơn vị thời gian;
      *             được chọn từ enum Type;
+     * @param duration Quãng thời gian entity này tồn tại;
+     *                 duration là hằng số, sẽ không thể thay đổi được.
      */
-    public DurationComponent(@NotNull Entity entity, Type type, double duration) {
-        this.entity = entity;
+    public DurationComponent(Type type, double duration) {
         switch (type) {
             case NANOSECOND -> this.duration = Duration.millis(duration / 1000000);
             case MICROSECOND -> this.duration = Duration.millis(duration / 1000);
@@ -35,8 +31,7 @@ public class DurationComponent extends Component {
     @Override
     public void onAdded() {
         super.onAdded();
-
-        FXGL.getGameTimer().runOnceAfter(entity::removeFromWorld, duration);
+        FXGL.getGameTimer().runOnceAfter(getEntity()::removeFromWorld, duration);
     }
 
     public enum Type {

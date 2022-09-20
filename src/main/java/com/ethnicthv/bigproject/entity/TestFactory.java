@@ -16,6 +16,7 @@ import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.ParticleProvider;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.entity.component.DurationComponent;
+import com.ethnicthv.bigproject.entity.component.OffscreenDelayCleanComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
@@ -35,17 +36,20 @@ public class TestFactory implements EntityFactory {
         rotate.setPivotX(0);
         rotate.setPivotY(10);
         rotate.setAngle(dir.angle(new Point2D(-1,0)));
-        a.getTransforms().add(rotate);
+        //a.getTransforms().add(rotate);
 
         Entity res = FXGL.entityBuilder(data)
                 .type(EntityType.ROCKET)
-                .view(a)
-                .bbox(new HitBox(a.localToParent(new Point2D(90,10)), BoundingShape.box(10,10)))
-                .at(current)
-                .with(new ProjectileComponent(dir, -400).allowRotation(false))
-                .with(new OffscreenCleanComponent())
-                .with(new ParticleComponent(ParticleProvider.INSTANCE.getEmberEmitter(dir,current)))
-                .with(new CollidableComponent(true))
+                .viewWithBBox(a)
+                //.bbox(new HitBox(a.localToParent(new Point2D(90,10)), BoundingShape.box(10,10)))
+                .with(new ProjectileComponent(dir, -400))
+                .with(new OffscreenDelayCleanComponent(2000))
+                .with(new ParticleComponent(ParticleEmitters.newSmokeEmitter()))
+                //.with(new CollidableComponent(true))
+                .rotationOrigin(new Point2D( 10,0))
+                .atAnchored(new Point2D(0,10),current)
+                .opacity(255)
+                .collidable()
                 .build();
         //res.setLocalAnchor(new Point2D(0,10));
         return res;
@@ -70,7 +74,7 @@ public class TestFactory implements EntityFactory {
                 .at(data.get("x"),data.get("y"))
                 .with(new ParticleComponent(ParticleEmitters.newExplosionEmitter(10)))
                 .build();
-        a.addComponent(new DurationComponent(a, DurationComponent.Type.MILLISECOND ,500));
+        a.addComponent(new DurationComponent(DurationComponent.Type.MILLISECOND ,400));
         return a;
     }
 }

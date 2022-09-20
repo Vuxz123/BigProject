@@ -2,6 +2,8 @@ package com.ethnicthv.bigproject;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.GameView;
+import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
 import com.ethnicthv.bigproject.entity.TestFactory;
 import com.ethnicthv.bigproject.input.InputControler;
@@ -22,6 +24,7 @@ public class HelloApplication extends GameApplication {
 //    }
 
     public static Text count;
+    public static Viewport externalViewPort = new Viewport(100,100);
 
     public static void main(String[] args) {
         launch(args);
@@ -33,15 +36,14 @@ public class HelloApplication extends GameApplication {
         gameSettings.setHeight(600);
         gameSettings.setTitle("Basic Game App");
         gameSettings.setVersion("0.1");
-        gameSettings.setTicksPerSecond(64);
+        gameSettings.setTicksPerSecond(128);
+        //gameSettings.setIntroEnabled(true);
     }
 
     @Override
     protected void initUI() {
         super.initUI();
-        Shape shape = new Rectangle(FXGL.getGameScene().getHeight(),FXGL.getGameScene().getWidth());
-        shape.setFill(Paint.valueOf("red"));
-        FXGL.getGameScene().addUINode(shape);
+        FXGL.getGameScene();
         count = FXGL.addText("0",10,15);
         count.setFill(Paint.valueOf("red"));
     }
@@ -50,6 +52,7 @@ public class HelloApplication extends GameApplication {
     protected void initGame() {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new TestFactory());
+        FXGL.getGameScene().setBackgroundColor(Paint.valueOf("blue"));
         InputControler.INSTANCE.setup();
     }
 
