@@ -1,5 +1,7 @@
 package com.ethnicthv.bigproject.item;
 
+import com.almasb.fxgl.inventory.ItemStack;
+
 import java.util.HashMap;
 
 public class ItemRegistryManager {

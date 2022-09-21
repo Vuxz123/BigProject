@@ -14,10 +14,17 @@ import com.ethnicthv.bigproject.entity.component.DurationComponent;
 import com.ethnicthv.bigproject.entity.entities.pools.ProjectilePools;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.core.math.FXGLMath.random;
 
 public class TestFactory implements EntityFactory {
-
+    @Spawns("w,wall")
+    public Entity wall(SpawnData data){
+        return FXGL.entityBuilder(data)
+                .viewWithBBox(new Rectangle(16,16, Color.RED))
+                .type(EntityType.BLOCK)
+                .build();
+    }
 }

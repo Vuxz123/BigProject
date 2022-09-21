@@ -1,8 +1,8 @@
 package com.ethnicthv.bigproject.item.items;
 
+import com.almasb.fxgl.inventory.ItemStack;
 import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.item.Item;
-import com.ethnicthv.bigproject.item.ItemStack;
 
 public class CoinItem extends Item {
     public CoinItem(Texture texture) {
@@ -16,6 +16,6 @@ public class CoinItem extends Item {
 
     @Override
     public ItemStack getItemStack() {
-        return null;
+        return new ItemStack<>(this);
     }
 }

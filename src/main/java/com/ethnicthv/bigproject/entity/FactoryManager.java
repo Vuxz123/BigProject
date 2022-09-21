@@ -13,6 +13,12 @@ public class FactoryManager {
 
     public void addFactory(EntityFactory factory){
         entityFactories.add(factory);
+        FXGL.getGameWorld().addEntityFactory(factory);
+    }
+
+    @Deprecated
+    public void addFactoryX(EntityFactory factory){
+        entityFactories.add(factory);
     }
 
     @Deprecated

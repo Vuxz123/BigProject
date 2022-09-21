@@ -35,6 +35,7 @@ public class BommerApplication extends GameApplication {
         super.initGame();
         FactoryManager.INSTANCE.setup();
         InputControler.INSTANCE.setup();
+        GameManager.initGame();
     }
 
     @Override

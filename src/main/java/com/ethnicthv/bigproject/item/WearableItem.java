@@ -1,5 +1,6 @@
 package com.ethnicthv.bigproject.item;
 
+import com.almasb.fxgl.inventory.ItemStack;
 import com.almasb.fxgl.texture.Texture;
 
 public abstract class WearableItem extends Item {
