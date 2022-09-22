@@ -1,12 +1,14 @@
 package com.ethnicthv.bigproject.client;
 
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
 import com.ethnicthv.bigproject.entity.entities.Player;
 
 import static com.ethnicthv.bigproject.Util.SS;
 
 public class GameManager {
-    public static final Player player = new Player();
+    public static Entity player;
 
     public static final int OFFSETX = 5;
     public static final int OFFSETY = 5;
@@ -33,11 +35,13 @@ public class GameManager {
         gameSettings.setTitle(TITLE);
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
-        System.out.println("" + grid.getMaxGrixX() + " " + grid.getMaxGridY());
+        System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
     }
 
     public static void initGame(){
         grid.setup();
+        player = new Player().getPlayer();
+        FXGL.getGameWorld().addEntity(player);
     }
 
 }

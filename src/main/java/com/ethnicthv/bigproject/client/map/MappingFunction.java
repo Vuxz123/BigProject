@@ -7,7 +7,7 @@ import javafx.scene.control.Cell;
 public class MappingFunction {
 
     public static CellState apply(Object t){
-        return t == EntityType.BLOCK ? CellState.NOT_WALKABLE : CellState.WALKABLE;
+        return t.equals(EntityType.BLOCK)  ? CellState.NOT_WALKABLE : CellState.WALKABLE;
     }
 
 }
