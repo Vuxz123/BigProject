@@ -1,10 +1,8 @@
 package com.ethnicthv.bigproject.entity.component;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.util.Duration;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Một Component sẽ khiến Entity biến mất sao một khoảng thời gian.

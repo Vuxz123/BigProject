@@ -96,7 +96,7 @@ public class CustomCellMoveComponent extends Component {
     public void setPositionToCell(int cellX, int cellY) {
         int cx = cellX * this.cellWidth + this.cellWidth / 2 + offsetX;
         int cy = cellY * this.cellHeight + this.cellHeight / 2 + offsetY;
-        this.entity.setAnchoredPosition((double)cx, (double)cy);
+        this.entity.setAnchoredPosition(cx, cy);
         this.isAtDestinationProp.setValue(true);
         this.isMovingLeft = false;
         this.isMovingRight = false;
@@ -137,7 +137,7 @@ public class CustomCellMoveComponent extends Component {
             if (Math.abs(dx) <= tpfSpeed) {
                 this.isMovingLeft = false;
                 this.isMovingRight = false;
-                this.entity.setX((double)(cx - offsetX));
+                this.entity.setX(cx - offsetX);
             } else {
                 this.isMovingLeft = Math.signum(dx) < 0.0;
                 this.isMovingRight = Math.signum(dx) > 0.0;
@@ -147,7 +147,7 @@ public class CustomCellMoveComponent extends Component {
             if (Math.abs(dy) <= tpfSpeed) {
                 this.isMovingUp = false;
                 this.isMovingDown = false;
-                this.entity.setY((double)(cy - offsetY));
+                this.entity.setY(cy - offsetY);
             } else {
                 this.isMovingUp = Math.signum(dy) < 0.0;
                 this.isMovingDown = Math.signum(dy) > 0.0;

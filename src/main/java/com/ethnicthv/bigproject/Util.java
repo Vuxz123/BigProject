@@ -1,9 +1,9 @@
 package com.ethnicthv.bigproject;
 
 import com.almasb.fxgl.core.math.FXGLMath;
-import com.almasb.fxgl.dsl.components.RandomAStarMoveComponent;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomAstarMoveComponent;
+import com.ethnicthv.bigproject.entity.EntityType;
+import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomRandomAStarMoveComponent;
 import javafx.scene.shape.Rectangle;
@@ -24,11 +24,13 @@ public class Util {
     public static void spawnNPC(int x, int y) {
         var e = entityBuilder()
                 .viewWithBBox(new Rectangle(16, 16, FXGLMath.randomColor()))
+                .type(EntityType.ENTITY)
                 .at(5 + 16, 5 + 16)
                 .anchorFromCenter()
                 .with(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY ,GameManager.grid.gridsize, GameManager.grid.gridsize, 150))
-                .with(new CustomAstarMoveComponent(GameManager.grid.pfg))
+                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
                 .with(new CustomRandomAStarMoveComponent(Duration.seconds(1), Duration.seconds(3)))
+                .collidable()
                 .buildAndAttach();
 
 

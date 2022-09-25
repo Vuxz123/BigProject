@@ -2,7 +2,6 @@ package com.ethnicthv.bigproject.physic;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.physics.CollisionHandler;
-import com.ethnicthv.bigproject.physic.collision.RocketWallCollision;
 
 import java.util.*;
 

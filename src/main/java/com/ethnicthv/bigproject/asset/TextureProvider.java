@@ -2,9 +2,6 @@ package com.ethnicthv.bigproject.asset;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.texture.Texture;
-import javafx.scene.image.ImageView;
-
-import java.awt.*;
 
 public class TextureProvider {
     public static final TextureProvider INSTANCE = new TextureProvider();

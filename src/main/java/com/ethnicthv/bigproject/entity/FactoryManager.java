@@ -23,8 +23,6 @@ public class FactoryManager {
 
     @Deprecated
     public void setup(){
-        entityFactories.forEach((entityFactory)->{
-            FXGL.getGameWorld().addEntityFactory(entityFactory);
-        });
+        entityFactories.forEach((entityFactory)-> FXGL.getGameWorld().addEntityFactory(entityFactory));
     }
 }

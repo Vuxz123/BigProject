@@ -5,15 +5,14 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
-import com.almasb.fxgl.pathfinding.CellState;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomAstarMoveComponent;
+import com.ethnicthv.bigproject.client.map.SafeCellState;
+import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-import static com.almasb.fxgl.core.math.FXGLMath.random;
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class TestFactory implements EntityFactory {
@@ -25,6 +24,7 @@ public class TestFactory implements EntityFactory {
 
         var e = entityBuilder(data)
                 .view(view)
+                .type(EntityType.NULL)
                 .build();
 
         int x = GameManager.grid.getGridX((int) data.getX());
@@ -32,10 +32,10 @@ public class TestFactory implements EntityFactory {
 
         e.getViewComponent().addOnClickHandler(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                GameManager.player.getComponent(CustomAstarMoveComponent.class).moveToCell(GameManager.grid.getGridX((int) data.getX()), GameManager.grid.getGridY((int) data.getY()));
+                GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.getGridX((int) data.getX()), GameManager.grid.getGridY((int) data.getY()));
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
-                GameManager.grid.pfg.get(x, y).setState(CellState.NOT_WALKABLE);
+                GameManager.grid.pfg.get(x, y).setState(SafeCellState.NOT_WALKABLE);
                 view.setFill(Color.RED);
             }
         });

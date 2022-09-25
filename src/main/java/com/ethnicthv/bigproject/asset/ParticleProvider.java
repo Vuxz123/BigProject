@@ -7,8 +7,6 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import static com.almasb.fxgl.core.math.FXGLMath.random;
-
 public class ParticleProvider {
     public static final ParticleProvider INSTANCE = new ParticleProvider();
     private ParticleProvider(){
@@ -20,10 +18,7 @@ public class ParticleProvider {
         res.setStartColor(Color.rgb(255, 255, 90));
         res.setEndColor(Color.rgb(230, 75, 40));
         res.setSize(5, 8);
-        res.setVelocityFunction(i -> {
-
-            return dir.multiply(FXGLMath.random(1,1.5));
-        });
+        res.setVelocityFunction(i -> dir.multiply(FXGLMath.random(1,1.5)));
         res.setSpawnPointFunction(i -> new Point2D(0, 0).add(new Point2D(i * (FXGLMath.randomDouble() - 0.5), FXGLMath.randomDouble() - 1)));
         res.setExpireFunction(i -> Duration.seconds(1));
         res.setBlendMode(BlendMode.SRC_OVER);

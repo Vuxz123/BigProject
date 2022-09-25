@@ -2,7 +2,7 @@ package com.ethnicthv.bigproject.entity.entities;
 
 import com.almasb.fxgl.entity.Entity;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomAstarMoveComponent;
+import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.EntityType;
 import javafx.scene.paint.Color;
@@ -22,7 +22,7 @@ public class Player extends Entity {
                 .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
                 .at(5 + 32, 5 + 32)
                 .with(new CustomCellMoveComponent(5, 5,16, 16, 150))
-                .with(new CustomAstarMoveComponent(GameManager.grid.pfg))
+                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
                 .zIndex(1)
                 .anchorFromCenter()
                 .build();
@@ -33,9 +33,9 @@ public class Player extends Entity {
             }
         });
 
-        agent.getComponent(CustomAstarMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
+        agent.getComponent(CustomAStarMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
             if (isAtDestination) {
-                debug("CustomAstarMoveComponent: reached destination");
+                debug("CustomAStarMoveComponent: reached destination");
             }
         });
 
