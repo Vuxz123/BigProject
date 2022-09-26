@@ -32,8 +32,6 @@ public class GameMap {
         loader = new CustomTextLevelLoader(gridsize, gridsize, OFFSETX, OFFSETY,'1', MappingFunction::apply);
         level = FXGL.getAssetLoader().loadLevel("test-level.txt", loader);
         FXGL.getGameWorld().setLevel(level);
-
-        Util.spawnNPC(2,2);
     }
 
     public int getGridX(int x){

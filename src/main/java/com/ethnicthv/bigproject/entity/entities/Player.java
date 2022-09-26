@@ -21,7 +21,7 @@ public class Player extends Entity {
         var agent = entityBuilder()
                 .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
                 .at(5 + 32, 5 + 32)
-                .with(new CustomCellMoveComponent(5, 5,16, 16, 150))
+                .with(new CustomCellMoveComponent(5, 5,16, 16, 300))
                 .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
                 .zIndex(1)
                 .anchorFromCenter()

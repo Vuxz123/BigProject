@@ -3,12 +3,13 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.ethnicthv.bigproject.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 
 import static com.ethnicthv.bigproject.Util.SS;
 
 public class GameManager {
-    public static Entity player;
+    public static Entity player ;
 
     public static final int OFFSETX = 5;
     public static final int OFFSETY = 5;
@@ -42,6 +43,7 @@ public class GameManager {
         grid.setup();
         player = new Player().getPlayer();
         FXGL.getGameWorld().addEntity(player);
+        Util.spawnNPC(10,10);
     }
 
 }

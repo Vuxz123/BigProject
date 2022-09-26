@@ -5,7 +5,6 @@ import java.io.Serializable;
 
 public class Pos implements Serializable {
     @Serial
-    @Serial
     private static final long serialVersionUID = 1234L;
 
     private int posX, posY;

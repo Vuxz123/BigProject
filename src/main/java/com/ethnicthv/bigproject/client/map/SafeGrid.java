@@ -40,7 +40,7 @@ public class SafeGrid extends Grid<SafeCell> {
                 .toList();
     }
 
-    public SafeCell getNearestSafeCell(int cellX, int cellY){
+    public SafeCell getNearestSafeCell(int cellX, int cellY) {
         AtomicInteger max = new AtomicInteger(Integer.MAX_VALUE);
         AtomicReference<SafeCell> cell = null;
         getCells()
@@ -49,8 +49,8 @@ public class SafeGrid extends Grid<SafeCell> {
                 .forEach(c -> {
                     int x = c.getX() - cellX;
                     int y = c.getY() - cellY;
-                    int distance = (int) Math.sqrt(x*x + y*y);
-                    if(distance < max.get()) {
+                    int distance = (int) Math.sqrt(x * x + y * y);
+                    if (distance < max.get()) {
                         max.set(distance);
                         assert cell != null;
                         cell.set(c);
@@ -60,9 +60,13 @@ public class SafeGrid extends Grid<SafeCell> {
         return cell.get();
     }
 
+    public SafeCell getCell(Entity entity) {
+        int x = ((int) entity.getX() - GameManager.OFFSETX) / GameManager.grid.gridsize;
+        int y = ((int) entity.getY() - GameManager.OFFSETY) / GameManager.grid.gridsize;
+        return this.get(x,y);
+    }
 
-
-    public void setUnSafe(int cellX, int cellY, CellUnSafeFunction function){
+    public void setUnSafe(int cellX, int cellY, CellUnSafeFunction function) {
         function.apply(this.getCells(), cellX, cellY);
     }
 
@@ -84,9 +88,9 @@ public class SafeGrid extends Grid<SafeCell> {
      * Xem chi tiết bản gốc: {@link AStarGrid}
      */
     public static SafeGrid fromWorld(GameWorld world,
-                                      int worldWidth, int worldHeight,
-                                      int cellWidth, int cellHeight,
-                                      Function<Object, SafeCellState> mapping) {
+                                     int worldWidth, int worldHeight,
+                                     int cellWidth, int cellHeight,
+                                     Function<Object, SafeCellState> mapping) {
 
         SafeGrid grid = new SafeGrid(worldWidth, worldHeight);
         grid.populate((x, y) -> {
@@ -96,13 +100,13 @@ public class SafeGrid extends Grid<SafeCell> {
 
             boolean isWalkable;
 
-            System.out.println( world.getEntitiesInRange(new Rectangle2D(worldX-2, worldY-2, 4, 4)).size());
+            System.out.println(world.getEntitiesInRange(new Rectangle2D(worldX - 2, worldY - 2, 4, 4)).size());
             // size 4 is a "good enough" value
             List<Object> collidingTypes = //world.getEntitiesInRange(new Rectangle2D(worldX-2, worldY-2, 4, 4))
-                                            world.getEntitiesAt(new Point2D(worldX,worldY))
-                    .stream()
-                    .map(Entity::getType)
-                    .collect(Collectors.toList());
+                    world.getEntitiesAt(new Point2D(worldX, worldY))
+                            .stream()
+                            .map(Entity::getType)
+                            .collect(Collectors.toList());
 
             if (collidingTypes.isEmpty()) {
                 // if no types found at given worldX, worldY, then just see what mapping returns by default
