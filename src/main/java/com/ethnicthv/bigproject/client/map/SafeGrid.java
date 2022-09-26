@@ -1,12 +1,17 @@
 package com.ethnicthv.bigproject.client.map;
 
 import com.almasb.fxgl.core.collection.grid.Grid;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
+import com.almasb.fxgl.event.EventBus;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
+import com.ethnicthv.bigproject.Util;
 import com.ethnicthv.bigproject.client.GameManager;
+import com.ethnicthv.bigproject.event.events.UpdateBlockEvent;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -60,14 +65,63 @@ public class SafeGrid extends Grid<SafeCell> {
         return cell.get();
     }
 
+    public SafeCell getCell(Point2D pos) {
+        int x = ((int) pos.getX() - GameManager.OFFSETX) / GameManager.grid.gridsize;
+        int y = ((int) pos.getY() - GameManager.OFFSETY) / GameManager.grid.gridsize;
+        return this.get(x, y);
+    }
+
     public SafeCell getCell(Entity entity) {
         int x = ((int) entity.getX() - GameManager.OFFSETX) / GameManager.grid.gridsize;
         int y = ((int) entity.getY() - GameManager.OFFSETY) / GameManager.grid.gridsize;
-        return this.get(x,y);
+        return this.get(x, y);
+    }
+
+    public void setUnSafe(int cellX, int cellY) {
+        this.get(cellX, cellY).setState(SafeCellState.NOTSAFE);
+        if (!this.get(cellX - 1, cellY).isWalkable() || this.get(cellX - 1, cellY).isNotSafe()) {
+            this.get(cellX - 1, cellY).setState(SafeCellState.SAFE);
+        }
+        if (!this.get(cellX + 1, cellY).isWalkable() || this.get(cellX + 1, cellY).isNotSafe()) {
+            this.get(cellX + 1, cellY).setState(SafeCellState.SAFE);
+        }
+        if (!this.get(cellX, cellY - 1).isWalkable() || this.get(cellX, cellY - 1).isNotSafe()) {
+            this.get(cellX, cellY - 1).setState(SafeCellState.SAFE);
+        }
+        if (!this.get(cellX, cellY + 1).isWalkable() || this.get(cellX, cellY + 1).isNotSafe()) {
+            this.get(cellX, cellY + 1).setState(SafeCellState.SAFE);
+        }
+    }
+
+
+    /**
+     * hàm nhằm mục đích Test
+     */
+    @Deprecated
+    public void setUnSafe(int cellX, int cellY, boolean a) {
+        EventBus bus = FXGL.getEventBus();
+        this.get(cellX, cellY).setState(SafeCellState.NOTSAFE);
+        Util.setBlockChange(cellX, cellY, Color.RED);
+        if (this.get(cellX - 1, cellY).isWalkable() && !this.get(cellX - 1, cellY).isNotSafe()) {
+            this.get(cellX - 1, cellY).setState(SafeCellState.SAFE);
+            Util.setBlockChange(cellX - 1, cellY, Color.GREEN);
+        }
+        if (this.get(cellX + 1, cellY).isWalkable() && !this.get(cellX + 1, cellY).isNotSafe()) {
+            this.get(cellX + 1, cellY).setState(SafeCellState.SAFE);
+            Util.setBlockChange(cellX + 1, cellY, Color.GREEN);
+        }
+        if (this.get(cellX, cellY - 1).isWalkable() && !this.get(cellX, cellY - 1).isNotSafe()) {
+            this.get(cellX, cellY - 1).setState(SafeCellState.SAFE);
+            Util.setBlockChange(cellX, cellY - 1, Color.GREEN);
+        }
+        if (this.get(cellX, cellY + 1).isWalkable() && !this.get(cellX, cellY + 1).isNotSafe()) {
+            this.get(cellX, cellY + 1).setState(SafeCellState.SAFE);
+            Util.setBlockChange(cellX, cellY + 1, Color.GREEN);
+        }
     }
 
     public void setUnSafe(int cellX, int cellY, CellUnSafeFunction function) {
-        function.apply(this.getCells(), cellX, cellY);
+        function.apply(this, cellX, cellY);
     }
 
     public boolean isSafe(int cellX, int cellY) {
@@ -76,10 +130,6 @@ public class SafeGrid extends Grid<SafeCell> {
 
     public boolean isNotSafe(int cellX, int cellY) {
         return get(cellX, cellY).isNotSafe();
-    }
-
-    public interface CellUnSafeFunction {
-        void apply(List<SafeCell> cell, int centerX, int centerY);
     }
 
     /**
@@ -122,5 +172,9 @@ public class SafeGrid extends Grid<SafeCell> {
         });
 
         return grid;
+    }
+
+    public interface CellUnSafeFunction {
+        void apply(Grid<SafeCell> cell, int centerX, int centerY);
     }
 }

@@ -21,7 +21,7 @@ public class SafeCell extends Cell {
     }
 
     public final boolean isNotSafe() {
-        return state.isSafe();
+        return state.isNotSafe();
     }
 
     public final boolean isWalkable() {

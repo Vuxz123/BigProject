@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.ethnicthv.bigproject.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
+import com.sun.media.jfxmedia.logging.Logger;
 
 import static com.ethnicthv.bigproject.Util.SS;
 
@@ -37,9 +38,12 @@ public class GameManager {
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
+
     }
 
     public static void initGame(){
+        Logger.setLevel(Logger.DEBUG);
+        FXGL.getEventBus().setLoggingEnabled(true);
         grid.setup();
         player = new Player().getPlayer();
         FXGL.getGameWorld().addEntity(player);

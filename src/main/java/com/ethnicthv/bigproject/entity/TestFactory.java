@@ -6,9 +6,7 @@ import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.client.map.SafeCellState;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
-import javafx.scene.input.MouseButton;
+import com.ethnicthv.bigproject.event.events.UpdateBlockEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -30,13 +28,10 @@ public class TestFactory implements EntityFactory {
         int x = GameManager.grid.getGridX((int) data.getX());
         int y = GameManager.grid.getGridY((int) data.getY());
 
-        e.getViewComponent().addOnClickHandler(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.getGridX((int) data.getX()), GameManager.grid.getGridY((int) data.getY()));
-
-            } else if (event.getButton() == MouseButton.SECONDARY) {
-                GameManager.grid.pfg.get(x, y).setState(SafeCellState.NOT_WALKABLE);
-                view.setFill(Color.RED);
+        e.getViewComponent().addEventHandler(UpdateBlockEvent.UB, event -> {
+            System.out.printf("%d %d : \n", x, y);
+            if(x == event.getCellX() && y == event.getCellY()) {
+                view.setFill(event.getColor());
             }
         });
 
@@ -46,7 +41,7 @@ public class TestFactory implements EntityFactory {
     public Entity wall(SpawnData data){
         return FXGL.entityBuilder(data)
                 .type(EntityType.BLOCK)
-                .viewWithBBox(new Rectangle(16,16, Color.RED))
+                .viewWithBBox(new Rectangle(16,16, Color.CHOCOLATE))
                 .build();
     }
 }
