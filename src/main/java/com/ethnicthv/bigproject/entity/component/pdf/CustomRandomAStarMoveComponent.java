@@ -5,6 +5,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.component.Required;
 import com.almasb.fxgl.time.LocalTimer;
 import com.ethnicthv.bigproject.client.map.SafeCell;
+import com.ethnicthv.bigproject.util.WrappedBoolean;
 import javafx.util.Duration;
 
 import java.util.function.Predicate;
@@ -79,6 +80,10 @@ public class CustomRandomAStarMoveComponent extends Component {
         astar.getCurrentCell().ifPresent(currentCell -> astar.getGrid().getRandomCell(aStarCell -> aStarCell.isWalkable()
                         && cellFilter.test(aStarCell)
                         && currentCell.distance(aStarCell) >= minDistance
-                        && currentCell.distance(aStarCell) <= maxDistance).ifPresent((aStarCell)-> astar.moveToCell(aStarCell)));
+                        && currentCell.distance(aStarCell) <= maxDistance).ifPresent((aStarCell)-> {
+                            WrappedBoolean isunsafe = new WrappedBoolean(false);
+                            astar.moveToCell(aStarCell, isunsafe);
+                            if(isunsafe.get()) astar.stopMovement();
+                        }));
     }
 }

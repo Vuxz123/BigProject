@@ -43,7 +43,7 @@ public class Util {
                 .anchorFromCenter()
                 .with(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY ,GameManager.grid.gridsize, GameManager.grid.gridsize, 150))
                 .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
-                .with(new CustomRandomAStarMoveComponent(Duration.seconds(1), Duration.seconds(3)))
+                .with(new CustomRandomAStarMoveComponent(Duration.seconds(0), Duration.seconds(0.5)))
                 .with(new StateComponent())
                 .with(new AIComponent())
                 .collidable()

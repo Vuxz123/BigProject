@@ -62,7 +62,7 @@ public class CustomTextLevelLoader implements LevelLoader {
                 if (c != emptyChar) {
                     Entity e = gameWorld.create("" + c, new SpawnData(offsetX + j * blockWidth, offsetY + i.get() * blockHeight));
                     boolean isNotWalkable = mapping.apply((EntityType) e.getType()).isNotWalkable();
-                    if(isNotWalkable) {
+                    if (isNotWalkable) {
                         temp.get(j, i.get()).setState(SafeCellState.NOT_WALKABLE);
                     }
                     entities.add(e);

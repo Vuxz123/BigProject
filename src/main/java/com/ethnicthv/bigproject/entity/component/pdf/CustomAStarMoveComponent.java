@@ -8,10 +8,10 @@ import com.almasb.fxgl.entity.component.Required;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
 import com.ethnicthv.bigproject.pfd.CustomAstarPartFinder;
+import com.ethnicthv.bigproject.util.WrappedBoolean;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.value.ChangeListener;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -113,6 +113,27 @@ public class CustomAStarMoveComponent extends Component {
         this.getGrid().getRandomCell(random, SafeCell::isWalkable).ifPresent(this::moveToCell);
     }
 
+    public void moveToCell(SafeCell cell, WrappedBoolean isUnSafe) {
+        this.moveToCell(cell.getX(), cell.getY(), isUnSafe);
+    }
+
+    public void moveToCell(int x, int y, WrappedBoolean isUnSafe) {
+        int startX = this.moveComponent.getCellX();
+        int startY = this.moveComponent.getCellY();
+        this.moveToCell(startX, startY, x, y, isUnSafe);
+    }
+
+    public void moveToCell(int startX, int startY, int targetX, int targetY,WrappedBoolean isUnSafe) {
+        this.isAtDestinationProp.set(false);
+        if (this.moveComponent.isAtDestination()) {
+            this.path = this.pathfinder.get().findPath(startX, startY, targetX, targetY);
+            if(isUnSafe != null) isUnSafe.set(this.path.stream().anyMatch(SafeCell::isNotSafe));
+        } else {
+            this.delayedPathCalc = () -> this.path = this.pathfinder.get().findPath(this.moveComponent.getCellX(), this.moveComponent.getCellY(), targetX, targetY);
+        }
+
+    }
+
     public void moveToCell(SafeCell cell) {
         this.moveToCell(cell.getX(), cell.getY());
     }
@@ -123,10 +144,6 @@ public class CustomAStarMoveComponent extends Component {
         this.moveToCell(startX, startY, x, y);
     }
 
-    /**
-     * Entity's anchored position is used to position it in the cell.
-     * This can be used to explicitly specify the start X and Y of the entity.
-     */
     public void moveToCell(int startX, int startY, int targetX, int targetY) {
         this.isAtDestinationProp.set(false);
         if (this.moveComponent.isAtDestination()) {

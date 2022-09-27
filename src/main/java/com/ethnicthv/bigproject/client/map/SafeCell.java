@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SafeCell extends Cell {
-    public static List<Pair<SafeCell,Double>> markedcell = new ArrayList<>();
+    public static List<Pair<SafeCell, Double>> markedcell = new ArrayList<>();
 
     private SafeCell parent;
     private SafeCellState state;
@@ -59,7 +59,7 @@ public class SafeCell extends Cell {
 
     public void setState(SafeCellState state) {
         this.state = state;
-        if(state == SafeCellState.SAFE || state == SafeCellState.NOTSAFE ){
+        if (state == SafeCellState.SAFE || state == SafeCellState.NOTSAFE) {
             markedcell.add(new Pair<SafeCell, Double>(this, 1d));
         }
     }

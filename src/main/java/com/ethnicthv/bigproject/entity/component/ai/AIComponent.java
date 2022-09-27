@@ -9,6 +9,7 @@ import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomRandomAStarMoveComponent;
+import com.ethnicthv.bigproject.util.WrappedBoolean;
 
 @Required(StateComponent.class)
 @Required(CustomRandomAStarMoveComponent.class)
