@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.ethnicthv.bigproject.client.GameManager;
+import com.ethnicthv.bigproject.entity.component.GameMechanicComponent;
 import com.ethnicthv.bigproject.event.events.UpdateBlockEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -42,6 +43,12 @@ public class TestFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityType.BLOCK)
                 .viewWithBBox(new Rectangle(16,16, Color.CHOCOLATE))
+                .build();
+    }
+    @Spawns("mechanic")
+    public Entity mechanic(SpawnData data){
+        return FXGL.entityBuilder(data)
+                .with(new GameMechanicComponent())
                 .build();
     }
 }

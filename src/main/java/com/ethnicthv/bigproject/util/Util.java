@@ -1,4 +1,4 @@
-package com.ethnicthv.bigproject;
+package com.ethnicthv.bigproject.util;
 
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
@@ -28,8 +28,10 @@ public class Util {
 
     public static void setBlockChange(int cellX, int cellY, Color color){
         FXGL.getGameWorld().getEntitiesAt(new Point2D(cellX * 16 + 5, cellY * 16 + 5)).forEach(e -> {
-            Rectangle r = (Rectangle) e.getViewComponent().getChildren().get(0);
-            r.setFill(color);
+            if(e.getType() == EntityType.NULL){
+                Rectangle r = (Rectangle) e.getViewComponent().getChildren().get(0);
+                r.setFill(color);
+            }
         });
     }
 

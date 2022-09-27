@@ -3,11 +3,11 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.ethnicthv.bigproject.Util;
+import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
 
-import static com.ethnicthv.bigproject.Util.SS;
+import static com.ethnicthv.bigproject.util.Util.SS;
 
 public class GameManager {
     public static Entity player ;
@@ -46,8 +46,10 @@ public class GameManager {
         FXGL.getEventBus().setLoggingEnabled(true);
         grid.setup();
         player = new Player().getPlayer();
+        FXGL.getGameWorld().spawn("mechanic");
         FXGL.getGameWorld().addEntity(player);
         Util.spawnNPC(10,10);
+        Util.spawnNPC(20,20);
     }
 
 }

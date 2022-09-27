@@ -3,7 +3,6 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.entity.level.LevelLoader;
-import com.ethnicthv.bigproject.Util;
 import com.ethnicthv.bigproject.client.map.CustomTextLevelLoader;
 import com.ethnicthv.bigproject.client.map.MappingFunction;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
@@ -30,7 +29,7 @@ public class GameMap {
     public void setup(){
         FactoryManager.INSTANCE.addFactory(new TestFactory());
         loader = new CustomTextLevelLoader(gridsize, gridsize, OFFSETX, OFFSETY,'1', MappingFunction::apply);
-        level = FXGL.getAssetLoader().loadLevel("test-level.txt", loader);
+        level = FXGL.getAssetLoader().loadLevel("map1", loader);
         FXGL.getGameWorld().setLevel(level);
     }
 
