@@ -40,7 +40,6 @@ public class InputControler {
                     int x = centerX - 4;
                     int l = x + 9;
                     for (; x < l; x++) {
-                        System.out.println("set un safe");
                         GameManager.grid.pfg.setUnSafe(x, centerY, true);
                     }
                 }), Duration.ZERO);
@@ -52,7 +51,6 @@ public class InputControler {
             protected void onActionBegin() {
                 super.onActionBegin();
                 Point2D mouse = FXGL.getInput().getMousePositionWorld();
-                System.out.println(GameManager.grid.pfg.getCell(mouse).getState());
             }
         }, KeyCode.K);
     }

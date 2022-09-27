@@ -15,7 +15,6 @@ public class GameMechanicComponent extends Component {
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
         List<Pair> removed = new ArrayList<>();
-        System.out.print(SafeCell.markedcell.size());
         SafeCell.markedcell.forEach(pair -> {
             if(pair.getValue() <= 0){
                 Util.setBlockChange(pair.getKey().getX(),pair.getKey().getY(), Color.WHITE);
@@ -25,10 +24,6 @@ public class GameMechanicComponent extends Component {
             }
             pair.setValue(pair.getValue() - tpf);
         });
-        if(!SafeCell.markedcell.isEmpty()) {
-            System.out.print(" " + SafeCell.markedcell.get(0).getValue());
-        }
-        System.out.println(" " + removed.size());
         removed.forEach(pair -> {
             SafeCell.markedcell.remove(pair);
         });
