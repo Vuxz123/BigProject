@@ -116,7 +116,7 @@ public class SafeGrid extends Grid<SafeCell> {
                     Util.setBlockChange(cellX, cellY + 1, Color.GREEN);
                 }
             }
-        } catch (IndexOutOfBoundsException ignored) {
+        } catch (RuntimeException ignored) {
         }
     }
 
@@ -167,6 +167,6 @@ public class SafeGrid extends Grid<SafeCell> {
     }
 
     public interface CellUnSafeFunction {
-        void apply(Grid<SafeCell> cell, int centerX, int centerY);
+        void apply(SafeGrid cell, int centerX, int centerY);
     }
 }

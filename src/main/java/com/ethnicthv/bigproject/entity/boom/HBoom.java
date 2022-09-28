@@ -12,14 +12,12 @@ public class HBoom extends AbstractBoom {
         return () -> {
             int x = centerX;
             int l = x + 9;
-            for (int i = 0; i < 4; i++) {
-                SpawnData data = new SpawnData(centerX,centerY);
-                data.put("dir", new Point2D(-1,0));
-                FXGL.getGameWorld().spawn("f", data);
-                data = new SpawnData(centerX,centerY);
-                data.put("dir", new Point2D(1,0));
-                FXGL.getGameWorld().spawn("f", data);
-            }
+            SpawnData data = new SpawnData(centerX, centerY);
+            data.put("dir", new Point2D(-1, 0));
+            FXGL.getGameWorld().spawn("f", data);
+            data = new SpawnData(centerX, centerY);
+            data.put("dir", new Point2D(1, 0));
+            FXGL.getGameWorld().spawn("f", data);
         };
     }
 
@@ -27,9 +25,13 @@ public class HBoom extends AbstractBoom {
     public SafeGrid.CellUnSafeFunction getCellFunc() {
         return (cell, centerX, centerY) -> {
             int x = centerX - 4;
+            int y = centerY - 1;
             int l = x + 9;
+            int l2 = y + 3;
             for (; x < l; x++) {
-                GameManager.grid.pfg.setUnSafe(x, centerY, true);
+                GameManager.grid.pfg.setUnSafe(x, y, true);
+                GameManager.grid.pfg.setUnSafe(x, y + 1, true);
+                GameManager.grid.pfg.setUnSafe(x, y + 2, true);
             }
         };
     }
