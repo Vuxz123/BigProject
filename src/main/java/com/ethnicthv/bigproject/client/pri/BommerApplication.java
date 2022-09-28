@@ -28,6 +28,7 @@ public class BommerApplication extends GameApplication {
     protected void initUI() {
         super.initUI();
         FXGL.getGameScene().setBackgroundColor(Color.BLACK);
+        GameManager.initUI();
     }
 
     @SuppressWarnings("deprecation")
@@ -49,5 +50,6 @@ public class BommerApplication extends GameApplication {
     @Override
     protected void onUpdate(double tpf) {
         super.onUpdate(tpf);
+        GameManager.onUpdate(tpf);
     }
 }
