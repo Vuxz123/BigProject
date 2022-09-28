@@ -41,8 +41,9 @@ public class TestFactory implements EntityFactory {
     @Spawns("w,wall")
     public Entity wall(SpawnData data){
         return FXGL.entityBuilder(data)
-                .type(EntityType.BLOCK)
+                .type(EntityType.WALL)
                 .viewWithBBox(new Rectangle(16,16, Color.CHOCOLATE))
+                .collidable()
                 .build();
     }
     @Spawns("mechanic")

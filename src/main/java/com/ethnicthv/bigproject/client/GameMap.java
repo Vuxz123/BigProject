@@ -16,13 +16,11 @@ import static com.ethnicthv.bigproject.client.GameManager.*;
 public class GameMap {
     public final int gridsize = 16;
 
-    public final int mapSizeX = 16* 40;
-
     public Level level;
 
     private LevelLoader loader;
-    public final int maxGridX = GameManager.WIDTH / gridsize + 1; // 62
-    public final int maxGridY = GameManager.HEIGHT / gridsize + 1; // 31
+    public final int maxGridX = 48; // 46
+    public final int maxGridY = GameManager.HEIGHT / gridsize + 1; // 32
 
     public SafeGrid pfg = new SafeGrid(maxGridX,maxGridY);
 

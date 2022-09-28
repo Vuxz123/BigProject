@@ -3,6 +3,8 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.ethnicthv.bigproject.physic.PhysicControler;
+import com.ethnicthv.bigproject.physic.collision.EntityPCollision;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -11,7 +13,8 @@ import static com.ethnicthv.bigproject.util.Util.SS;
 
 public class GameManager {
     public static Entity player ;
-
+    public static GameData data = new GameData();
+    public static GameUI ui = new GameUI();
     public static final int OFFSETX = 5;
     public static final int OFFSETY = 5;
     public static int WIDTH = 1000;
@@ -38,6 +41,7 @@ public class GameManager {
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
+        PhysicControler.INSTACNE.add("a", new EntityPCollision());
 
     }
 
@@ -50,6 +54,14 @@ public class GameManager {
         FXGL.getGameWorld().addEntity(player);
         Util.spawnNPC(10,10);
         Util.spawnNPC(20,20);
+    }
+
+    public static void initUI(){
+        ui.text = FXGL.addText("0", WIDTH - 100, 0 + 100);
+    }
+
+    public static void onUpdate(double tdf) {
+        GameManager.ui.text.setText(String.valueOf(GameManager.data.killed));
     }
 
 }

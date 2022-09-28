@@ -10,7 +10,7 @@ import javafx.geometry.Point2D;
 
 public class RocketWallCollision extends CollisionHandler {
     public RocketWallCollision() {
-        super(EntityType.BLOCK, EntityType.PLAYER);
+        super(EntityType.WALL, EntityType.PLAYER);
     }
 
     @Override
