@@ -13,7 +13,8 @@ public class BomComponent extends Component {
     private TimerAction action;
     private final Duration duration;
     private final SafeGrid.CellUnSafeFunction function;
-    private final Runnable bomfunction;
+    private Runnable bomfunction;
+    private AbstractBoom boom = null;
 
     public BomComponent(Duration duration, SafeGrid.CellUnSafeFunction function, Runnable bomfunction) {
         this.duration = duration;
@@ -24,16 +25,18 @@ public class BomComponent extends Component {
     public BomComponent(Duration duration, AbstractBoom boom) {
         this.duration = duration;
         this.function = boom.getCellFunc();
-        this.bomfunction = boom.getBoomFunc();
+        this.boom = boom;
+
     }
 
     @Override
     public void onAdded() {
         super.onAdded();
+        if(boom != null) this.bomfunction = boom.getBoomFunc(GameManager.grid.getGridX((int) entity.getX()), GameManager.grid.getGridY((int) entity.getY()));
+        action = FXGL.runOnce(bomfunction, duration);
         FXGL.runOnce(()->{
             GameManager.grid.pfg.setUnSafe(GameManager.grid.getGridX((int) this.entity.getX()), GameManager.grid.getGridY((int) this.entity.getY()), function);
         }, duration.subtract(Duration.seconds(1)));
-        action = FXGL.runOnce(bomfunction, duration);
     }
 
     @Override
