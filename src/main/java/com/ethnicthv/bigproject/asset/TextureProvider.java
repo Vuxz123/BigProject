@@ -8,6 +8,8 @@ public class TextureProvider {
     public final Texture EMBER;
     public final Texture ROCKET;
 
+
+
     public Texture PLAYER;
 
     private TextureProvider(){

@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.EntityPCollision;
+import com.ethnicthv.bigproject.physic.collision.EtoECollision;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -41,8 +42,6 @@ public class GameManager {
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
-        PhysicControler.INSTACNE.add("a", new EntityPCollision());
-
     }
 
     public static void initGame(){
@@ -52,6 +51,8 @@ public class GameManager {
         player = new Player().getPlayer();
         FXGL.getGameWorld().spawn("mechanic");
         FXGL.getGameWorld().addEntity(player);
+        PhysicControler.INSTACNE.add("a", new EntityPCollision());
+        PhysicControler.INSTACNE.add("b", new EtoECollision());
         Util.spawnNPC(10,10);
         Util.spawnNPC(20,20);
     }

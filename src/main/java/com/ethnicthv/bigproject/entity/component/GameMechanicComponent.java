@@ -19,11 +19,11 @@ public class GameMechanicComponent extends Component {
     @Override
     public void onAdded() {
         super.onAdded();
-        FXGL.run(() -> {
-            int x = FXGLMath.random(2, 46);
-            int y = FXGLMath.random(2, 30);
-            if(GameManager.grid.pfg.get(x,y).isWalkable()) Util.spawnNPC(x,y);
-        }, Duration.seconds(1));
+//        FXGL.run(() -> {
+//            int x = FXGLMath.random(2, 22);
+//            int y = FXGLMath.random(2, 14);
+//            if(GameManager.grid.pfg.get(x,y).isWalkable()) Util.spawnNPC(x,y);
+//        }, Duration.seconds(1));
     }
 
     @Override

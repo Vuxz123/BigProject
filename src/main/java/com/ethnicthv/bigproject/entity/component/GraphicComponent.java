@@ -1,9 +1,8 @@
-package com.ethnicthv.bigproject.entity;
+package com.ethnicthv.bigproject.entity.component;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
@@ -28,6 +27,7 @@ public class GraphicComponent extends Component {
     @Override
     public void onAdded() {
         super.onAdded();
+        this.setScaleOrigin(new Point2D(8,8));
         graphic.setPosition(entity.getPosition().add(new Point2D(OffsetX, OffsetY)));
         FXGL.getGameWorld().addEntity(graphic);
     }
@@ -36,7 +36,6 @@ public class GraphicComponent extends Component {
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
         this.graphic.setPosition(entity.getPosition().add(new Point2D(OffsetX, OffsetY)));
-
     }
 
     @Override
@@ -58,6 +57,15 @@ public class GraphicComponent extends Component {
     public GraphicComponent setOffsetY(int offsetY) {
         this.OffsetY = offsetY;
         return this;
+    }
+
+    public void setScaleOrigin(Point2D origin) {
+        this.graphic.getTransformComponent().setScaleOrigin(origin);
+    }
+
+    public void mirror(boolean isleft) {
+        if (isleft) this.graphic.getTransformComponent().setScaleX(-1);
+        else this.graphic.getTransformComponent().setScaleX(1);
     }
 
     public int getOffsetX() {

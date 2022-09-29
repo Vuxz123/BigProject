@@ -17,7 +17,8 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 public class TestFactory implements EntityFactory {
     @Spawns("0,empty")
     public Entity empty(SpawnData data){
-        var view = new Rectangle(16, 16, Color.WHITE);
+        int gs = GameManager.grid.gridsize;
+        var view = new Rectangle(gs, gs, Color.WHITE);
         view.setStroke(Color.color(0, 0, 0, 0.25));
         view.setStrokeType(StrokeType.INSIDE);
 
@@ -40,9 +41,10 @@ public class TestFactory implements EntityFactory {
     }
     @Spawns("w,wall")
     public Entity wall(SpawnData data){
+        int gs = GameManager.grid.gridsize;
         return FXGL.entityBuilder(data)
                 .type(EntityType.WALL)
-                .viewWithBBox(new Rectangle(16,16, Color.CHOCOLATE))
+                .viewWithBBox(new Rectangle(gs,gs, Color.CHOCOLATE))
                 .collidable()
                 .build();
     }
