@@ -40,7 +40,7 @@ public class AIComponent extends Component {
         super.onUpdate(tpf);
         if(GameManager.grid.pfg.getCell(entity.getPosition()).isNotSafe()){
             stateComponent.changeState(states.DODGE);
-        }else if (player.distance(entity) < 50) {
+        }else if (player.distance(entity) < 50 && !GameManager.grid.pfg.getCell(entity.getPosition()).isSafe()) {
             stateComponent.changeState(states.PURSUEING);
         } else {
             stateComponent.changeState(states.RANDOM);
@@ -79,14 +79,6 @@ public class AIComponent extends Component {
                 int cellY = GameManager.grid.getGridY((int) entity.getY());
                 SafeCell c = GameManager.grid.pfg.getNearestSafeCell(cellX, cellY);
                 astar.moveToCell(c);
-            }
-
-            @Override
-            protected void onUpdate(double tpf) {
-                super.onUpdate(tpf);
-                if (astar.isAtDestination()){
-                    stateComponent.changeState(RANDOM);
-                }
             }
         };
     }

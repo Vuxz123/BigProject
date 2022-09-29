@@ -22,7 +22,7 @@ public class ParticleFactory implements EntityFactory {
                 .viewWithBBox(new Rectangle(32 + 16, 32 + 16, Color.RED))
                 .at(5 + x*16, 5 + y*16 - 16)
                 .type(EntityType.PARTICLE)
-                .with(new ProjectileWithAccelerationComponent(data.get("dir"),400, ((Point2D) data.get("dir")).multiply(-100)))
+                .with(new ProjectileWithAccelerationComponent(data.get("dir"),200, ((Point2D) data.get("dir")).multiply(-100)))
                 .with(new DurationComponent(DurationComponent.Type.MILLISECOND, 250))
                 .collidable()
                 .build();
