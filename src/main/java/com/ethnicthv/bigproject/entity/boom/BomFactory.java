@@ -22,6 +22,7 @@ public class BomFactory implements EntityFactory {
                 .view(new Circle(8))
                 .type(EntityType.BOM)
                 .with(new BomComponent(Duration.seconds(5), new HBoom()))
+                .zIndex(11)
                 .build();
         return e;
     }

@@ -1,7 +1,11 @@
 package com.ethnicthv.bigproject.entity.entities;
 
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.components.BoundingBoxComponent;
+import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.physics.HitBox;
 import com.ethnicthv.bigproject.client.GameManager;
+import com.ethnicthv.bigproject.entity.GraphicComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.EntityType;
@@ -13,33 +17,46 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class Player extends Entity {
 
-    public Player(){
+    public Player() {
         this.setType(EntityType.PLAYER);
     }
 
-    public Entity getPlayer(){
-        var agent = entityBuilder()
-                .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
-                .at(5 + 32, 5 + 32)
-                .with(new CustomCellMoveComponent(5, 5,16, 16, 300))
-                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
-                .zIndex(1)
-                .anchorFromCenter()
-                .build();
+    public Entity getPlayer() {
+//        entityBuilder()
+//                .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
+//                .at(5 + 32, 5 + 32)
+//                .with(new CustomCellMoveComponent(5, 5, 16, 16, 300))
+//                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
+//                .with(new GraphicComponent(new Rectangle(16, 30, Color.PINK)).setZIndex(2).setOffsetX(0))
+//                .with(new BoundingBoxComponent())
+//                .zIndex(1)
+//                .anchorFromCenter()
+//                .build();
+        this.addComponent(new CustomCellMoveComponent(5, 5, 16, 16, 300));
+        this.addComponent(new CustomAStarMoveComponent(GameManager.grid.pfg));
+        this.addComponent(new GraphicComponent(new Rectangle(16, 30, Color.PINK)).setZIndex(1).setOffsetX(-8).setOffsetY(-22));
+        this.addComponent(new CollidableComponent());
+        this.setZIndex(1);
+        this.setPosition(5 + 32, 5 + 32);
+        this.setLocalAnchorFromCenter();
+        this.getViewComponent().addChild(new Rectangle(16, 16, Color.BLUE));
+        this.getViewComponent().setVisible(false);
+        //this.getBoundingBoxComponent().addHitBox();
 
-        agent.getComponent(CustomCellMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
+
+        this.getComponent(CustomCellMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
             if (isAtDestination) {
                 debug("CellMoveComponent: reached destination");
             }
         });
 
-        agent.getComponent(CustomAStarMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
+        this.getComponent(CustomAStarMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
             if (isAtDestination) {
                 debug("CustomAStarMoveComponent: reached destination");
             }
         });
 
-        return agent;
+        return this;
     }
 
 }
