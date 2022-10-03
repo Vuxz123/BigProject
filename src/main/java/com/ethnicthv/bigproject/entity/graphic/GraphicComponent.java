@@ -1,4 +1,4 @@
-package com.ethnicthv.bigproject.entity.component;
+package com.ethnicthv.bigproject.entity.graphic;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;

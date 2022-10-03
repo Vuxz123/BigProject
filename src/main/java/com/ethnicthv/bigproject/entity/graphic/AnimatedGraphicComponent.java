@@ -1,8 +1,7 @@
-package com.ethnicthv.bigproject.entity.component;
+package com.ethnicthv.bigproject.entity.graphic;
 
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
-import javafx.scene.Node;
 
 import java.util.HashMap;
 

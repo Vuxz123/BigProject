@@ -2,6 +2,7 @@ package com.ethnicthv.bigproject.entity.component;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
+import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
 
 public class PlayerControlerComponent extends Component {
 

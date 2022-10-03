@@ -6,7 +6,7 @@ import com.almasb.fxgl.texture.AnimatedTexture;
 import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.EntityType;
-import com.ethnicthv.bigproject.entity.component.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
