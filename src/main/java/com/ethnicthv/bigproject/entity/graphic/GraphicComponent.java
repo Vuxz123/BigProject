@@ -8,20 +8,16 @@ import javafx.scene.Node;
 
 public class GraphicComponent extends Component {
     private Entity graphic;
-    private int OffsetX;
-    private int OffsetY;
+    private int OffsetX = 0;
+    private int OffsetY = 0;
 
     public GraphicComponent(Entity graphic) {
         this.graphic = graphic;
-        OffsetX = (int) (graphic.getViewComponent().getChildren().get(0).getLayoutX() - 16);
-        OffsetY = (int) (graphic.getViewComponent().getChildren().get(0).getLayoutX() - 16);
     }
 
     public GraphicComponent(Node texture) {
         this.graphic = new Entity();
         graphic.getViewComponent().addChild(texture);
-        OffsetX = (int) (texture.getLayoutX() - 16);
-        OffsetY = (int) (texture.getLayoutX() - 16);
     }
 
     @Override

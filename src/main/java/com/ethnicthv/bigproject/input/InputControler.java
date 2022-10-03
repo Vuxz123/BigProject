@@ -6,7 +6,9 @@ import com.almasb.fxgl.input.UserAction;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.EntityType;
+import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
+import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -28,11 +30,11 @@ public class InputControler {
             }
         }, MouseButton.PRIMARY);
 
-        FXGL.getInput().addAction(new UserAction("CHECK STATE") {
+        FXGL.getInput().addAction(new UserAction("SHIELD") {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                Point2D mouse = FXGL.getInput().getMousePositionWorld();
+                GameManager.player.getComponent(FeaturedRendererComponent.class).pushFeature(PlayerControlerComponent.SHIELD);
             }
         }, KeyCode.K);
 

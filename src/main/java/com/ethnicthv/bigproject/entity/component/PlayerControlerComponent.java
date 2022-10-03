@@ -3,8 +3,12 @@ package com.ethnicthv.bigproject.entity.component;
 import com.almasb.fxgl.entity.component.Component;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.entity.graphic.features.ShieldFeature;
+import javafx.util.Duration;
 
 public class PlayerControlerComponent extends Component {
+
+    public static ShieldFeature SHIELD = new ShieldFeature(Duration.seconds(5));
 
     @Override
     public void onUpdate(double tpf) {

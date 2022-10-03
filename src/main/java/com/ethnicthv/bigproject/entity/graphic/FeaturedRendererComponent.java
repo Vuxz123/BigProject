@@ -1,19 +1,36 @@
 package com.ethnicthv.bigproject.entity.graphic;
 
-import com.ethnicthv.bigproject.entity.graphic.GraphicComponent;
+import com.ethnicthv.bigproject.entity.graphic.features.Feature;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.List;
 
 public class FeaturedRendererComponent extends GraphicComponent {
-    private Renderer renderer;
-    private Feature feature;
+    private final Renderer renderer;
+    private final List<Feature> features = Collections.synchronizedList(new ArrayList<>());
 
     public FeaturedRendererComponent() {
         super(new Renderer());
-        renderer = (Renderer) super.entity;
+        renderer = (Renderer) super.getGraphic();
     }
 
-    public void setFeature(Feature feature) {
-        this.feature = feature;
-        feature.onAdd(renderer);
+    public void pushFeature(Feature feature) {
+        if (!features.contains(feature)) {
+            this.features.add(feature);
+            feature.setRendererComponent(this);
+            feature.onAdd(renderer);
+        }
+    }
+
+    public void popFeature(Feature feature) {
+        if (feature != null) {
+            feature.onRemove(renderer);
+            synchronized (features) {
+                features.remove(feature);
+            }
+        }
     }
 
     @Override
@@ -23,6 +40,11 @@ public class FeaturedRendererComponent extends GraphicComponent {
     }
 
     private void render(double tpf) {
-        feature.render(renderer, tpf);
+        synchronized (features) {
+            try {
+                for(Feature feature: features) feature.onUpdate(renderer, tpf);
+            }catch (ConcurrentModificationException ignored){
+            }
+        }
     }
 }

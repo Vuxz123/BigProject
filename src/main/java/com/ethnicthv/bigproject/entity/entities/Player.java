@@ -10,6 +10,7 @@ import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
+import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -36,12 +37,13 @@ public class Player extends Entity {
         this.addComponent(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY, grid.gridsize, grid.gridsize, 300));
         this.addComponent(new CustomAStarMoveComponent(grid.pfg));
         this.addComponent(new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.PLAYER_IDLE))
-                .setZIndex(1)
+                .setZIndex(4)
                 .setOffsetX(-8)
                 .setOffsetY(-22)
                 .addChannel("walk", AnimatedChannelProvider.INSTANCE.PLAYER_WALK));
         this.addComponent(new CollidableComponent());
         this.addComponent(new PlayerControlerComponent());
+        this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
         this.setPosition( GameManager.OFFSETX + grid.gridsize * 2, GameManager.OFFSETY + grid.gridsize * 2);
         this.setLocalAnchorFromCenter();

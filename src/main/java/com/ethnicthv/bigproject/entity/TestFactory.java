@@ -5,6 +5,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.component.GameMechanicComponent;
 import com.ethnicthv.bigproject.event.events.UpdateBlockEvent;
@@ -24,6 +25,7 @@ public class TestFactory implements EntityFactory {
 
         var e = entityBuilder(data)
                 .view(view)
+                .zIndex(0)
                 .type(EntityType.NULL)
                 .build();
 
@@ -44,6 +46,7 @@ public class TestFactory implements EntityFactory {
         int gs = GameManager.grid.gridsize;
         return FXGL.entityBuilder(data)
                 .type(EntityType.WALL)
+                .zIndex(0)
                 .viewWithBBox(new Rectangle(gs,gs, Color.CHOCOLATE))
                 .collidable()
                 .build();
@@ -51,6 +54,8 @@ public class TestFactory implements EntityFactory {
     @Spawns("mechanic")
     public Entity mechanic(SpawnData data){
         return FXGL.entityBuilder(data)
+                .at(0,0)
+                .view(TextureProvider.INSTANCE.FRAME)
                 .with(new GameMechanicComponent())
                 .build();
     }
