@@ -8,7 +8,7 @@ public class TextureProvider {
 
     public final Texture FRAME = FXGL.getAssetLoader().loadTexture("frame.png");
 
-    public final Texture EMBER = FXGL.getAssetLoader().loadTexture("ember.png");
+    public final Texture EMBER = FXGL.getAssetLoader().loadTexture("ember.png",100,100);
 
     public final Texture ROCKET = FXGL.getAssetLoader().loadTexture("rocket.png", 100,20);
 

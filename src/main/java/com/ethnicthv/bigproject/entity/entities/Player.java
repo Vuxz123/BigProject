@@ -1,29 +1,36 @@
 package com.ethnicthv.bigproject.entity.entities;
 
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
+import com.ethnicthv.bigproject.client.PlayerData;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.beans.Transient;
 
 import static com.almasb.fxgl.dsl.FXGL.debug;
 import static com.ethnicthv.bigproject.client.GameManager.grid;
 
-public class Player extends Entity {
+public class Player extends Entity implements SealedPlayer{
+
+    PlayerData playerData = new PlayerData();
 
     public Player() {
         this.setType(EntityType.PLAYER);
     }
 
-    public Entity getPlayer() {
+    public Player getPlayer() {
 //        entityBuilder()
 //                .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
 //                .at(5 + 32, 5 + 32)
@@ -42,6 +49,7 @@ public class Player extends Entity {
                 .setOffsetY(-22)
                 .addChannel("walk", AnimatedChannelProvider.INSTANCE.PLAYER_WALK));
         this.addComponent(new CollidableComponent());
+        this.addComponent(new HealthIntComponent(100));
         this.addComponent(new PlayerControlerComponent());
         this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
@@ -67,4 +75,17 @@ public class Player extends Entity {
         return this;
     }
 
+    public PlayerData getPlayerData() {
+        return playerData;
+    }
+
+    @Override
+    public Entity toEntity() {
+        return this;
+    }
+
+    @Override
+    public PlayerControlerComponent getPCC() {
+        return this.getComponent(PlayerControlerComponent.class);
+    }
 }

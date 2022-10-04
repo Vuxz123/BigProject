@@ -1,14 +1,28 @@
 package com.ethnicthv.bigproject.entity.component;
 
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
+import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.entity.component.Required;
+import com.ethnicthv.bigproject.client.GameManager;
+import com.ethnicthv.bigproject.client.map.SafeCell;
+import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import com.ethnicthv.bigproject.entity.graphic.features.ShieldFeature;
+import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
+@Required(HealthIntComponent.class)
 public class PlayerControlerComponent extends Component {
 
+    //Feature
     public static ShieldFeature SHIELD = new ShieldFeature(Duration.seconds(5));
+
+    //Component
+    private HealthIntComponent healthComponent;
 
     @Override
     public void onUpdate(double tpf) {
@@ -23,6 +37,24 @@ public class PlayerControlerComponent extends Component {
             this.entity.getComponent(AnimatedGraphicComponent.class).playChannel("walk");
         }else {
             this.entity.getComponent(AnimatedGraphicComponent.class).playChannel("idle");
+        }
+    }
+
+    public void activateShield() {
+        if(!GameManager.getPlayer().getPlayerData().isShielddelay()) {
+            this.entity.getComponent(FeaturedRendererComponent.class).pushFeature(SHIELD);
+        }
+    }
+
+    public void placeBoom() {
+        if(!GameManager.getPlayer().getPlayerData().isBomDelay()) {
+            Point2D pos = GameManager.getPlayer().getPosition();
+            SafeCell cell = GameManager.grid.pfg.getCell(pos);
+            if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
+                return;
+            }
+            GameManager.getPlayer().getPlayerData().resetBomDelay();
+            FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
         }
     }
 }

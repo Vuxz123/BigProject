@@ -56,6 +56,7 @@ public class TestFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .at(0,0)
                 .view(TextureProvider.INSTANCE.FRAME)
+                .zIndex(30)
                 .with(new GameMechanicComponent())
                 .build();
     }

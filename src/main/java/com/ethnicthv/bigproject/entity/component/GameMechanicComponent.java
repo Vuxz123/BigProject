@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.client.map.SafeCellState;
+import com.ethnicthv.bigproject.ui.UIControlor;
 import com.ethnicthv.bigproject.util.Pair;
 import com.ethnicthv.bigproject.util.Util;
 import javafx.scene.paint.Color;
@@ -29,6 +30,8 @@ public class GameMechanicComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
+        UIControlor.INSTANCE.onUpdate(tpf);
+        GameManager.getPlayer().getPlayerData().onUpdate(tpf);
         List<Pair> removed = new ArrayList<>();
         SafeCell.markedcell.forEach(pair -> {
             if (pair.getValue() <= 0) {

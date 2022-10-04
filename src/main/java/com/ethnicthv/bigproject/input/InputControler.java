@@ -26,7 +26,7 @@ public class InputControler {
             protected void onAction() {
                 super.onAction();
                 Point2D mouse = FXGL.getInput().getMousePositionWorld();
-                GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
+                GameManager.getPlayer().toEntity().getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
             }
         }, MouseButton.PRIMARY);
 
@@ -34,7 +34,7 @@ public class InputControler {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                GameManager.player.getComponent(FeaturedRendererComponent.class).pushFeature(PlayerControlerComponent.SHIELD);
+                GameManager.getPlayer().getPCC().activateShield();
             }
         }, KeyCode.K);
 
@@ -42,12 +42,7 @@ public class InputControler {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                Point2D pos = GameManager.player.getPosition();
-                SafeCell cell = GameManager.grid.pfg.getCell(pos);
-                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
-                    return;
-                }
-                FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
+                GameManager.getPlayer().getPCC().placeBoom();
             }
         }, KeyCode.SPACE);
     }
