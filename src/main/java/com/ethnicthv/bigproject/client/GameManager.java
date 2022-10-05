@@ -9,6 +9,7 @@ import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.EntityPCollision;
 import com.ethnicthv.bigproject.physic.collision.EtoECollision;
 import com.ethnicthv.bigproject.physic.collision.EtoShieldCollision;
+import com.ethnicthv.bigproject.physic.collision.PlayerToItemCollision;
 import com.ethnicthv.bigproject.ui.CooldownIcon;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
@@ -17,7 +18,7 @@ import com.sun.media.jfxmedia.logging.Logger;
 import static com.ethnicthv.bigproject.util.Util.SS;
 
 public class GameManager {
-    private static Player player ;
+    public static Player player ;
     public static GameData data = new GameData();
     public static GameUI ui = new GameUI();
     public static final int OFFSETX = 5;
@@ -58,6 +59,7 @@ public class GameManager {
         PhysicControler.INSTACNE.add("a", new EntityPCollision());
         PhysicControler.INSTACNE.add("b", new EtoECollision());
         PhysicControler.INSTACNE.add("c", new EtoShieldCollision());
+        PhysicControler.INSTACNE.add("d", new PlayerToItemCollision());
         Util.spawnNPC(10,10);
         Util.spawnNPC(20,20);
     }

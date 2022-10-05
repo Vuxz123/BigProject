@@ -10,6 +10,7 @@ import com.ethnicthv.bigproject.entity.FactoryManager;
 import com.ethnicthv.bigproject.entity.TestFactory;
 import com.ethnicthv.bigproject.entity.boom.BomFactory;
 import com.ethnicthv.bigproject.entity.particle.ParticleFactory;
+import com.ethnicthv.bigproject.item.ItemEntityFactory;
 
 import static com.ethnicthv.bigproject.client.GameManager.*;
 
@@ -30,6 +31,7 @@ public class GameMap {
         FactoryManager.INSTANCE.addFactory(new TestFactory());
         FactoryManager.INSTANCE.addFactory(new BomFactory());
         FactoryManager.INSTANCE.addFactory(new ParticleFactory());
+        FactoryManager.INSTANCE.addFactory(new ItemEntityFactory());
         loader = new CustomTextLevelLoader(gridsize, gridsize, OFFSETX, OFFSETY,'1', MappingFunction::apply);
         level = FXGL.getAssetLoader().loadLevel("map1", loader);
         FXGL.getGameWorld().setLevel(level);

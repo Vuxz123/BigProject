@@ -4,6 +4,7 @@ import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
+import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.PlayerData;
@@ -14,9 +15,11 @@ import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import javafx.geometry.Point2D;
+import javafx.scene.effect.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.beans.Transient;
 
 import static com.almasb.fxgl.dsl.FXGL.debug;
@@ -25,6 +28,8 @@ import static com.ethnicthv.bigproject.client.GameManager.grid;
 public class Player extends Entity implements SealedPlayer{
 
     PlayerData playerData = new PlayerData();
+
+    public DropShadow effect;
 
     public Player() {
         this.setType(EntityType.PLAYER);
@@ -43,8 +48,12 @@ public class Player extends Entity implements SealedPlayer{
 //                .build();
         this.addComponent(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY, grid.gridsize, grid.gridsize, 300));
         this.addComponent(new CustomAStarMoveComponent(grid.pfg));
-        this.addComponent(new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.PLAYER_IDLE))
-                .setZIndex(4)
+
+        AnimatedGraphicComponent agc = new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.PLAYER_IDLE) );
+        effect = new DropShadow();
+        agc.addEffect(effect, 0);
+
+        this.addComponent(agc.setZIndex(4)
                 .setOffsetX(-8)
                 .setOffsetY(-22)
                 .addChannel("walk", AnimatedChannelProvider.INSTANCE.PLAYER_WALK));

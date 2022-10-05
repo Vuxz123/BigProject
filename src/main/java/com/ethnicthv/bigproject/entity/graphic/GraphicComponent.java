@@ -5,6 +5,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.effect.Effect;
 
 public class GraphicComponent extends Component {
     private Entity graphic;
@@ -23,7 +24,7 @@ public class GraphicComponent extends Component {
     @Override
     public void onAdded() {
         super.onAdded();
-        this.setScaleOrigin(new Point2D(8,8));
+        this.setScaleOrigin(new Point2D(8, 8));
         graphic.setPosition(entity.getPosition().add(new Point2D(OffsetX, OffsetY)));
         FXGL.getGameWorld().addEntity(graphic);
     }
@@ -79,5 +80,9 @@ public class GraphicComponent extends Component {
     public GraphicComponent setGraphic(Entity graphic) {
         this.graphic = graphic;
         return this;
+    }
+
+    public void addEffect(Effect effect, int index) {
+        this.graphic.getViewComponent().getChildren().get(index).setEffect(effect);
     }
 }
