@@ -133,7 +133,7 @@ public class SafeGrid extends Grid<SafeCell> {
     }
 
     /**
-     * Method này nhằm mục đích test.
+     * Method này nhằm mục đích shield.
      * Không nên dùng.
      * Xem chi tiết bản gốc: {@link AStarGrid}
      */

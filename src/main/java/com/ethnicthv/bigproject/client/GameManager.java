@@ -2,8 +2,9 @@ package com.ethnicthv.bigproject.client;
 
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.ethnicthv.bigproject.asset.TextureProvider;
+import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.EntityPCollision;
@@ -11,9 +12,11 @@ import com.ethnicthv.bigproject.physic.collision.EtoECollision;
 import com.ethnicthv.bigproject.physic.collision.EtoShieldCollision;
 import com.ethnicthv.bigproject.physic.collision.PlayerToItemCollision;
 import com.ethnicthv.bigproject.ui.CooldownIcon;
+import com.ethnicthv.bigproject.ui.ProgressBar;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
+import javafx.scene.paint.Color;
 
 import static com.ethnicthv.bigproject.util.Util.SS;
 
@@ -65,13 +68,27 @@ public class GameManager {
     }
 
     public static void initUI(){
-        ui.text = FXGL.addText("0", WIDTH - 100, 0 + 100);
-        ui.test = new CooldownIcon(TextureProvider.INSTANCE.EMBER);
-        FXGL.getGameScene().addUINode(ui.test);
+        ui.text = FXGL.addText("0", WIDTH - 100, 500);
+        ui.shield = new CooldownIcon(TextureProvider.INSTANCE.SHIELD_ICON.copy(), player.getPlayerData()::getShielddelay, 20);
+        ui.shield.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2));
+        ui.shield.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
+        ui.speed = new CooldownIcon(TextureProvider.INSTANCE.SPEED_ICON.copy(), player.getPlayerData()::getSpeedUpdelay, 10);
+        ui.speed.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2) + 32);
+        ui.speed.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
+        ui.health = new ProgressBar(Color.RED, player.getPlayerData()::getHealth, 100);
+        ui.health.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + 8);
+        ui.health.setTranslateY(OFFSETY + grid.gridsize * 1 + ((double) grid.maxGridY / 2));
+        ui.mana = new ProgressBar(Color.BLUE, player.getPlayerData()::getMana, 100);
+        ui.mana.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + 8);
+        ui.mana.setTranslateY(OFFSETY + grid.gridsize * 4 - 8 + ((double) grid.maxGridY / 2));
+        FXGL.getGameScene().addUINode(ui.shield);
+        FXGL.getGameScene().addUINode(ui.speed);
+        FXGL.getGameScene().addUINode(ui.health);
+        FXGL.getGameScene().addUINode(ui.mana);
     }
 
     public static void onUpdate(double tdf) {
-        GameManager.ui.text.setText(String.valueOf(GameManager.player.getPlayerData().getShielddelay()));
+        GameManager.ui.text.setText(String.valueOf(GameManager.player.getComponent(CustomCellMoveComponent.class).getSpeed().get()));
     }
 
     public static SealedPlayer getPlayer() {

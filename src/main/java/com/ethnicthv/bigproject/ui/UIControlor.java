@@ -2,7 +2,6 @@ package com.ethnicthv.bigproject.ui;
 
 import com.almasb.fxgl.core.Updatable;
 import com.ethnicthv.bigproject.client.GameManager;
-import javafx.scene.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,8 @@ public class UIControlor {
 
     private List<Updatable> updatedNode = new ArrayList<>();
     private UIControlor() {
-        updatedNode.add(GameManager.ui.test);
+        updatedNode.add(GameManager.ui.shield);
+        updatedNode.add(GameManager.ui.speed);
     }
 
     public void onUpdate(double tpf) {

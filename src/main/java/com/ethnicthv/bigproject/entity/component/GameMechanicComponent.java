@@ -1,7 +1,5 @@
 package com.ethnicthv.bigproject.entity.component;
 
-import com.almasb.fxgl.core.math.FXGLMath;
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
@@ -10,7 +8,6 @@ import com.ethnicthv.bigproject.ui.UIControlor;
 import com.ethnicthv.bigproject.util.Pair;
 import com.ethnicthv.bigproject.util.Util;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;

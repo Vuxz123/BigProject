@@ -1,19 +1,23 @@
 package com.ethnicthv.bigproject.client;
 
+import javafx.beans.property.DoubleProperty;
+
 public class PlayerData {
-
-    private double Bomdelay = 0;
-
-    private double Shielddelay = 0;
-
-    private double SpeedUpdelay = 0;
+    private Double Health = 100.0;
+    private Double Mana = 100.0;
+    private Double Bomdelay = (double) 0;
+    private Double Shielddelay = (double) 0;
+    private Double SpeedUpdelay = (double) 0;
 
     public void onUpdate(double tpf) {
         if (Bomdelay > 0) Bomdelay -= tpf;
-        else Bomdelay = 0;
+        else Bomdelay = (double) 0;
 
         if (Shielddelay > 0) Shielddelay -= tpf;
-        else Shielddelay = 0;
+        else Shielddelay = (double) 0;
+
+        if (SpeedUpdelay > 0) SpeedUpdelay -= tpf;
+        else SpeedUpdelay = (double) 0;
     }
 
     public boolean isBomDelay() {
@@ -25,7 +29,7 @@ public class PlayerData {
     }
 
     public boolean isSpeedUpdelay() {
-        return Shielddelay > 0;
+        return SpeedUpdelay > 0;
     }
 
     public void resetBomDelay() {
@@ -33,22 +37,30 @@ public class PlayerData {
     }
 
     public void resetShieldDelay() {
-        this.Shielddelay = 10;
+        this.Shielddelay = 20.0;
     }
 
     public void resetSpeedUpdelay() {
-        this.SpeedUpdelay = 10;
+        this.SpeedUpdelay = 10.0;
     }
 
-    public double getBomdelay() {
+    public Double getHealth() {
+        return Health;
+    }
+
+    public Double getMana() {
+        return Mana;
+    }
+
+    public Double getBomdelay() {
         return Bomdelay;
     }
 
-    public double getShielddelay() {
+    public Double getShielddelay() {
         return Shielddelay;
     }
 
-    public double getSpeedUpdelay() {
+    public Double getSpeedUpdelay() {
         return SpeedUpdelay;
     }
 }

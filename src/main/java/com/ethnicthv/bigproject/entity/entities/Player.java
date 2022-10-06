@@ -6,25 +6,18 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.AnimatedTexture;
-import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.PlayerData;
 import com.ethnicthv.bigproject.entity.EntityType;
-import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.entity.component.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
-import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
-import javafx.geometry.Point2D;
+import com.ethnicthv.bigproject.entity.component.graphic.FeaturedRendererComponent;
 import javafx.scene.effect.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
-import java.beans.Transient;
-
-import static com.almasb.fxgl.dsl.FXGL.debug;
 import static com.ethnicthv.bigproject.client.GameManager.grid;
 
 public class Player extends Entity implements SealedPlayer{
@@ -60,7 +53,6 @@ public class Player extends Entity implements SealedPlayer{
                 .setOffsetY(-22)
                 .addChannel("walk", AnimatedChannelProvider.INSTANCE.PLAYER_WALK));
         this.addComponent(new CollidableComponent(true));
-        this.addComponent(new HealthIntComponent(100));
         this.addComponent(new PlayerControlerComponent());
         this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
@@ -89,5 +81,9 @@ public class Player extends Entity implements SealedPlayer{
     @Override
     public PlayerControlerComponent getPCC() {
         return this.getComponent(PlayerControlerComponent.class);
+    }
+
+    public AnimatedGraphicComponent getGraphic() {
+        return this.getComponent(AnimatedGraphicComponent.class);
     }
 }

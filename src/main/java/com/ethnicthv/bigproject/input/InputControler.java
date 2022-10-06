@@ -1,15 +1,10 @@
 package com.ethnicthv.bigproject.input;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.UserAction;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.client.map.SafeCell;
-import com.ethnicthv.bigproject.entity.EntityType;
-import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
-import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import com.ethnicthv.bigproject.item.ItemEntityFactory;
 import com.ethnicthv.bigproject.item.items.CoinItem;
 import javafx.geometry.Point2D;
@@ -29,7 +24,8 @@ public class InputControler {
             protected void onAction() {
                 super.onAction();
                 Point2D mouse = FXGL.getInput().getMousePositionWorld();
-                GameManager.getPlayer().toEntity().getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
+                GameManager.getPlayer().toEntity().
+                        getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
             }
         }, MouseButton.PRIMARY);
 
@@ -53,8 +49,17 @@ public class InputControler {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                ItemEntityFactory.spawnItem(new CoinItem(TextureProvider.INSTANCE.EMBER.copy()), GameManager.grid.pfg.getCell(FXGL.getInput().getMousePositionWorld()).getWorldPosition());
+                ItemEntityFactory.spawnItem(new CoinItem(TextureProvider.INSTANCE.EMBER.copy()),
+                        GameManager.grid.pfg.getCell(FXGL.getInput().getMousePositionWorld()).getWorldPosition());
             }
         }, MouseButton.SECONDARY);
+
+        FXGL.getInput().addAction(new UserAction("Test2") {
+            @Override
+            protected void onActionBegin() {
+                super.onActionBegin();
+                GameManager.getPlayer().getPCC().speedUP();
+            }
+        }, KeyCode.L);
     }
 }
