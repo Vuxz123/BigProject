@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.component.Required;
+import com.almasb.fxgl.pathfinding.CellMoveComponent;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.EntityType;
@@ -12,6 +13,7 @@ import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.graphic.FeaturedRendererComponent;
 import com.ethnicthv.bigproject.entity.graphic.features.ShieldFeature;
+import javafx.animation.Interpolator;
 import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
@@ -37,6 +39,17 @@ public class PlayerControlerComponent extends Component {
             this.entity.getComponent(AnimatedGraphicComponent.class).playChannel("walk");
         }else {
             this.entity.getComponent(AnimatedGraphicComponent.class).playChannel("idle");
+        }
+    }
+
+    public void speedUP() {
+        if(!GameManager.getPlayer().getPlayerData().isSpeedUpdelay()) {
+            GameManager.getPlayer().getPlayerData().resetSpeedUpdelay();
+            FXGL.animationBuilder()
+                    .interpolator(Interpolator.SPLINE(0.5,1,2,0.5))
+                    .animate(this.entity.getComponent(CustomCellMoveComponent.class).getSpeed())
+                    .duration(Duration.seconds(5))
+
         }
     }
 

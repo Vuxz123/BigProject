@@ -3,6 +3,8 @@ package com.ethnicthv.bigproject.entity.entities;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
@@ -57,29 +59,20 @@ public class Player extends Entity implements SealedPlayer{
                 .setOffsetX(-8)
                 .setOffsetY(-22)
                 .addChannel("walk", AnimatedChannelProvider.INSTANCE.PLAYER_WALK));
-        this.addComponent(new CollidableComponent());
+        this.addComponent(new CollidableComponent(true));
         this.addComponent(new HealthIntComponent(100));
         this.addComponent(new PlayerControlerComponent());
         this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
         this.setPosition( GameManager.OFFSETX + grid.gridsize * 2, GameManager.OFFSETY + grid.gridsize * 2);
         this.setLocalAnchorFromCenter();
-        this.getViewComponent().addChild(new Rectangle(16, 16, Color.BLUE));
+        this.getViewComponent().addChild(new Rectangle(16, 16));
         this.getViewComponent().setVisible(false);
+        this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.circle(8)));
+        this.getTransformComponent().setScaleOrigin(this.getBoundingBoxComponent().getCenterLocal());
+        this.getTransformComponent().setRotationOrigin(this.getBoundingBoxComponent().getCenterLocal());
+        this.setType(EntityType.PLAYER);
         //this.getBoundingBoxComponent().addHitBox();
-
-
-        this.getComponent(CustomCellMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
-            if (isAtDestination) {
-                debug("CellMoveComponent: reached destination");
-            }
-        });
-
-        this.getComponent(CustomAStarMoveComponent.class).atDestinationProperty().addListener((o, old, isAtDestination) -> {
-            if (isAtDestination) {
-                debug("CustomAStarMoveComponent: reached destination");
-            }
-        });
 
         return this;
     }

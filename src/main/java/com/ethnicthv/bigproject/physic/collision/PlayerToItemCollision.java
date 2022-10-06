@@ -13,7 +13,6 @@ public class PlayerToItemCollision extends CollisionHandler {
     @Override
     protected void onCollision(Entity a, Entity b) {
         super.onCollision(a, b);
-        System.out.println("item ");
         if(b.getComponent(PickupableComponent.class).isPickupable()) {
             System.out.println("Pick Up");
             b.removeFromWorld();
