@@ -1,16 +1,18 @@
 package com.ethnicthv.bigproject.entity.particle;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.dsl.components.ProjectileWithAccelerationComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.DurationComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class ParticleFactory implements EntityFactory {
@@ -19,11 +21,13 @@ public class ParticleFactory implements EntityFactory {
         int x = (int) data.getX();
         int y = (int) data.getY();
         Entity e = FXGL.entityBuilder(data)
-                .viewWithBBox(new Rectangle(32 + 16, 32 + 16, Color.RED))
-                .at(5 + x*16, 5 + y*16 - 16)
+                .view(TextureProvider.INSTANCE.BLAST.copy())
+                .anchorFromCenter()
+                .bbox(BoundingShape.circle(16))
+                .at(5 + x * 16, 5 + y * 16 - 16)
                 .type(EntityType.PARTICLE)
-                .with(new ProjectileWithAccelerationComponent(data.get("dir"),200, ((Point2D) data.get("dir")).multiply(-100)))
-                .with(new DurationComponent(DurationComponent.Type.MILLISECOND, 250))
+                .with(new ProjectileComponent(data.get("dir"), data.get("spe")))
+                .with(new DurationComponent(DurationComponent.Type.MILLISECOND, /*data.get("du")*/ 1000))
                 .collidable()
                 .build();
         return e;

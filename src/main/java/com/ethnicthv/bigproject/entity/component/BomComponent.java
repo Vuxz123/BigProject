@@ -33,8 +33,8 @@ public class BomComponent extends Component {
     public void onAdded() {
         super.onAdded();
         if(boom != null) this.bomfunction = boom.getBoomFunc(GameManager.grid.getGridX((int) entity.getX()), GameManager.grid.getGridY((int) entity.getY()));
-        action = FXGL.runOnce(bomfunction, duration);
-        FXGL.runOnce(()->{
+        action = FXGL.getGameTimer().runOnceAfter(bomfunction, duration);
+        FXGL.getGameTimer().runOnceAfter(()->{
             GameManager.grid.pfg.setUnSafe(GameManager.grid.getGridX((int) this.entity.getX()), GameManager.grid.getGridY((int) this.entity.getY()), function);
         }, duration.subtract(Duration.seconds(1)));
     }

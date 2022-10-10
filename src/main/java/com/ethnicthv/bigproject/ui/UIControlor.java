@@ -13,6 +13,8 @@ public class UIControlor {
     private UIControlor() {
         updatedNode.add(GameManager.ui.shield);
         updatedNode.add(GameManager.ui.speed);
+        updatedNode.add(GameManager.ui.health);
+        updatedNode.add(GameManager.ui.mana);
     }
 
     public void onUpdate(double tpf) {

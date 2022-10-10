@@ -9,6 +9,7 @@ import com.ethnicthv.bigproject.entity.component.ai.AIComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomRandomAStarMoveComponent;
+import com.ethnicthv.bigproject.entity.entities.enemy.EnemyPool;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -36,20 +37,19 @@ public class Util {
     }
 
     public static void spawnNPC(int x, int y) {
-        var e = entityBuilder()
-                .viewWithBBox(new Rectangle(16, 16, FXGLMath.randomColor()))
-                .type(EntityType.ENTITY)
-                .at(5 + x*16, 5 + y*16)
-                .anchorFromCenter()
-                .with(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY ,GameManager.grid.gridsize, GameManager.grid.gridsize, 150))
-                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
-                .with(new CustomRandomAStarMoveComponent(Duration.seconds(0), Duration.seconds(0.5)))
-                .with(new StateComponent())
-                .with(new AIComponent())
-                .collidable()
-                .buildAndAttach();
-
-
+//        var e = entityBuilder()
+//                .viewWithBBox(new Rectangle(16, 16, FXGLMath.randomColor()))
+//                .type(EntityType.ENTITY)
+//                .at(5 + x*16, 5 + y*16)
+//                .anchorFromCenter()
+//                .with(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY ,GameManager.grid.gridsize, GameManager.grid.gridsize, 150))
+//                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
+//                .with(new CustomRandomAStarMoveComponent(Duration.seconds(0), Duration.seconds(0.5)))
+//                .with(new StateComponent())
+//                .with(new AIComponent())
+//                .collidable()
+//                .buildAndAttach();
+        EnemyPool.spawnCommonEntity( x, y);
     }
 
 }

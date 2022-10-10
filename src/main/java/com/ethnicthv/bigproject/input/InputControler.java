@@ -61,5 +61,13 @@ public class InputControler {
                 GameManager.getPlayer().getPCC().speedUP();
             }
         }, KeyCode.L);
+
+        FXGL.getInput().addAction(new UserAction("Test3") {
+            @Override
+            protected void onActionBegin() {
+                super.onActionBegin();
+                GameManager.getPlayer().getPCC().blockWay();
+            }
+        }, KeyCode.M);
     }
 }

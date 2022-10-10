@@ -85,4 +85,8 @@ public class GraphicComponent extends Component {
     public void addEffect(Effect effect, int index) {
         this.graphic.getViewComponent().getChildren().get(index).setEffect(effect);
     }
+
+    public void rotateToVector(Point2D vector) {
+        this.graphic.rotateToVector(vector);
+    }
 }

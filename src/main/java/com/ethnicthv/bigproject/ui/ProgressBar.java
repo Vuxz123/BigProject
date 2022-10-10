@@ -38,6 +38,8 @@ public class ProgressBar extends Group implements Updatable {
 
     @Override
     public void onUpdate(double tpf) {
+
         scale.setX(valuelisten.get() / max);
+
     }
 }

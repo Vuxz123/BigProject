@@ -1,8 +1,8 @@
 package com.ethnicthv.bigproject.client;
 
-import javafx.beans.property.DoubleProperty;
-
 public class PlayerData {
+    private final double maxHealth = 100;
+    private final double maxMana = 100;
     private Double Health = 100.0;
     private Double Mana = 100.0;
     private Double Bomdelay = (double) 0;
@@ -62,5 +62,27 @@ public class PlayerData {
 
     public Double getSpeedUpdelay() {
         return SpeedUpdelay;
+    }
+
+    public boolean hasEnoughMana(double amount) {
+        return this.Mana - amount > 0 ;
+    }
+
+    public boolean useMana(double amount) {
+        this.Mana = this.Mana - amount;
+        if(this.Mana < 0) {
+            this.Mana += amount;
+            return false;
+        }
+        return true;
+    }
+
+    public boolean dealDamage(double damage) {
+        this.Health = this.Health - damage;
+        if(this.Health <= 0d) {
+            this.Health = 0d;
+            return true;
+        }
+        return false;
     }
 }

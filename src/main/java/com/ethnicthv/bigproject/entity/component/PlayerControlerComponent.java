@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.component.Required;
+import com.almasb.fxgl.time.TimerAction;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.EntityType;
@@ -19,7 +20,7 @@ import javafx.scene.effect.MotionBlur;
 import javafx.util.Duration;
 
 public class PlayerControlerComponent extends Component {
-
+    TimerAction action = null;
     //Feature
     public static ShieldFeature SHIELD = new ShieldFeature(Duration.seconds(5));
 
@@ -41,6 +42,16 @@ public class PlayerControlerComponent extends Component {
         }else {
             this.entity.getComponent(AnimatedGraphicComponent.class).playChannel("idle");
         }
+    }
+
+    public void blockWay() {
+        Point2D pos = GameManager.getPlayer().getPosition();
+        SafeCell cell = GameManager.grid.pfg.getCell(pos);
+        if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
+            return;
+        }
+        GameManager.getPlayer().getPlayerData().resetBomDelay();
+        FXGL.getGameWorld().spawn("bb", new SpawnData(pos));
     }
 
     public void speedUP() {

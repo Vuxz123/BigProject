@@ -1,6 +1,5 @@
 package com.ethnicthv.bigproject.entity.entities;
 
-import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
@@ -30,7 +29,7 @@ public class Player extends Entity implements SealedPlayer{
         this.setType(EntityType.PLAYER);
     }
 
-    public Player getPlayer() {
+    public Player init() {
 //        entityBuilder()
 //                .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
 //                .at(5 + 32, 5 + 32)
@@ -41,6 +40,13 @@ public class Player extends Entity implements SealedPlayer{
 //                .zIndex(1)
 //                .anchorFromCenter()
 //                .build();
+        this.setLocalAnchorFromCenter();
+        this.getViewComponent().addChild(new Rectangle(16, 16));
+        this.getViewComponent().setVisible(false);
+        this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.circle(8)));
+        this.getTransformComponent().setScaleOrigin(this.getBoundingBoxComponent().getCenterLocal());
+        this.getTransformComponent().setRotationOrigin(this.getBoundingBoxComponent().getCenterLocal());
+        this.setType(EntityType.PLAYER);
         this.addComponent(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY, grid.gridsize, grid.gridsize, 300));
         this.addComponent(new CustomAStarMoveComponent(grid.pfg));
 
@@ -57,13 +63,7 @@ public class Player extends Entity implements SealedPlayer{
         this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
         this.setPosition( GameManager.OFFSETX + grid.gridsize * 2, GameManager.OFFSETY + grid.gridsize * 2);
-        this.setLocalAnchorFromCenter();
-        this.getViewComponent().addChild(new Rectangle(16, 16));
-        this.getViewComponent().setVisible(false);
-        this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.circle(8)));
-        this.getTransformComponent().setScaleOrigin(this.getBoundingBoxComponent().getCenterLocal());
-        this.getTransformComponent().setRotationOrigin(this.getBoundingBoxComponent().getCenterLocal());
-        this.setType(EntityType.PLAYER);
+
         //this.getBoundingBoxComponent().addHitBox();
 
         return this;

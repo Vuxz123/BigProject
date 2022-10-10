@@ -31,6 +31,9 @@ public class GameMechanicComponent extends Component {
         GameManager.getPlayer().getPlayerData().onUpdate(tpf);
         List<Pair> removed = new ArrayList<>();
         SafeCell.markedcell.forEach(pair -> {
+            if(!pair.getKey().isWalkable()) {
+                removed.add(pair);
+            }
             if (pair.getValue() <= 0) {
                 Util.setBlockChange(pair.getKey().getX(), pair.getKey().getY(), Color.WHITE);
                 pair.getKey().setState(SafeCellState.NULL);
