@@ -8,6 +8,7 @@ import com.almasb.fxgl.entity.Spawns;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.BomComponent;
+import com.ethnicthv.bigproject.input.InputControler;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -24,6 +25,7 @@ public class BomFactory implements EntityFactory {
                 .with(new BomComponent(Duration.seconds(5), new HBoom()))
                 .zIndex(11)
                 .build();
+
         return e;
     }
 

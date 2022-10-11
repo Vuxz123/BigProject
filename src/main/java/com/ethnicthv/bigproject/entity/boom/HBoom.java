@@ -2,9 +2,12 @@ package com.ethnicthv.bigproject.entity.boom;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
+import com.ethnicthv.bigproject.asset.Config;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
 import javafx.geometry.Point2D;
+
+import static com.almasb.fxgl.dsl.FXGL.play;
 
 public class HBoom extends AbstractBoom {
     @Override
@@ -18,6 +21,8 @@ public class HBoom extends AbstractBoom {
             data = new SpawnData(centerX, centerY);
             data.put("dir", new Point2D(1, 0));
             FXGL.getGameWorld().spawn("f", data);
+            //why i put here
+            play(Config.Asset.SOUNG_EXPLOSION);
         };
     }
 

@@ -10,6 +10,9 @@ import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.entities.pools.ProjectilePools;
 import javafx.geometry.Point2D;
 
+import static com.almasb.fxgl.dsl.FXGL.play;
+import static com.ethnicthv.bigproject.asset.Config.*;
+
 public class EntityPCollision extends CollisionHandler {
     public EntityPCollision() {
         super(EntityType.ENTITY, EntityType.PARTICLE);
@@ -19,5 +22,7 @@ public class EntityPCollision extends CollisionHandler {
         super.onCollisionBegin(entity, particle);
         entity.removeFromWorld();
         GameManager.data.killed ++;
+        play(Asset.SOUND_LOSE_LIFE);
+        System.out.println("playing sound");
     }
 }

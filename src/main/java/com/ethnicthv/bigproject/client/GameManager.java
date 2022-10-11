@@ -3,12 +3,20 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.ethnicthv.bigproject.input.InputControler;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.EntityPCollision;
 import com.ethnicthv.bigproject.physic.collision.EtoECollision;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 import static com.ethnicthv.bigproject.util.Util.SS;
 
@@ -26,7 +34,8 @@ public class GameManager {
 
     public static GameMap grid = new GameMap();
 
-    private GameManager(){}
+    private GameManager() {
+    }
 
     public static void init(){
         //init item
@@ -44,7 +53,7 @@ public class GameManager {
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
     }
 
-    public static void initGame(){
+    public static void initGame() throws URISyntaxException {
         Logger.setLevel(Logger.DEBUG);
         FXGL.getEventBus().setLoggingEnabled(true);
         grid.setup();
@@ -55,14 +64,18 @@ public class GameManager {
         PhysicControler.INSTACNE.add("b", new EtoECollision());
         Util.spawnNPC(10,10);
         Util.spawnNPC(20,20);
+
     }
 
     public static void initUI(){
         ui.text = FXGL.addText("0", WIDTH - 100, 0 + 100);
     }
 
+
+
     public static void onUpdate(double tdf) {
         GameManager.ui.text.setText(String.valueOf(GameManager.data.killed));
+        GameManager.ui.text.setText(String.valueOf(InputControler.INSTANCE.getBombPlaced()));
     }
 
 }
