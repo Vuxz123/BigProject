@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="nameLabel" layoutX="92.0" layoutY="154.0" text="Yo:  ">
+      <Label fx:id="nameLabel" layoutX="341.0" layoutY="174.0" text="Yo:  ">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="highestScore" layoutX="92.0" layoutY="220.0" text="Your highest Score is">
+      <Label fx:id="highestScore" layoutX="341.0" layoutY="236.0" text="Your highest Score is">
          <font>
             <Font size="30.0" />
          </font>
