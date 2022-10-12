@@ -21,13 +21,13 @@ public class ParticleFactory implements EntityFactory {
         int x = (int) data.getX();
         int y = (int) data.getY();
         Entity e = FXGL.entityBuilder(data)
+                .bbox(BoundingShape.circle(16))
                 .view(TextureProvider.INSTANCE.BLAST.copy())
                 .anchorFromCenter()
-                .bbox(BoundingShape.circle(16))
                 .at(5 + x * 16, 5 + y * 16 - 16)
                 .type(EntityType.PARTICLE)
                 .with(new ProjectileComponent(data.get("dir"), data.get("spe")))
-                .with(new DurationComponent(DurationComponent.Type.MILLISECOND, /*data.get("du")*/ 1000))
+                .with(new DurationComponent(DurationComponent.Type.MILLISECOND, data.get("du")))
                 .collidable()
                 .build();
         return e;

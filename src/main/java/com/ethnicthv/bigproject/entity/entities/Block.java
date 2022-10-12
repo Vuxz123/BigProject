@@ -12,11 +12,14 @@ import com.ethnicthv.bigproject.entity.component.graphic.GraphicComponent;
 public class Block extends Entity {
 
     public Block() {
-        this.getViewComponent().addChild(TextureProvider.INSTANCE.BLOCK.copy());
-        this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.box(16, 16)));
+        this.setLocalAnchorFromCenter();
+        this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.circle(4)));
+        this.getBoundingBoxComponent().getTransform().positionOriginXProperty().set(-4);
+        this.getBoundingBoxComponent().getTransform().positionOriginYProperty().set(-4);
         this.setType(EntityType.BREAKABLE_BLOCK);
         this.addComponent(new CollidableComponent(true));
         this.addComponent(new BlockBoomComponent());
+        this.addComponent(new GraphicComponent(TextureProvider.INSTANCE.BLOCK.copy()));
     }
 
 }

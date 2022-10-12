@@ -45,10 +45,33 @@ public class GameMap {
     }
 
     public void resetLevel() {
+        {
+            int i = 7;
+            int j = 2;
+            for (Pos p : BlockBoom.pair) {
+                int x = i + p.getKey();
+                int y = j + p.getValue();
+                if (GameManager.grid.pfg.get(x, y).getState() != SafeCellState.NOT_WALKABLE) {
+                    //System.out.println("" + p.getKey() + " " + p.getValue() + " " + GameManager.grid.pfg.get(x, y).isWalkable() + " " + x + " " + y + " " + GameManager.grid.pfg.get(x, y).getState());
+                    FXGL.spawn("block", x * GameManager.grid.gridsize + GameManager.OFFSETX, y * GameManager.grid.gridsize + GameManager.OFFSETY);
+                }
+            }
+
+            i = 2;
+            j = 7;
+            for (Pos p : BlockBoom.pair) {
+                int x = i + p.getKey();
+                int y = j + p.getValue();
+                if (GameManager.grid.pfg.get(x, y).getState() != SafeCellState.NOT_WALKABLE) {
+                    //System.out.println("" + p.getKey() + " " + p.getValue() + " " + GameManager.grid.pfg.get(x, y).isWalkable() + " " + x + " " + y + " " + GameManager.grid.pfg.get(x, y).getState());
+                    FXGL.spawn("block", x * GameManager.grid.gridsize + GameManager.OFFSETX, y * GameManager.grid.gridsize + GameManager.OFFSETY);
+                }
+            }
+        }
         for (int v = 0; v < 30; v++) {
             var lcell = pfg.getWalkableCell();
             var cell = FXGLMath.random(lcell);
-            if (cell.isEmpty()) {
+            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 100) {
                 v--;
                 continue;
             }
@@ -64,9 +87,13 @@ public class GameMap {
             }
         }
         var lcell = pfg.getWalkableCell();
-        for(int v = 0; v < 10; v ++) {
+        for (int v = 0; v < 10; v++) {
             var cell = FXGLMath.random(lcell);
-            EnemyPool.spawnCommonEntity( cell.get().getX(), cell.get().getY());
+            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 50) {
+                v--;
+                continue;
+            }
+            EnemyPool.spawnCommonEntity(cell.get().getX(), cell.get().getY());
         }
     }
 

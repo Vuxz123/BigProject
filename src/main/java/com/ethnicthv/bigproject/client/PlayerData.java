@@ -37,7 +37,7 @@ public class PlayerData {
     }
 
     public void resetShieldDelay() {
-        this.Shielddelay = 20.0;
+        this.Shielddelay = 5.0;
     }
 
     public void resetSpeedUpdelay() {
@@ -78,6 +78,7 @@ public class PlayerData {
     }
 
     public boolean dealDamage(double damage) {
+        if(GameManager.getPlayer().getPCC().isInvincible()) return false;
         this.Health = this.Health - damage;
         if(this.Health <= 0d) {
             this.Health = 0d;

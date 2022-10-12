@@ -6,12 +6,12 @@ import com.ethnicthv.bigproject.entity.EntityType;
 
 public class ParticletoBlockCollision extends CollisionHandler {
     public ParticletoBlockCollision() {
-        super(EntityType.PARTICLE, EntityType.BREAKABLE_BLOCK);
+        super(EntityType.BREAKABLE_BLOCK, EntityType.PARTICLE);
     }
 
     @Override
-    protected void onCollisionBegin(Entity a, Entity b) {
+    protected void onCollision(Entity a, Entity b) {
         super.onCollisionBegin(a, b);
-        b.removeFromWorld();
+        a.removeFromWorld();
     }
 }

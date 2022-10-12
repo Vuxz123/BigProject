@@ -23,8 +23,9 @@ public class ShieldFeature extends DurationFeature{
     @Override
     public void onAdd(Renderer renderer) {
         super.onAdd(renderer);
+        GameManager.getPlayer().getPCC().setInvincible(true);
         GameManager.getPlayer().getPlayerData().resetShieldDelay();
-        SHIELD1 = entityBuilder().viewWithBBox(TextureProvider.INSTANCE.SHIELD_1.copy()).collidable().type(EntityType.SHIELD).at(renderer.getPosition().add(-32,-48)).build();
+        SHIELD1 = entityBuilder().view(TextureProvider.INSTANCE.SHIELD_1.copy()).at(renderer.getPosition().add(-32,-48)).build();
         SHIELD2 = entityBuilder().view(TextureProvider.INSTANCE.SHIELD_2.copy()).at(renderer.getPosition().add(-32,-48)).build();
         SHIELD1.setZIndex(3);
         SHIELD2.setZIndex(5);
@@ -63,6 +64,7 @@ public class ShieldFeature extends DurationFeature{
     @Override
     public void onRemove(Renderer renderer) {
         super.onRemove(renderer);
+        GameManager.getPlayer().getPCC().setInvincible(false);
         animationBuilder()
                 .interpolator(Interpolator.EASE_IN)
                 .onFinished(() -> SHIELD1.removeFromWorld())

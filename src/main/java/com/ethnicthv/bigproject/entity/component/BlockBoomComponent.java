@@ -15,8 +15,7 @@ public class BlockBoomComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        if (GameManager.grid.pfg.getCell(this.entity).isWalkable())
-            GameManager.grid.pfg.getCell(this.entity).setState(SafeCellState.NOT_WALKABLE);
+        if (GameManager.grid.pfg.getCell(this.entity).isWalkable()) GameManager.grid.pfg.getCell(this.entity).setState(SafeCellState.NOT_WALKABLE);
     }
 
     @Override

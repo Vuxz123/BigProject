@@ -62,13 +62,14 @@ public class GameManager {
         PhysicControler.INSTACNE.add("d", new PlayerToItemCollision());
         //PhysicControler.INSTACNE.add("e", new PARTICLEtWallCollision());
         PhysicControler.INSTACNE.add("e", new ParticletoBlockCollision());
-        PhysicControler.INSTACNE.add("e", new PtoParCollision());
+        PhysicControler.INSTACNE.add("f", new PtoParCollision());
+        PhysicControler.INSTACNE.add("g", new PtoECollision());
         grid.resetLevel();
     }
 
     public static void initUI(){
         ui.text = FXGL.addText("0", WIDTH - 100, 500);
-        ui.shield = new CooldownIcon(TextureProvider.INSTANCE.SHIELD_ICON.copy(), player.getPlayerData()::getShielddelay, 20);
+        ui.shield = new CooldownIcon(TextureProvider.INSTANCE.SHIELD_ICON.copy(), player.getPlayerData()::getShielddelay, 5);
         ui.shield.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2));
         ui.shield.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
         ui.speed = new CooldownIcon(TextureProvider.INSTANCE.SPEED_ICON.copy(), player.getPlayerData()::getSpeedUpdelay, 10);

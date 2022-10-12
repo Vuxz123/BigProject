@@ -26,6 +26,8 @@ public class PlayerControlerComponent extends Component {
 
     public static SpeedUpFeature SPEED = new SpeedUpFeature();
 
+    private boolean invincible = false;
+
     //Component
 
     @Override
@@ -99,5 +101,13 @@ public class PlayerControlerComponent extends Component {
             GameManager.getPlayer().getPlayerData().resetBomDelay();
             FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
         }
+    }
+
+    public boolean isInvincible() {
+        return invincible;
+    }
+
+    public void setInvincible(boolean invincible) {
+        this.invincible = invincible;
     }
 }

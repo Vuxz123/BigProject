@@ -30,20 +30,10 @@ public class Player extends Entity implements SealedPlayer{
     }
 
     public Player init() {
-//        entityBuilder()
-//                .viewWithBBox(new Rectangle(16, 16, Color.BLUE))
-//                .at(5 + 32, 5 + 32)
-//                .with(new CustomCellMoveComponent(5, 5, 16, 16, 300))
-//                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
-//                .with(new GraphicComponent(new Rectangle(16, 30, Color.PINK)).setZIndex(2).setOffsetX(0))
-//                .with(new BoundingBoxComponent())
-//                .zIndex(1)
-//                .anchorFromCenter()
-//                .build();
         this.setLocalAnchorFromCenter();
-        this.getViewComponent().addChild(new Rectangle(16, 16));
-        this.getViewComponent().setVisible(false);
         this.getBoundingBoxComponent().addHitBox(new HitBox(BoundingShape.circle(8)));
+        this.getBoundingBoxComponent().getTransform().positionOriginXProperty().set(8);
+        this.getBoundingBoxComponent().getTransform().positionOriginYProperty().set(8);
         this.getTransformComponent().setScaleOrigin(this.getBoundingBoxComponent().getCenterLocal());
         this.getTransformComponent().setRotationOrigin(this.getBoundingBoxComponent().getCenterLocal());
         this.setType(EntityType.PLAYER);
