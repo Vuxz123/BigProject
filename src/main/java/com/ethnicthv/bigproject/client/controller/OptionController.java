@@ -1,22 +1,16 @@
 package com.ethnicthv.bigproject.client.controller;
 
 
-import com.almasb.fxgl.app.scene.*;
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.ui.UI;
 import com.almasb.fxgl.ui.UIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getAssetLoader;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameScene;
 
 public class OptionController implements UIController, Initializable {
 
@@ -26,8 +20,10 @@ public class OptionController implements UIController, Initializable {
     private ChoiceBox<String> controlChoiceBox;
     @FXML
     private Button Back;
+
     OptionController() {
     }
+
     private String[] selection = {"MOUSE", "KEYBOARD"};
 
     @Override
@@ -51,7 +47,7 @@ public class OptionController implements UIController, Initializable {
 //        String myFood = choiceBox.getValue();
 //    }
 
-    public void control (ActionEvent event) {
+    public void control(ActionEvent event) {
 
     }
 

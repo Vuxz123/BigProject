@@ -10,9 +10,11 @@ public class PlayerData {
     private Double SpeedUpdelay = (double) 0;
     private Double Bomcooldown = 10.0;
     private Integer Boms = 5;
-
+    private Double Blockcooldown = 10.0;
+    private Integer Blocks = 5;
     private Double boomDuration = 250d;
     private Double boomSpe = 200d;
+
 
     public void onUpdate(double tpf) {
         if (Health <= 0) {
@@ -36,6 +38,15 @@ public class PlayerData {
                 Boms++;
             }
         }
+        if (Blockcooldown > 0) Blockcooldown -= tpf;
+        else {
+            if (Blocks >= 5) {
+                Blockcooldown = (double) 0;
+            } else {
+                Blockcooldown = 10d;
+                Blocks++;
+            }
+        }
     }
 
     public Double getBoomDuration() {
@@ -57,6 +68,12 @@ public class PlayerData {
     public boolean placeBoom() {
         if (this.Boms - 1 < 0) return false;
         this.Boms--;
+        return true;
+    }
+
+    public boolean placeBlock() {
+        if (this.Blocks - 1 < 0) return false;
+        this.Blocks--;
         return true;
     }
 
@@ -108,8 +125,16 @@ public class PlayerData {
         return Boms;
     }
 
+    public Integer getBlocks() {
+        return Blocks;
+    }
+
     public Double getBomcooldown() {
         return Bomcooldown;
+    }
+
+    public Double getBlockcooldown() {
+        return Blockcooldown;
     }
 
     public boolean hasEnoughMana(double amount) {

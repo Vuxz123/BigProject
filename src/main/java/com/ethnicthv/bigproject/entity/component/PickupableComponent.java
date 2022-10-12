@@ -45,7 +45,7 @@ public class PickupableComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        effect.setSpread(time/15);
+        effect.setSpread(time / 15);
         tpf *= speed;
         time = time + dir * tpf;
         if (dir == 1) dir = (time > 10) ? -1 : 1;

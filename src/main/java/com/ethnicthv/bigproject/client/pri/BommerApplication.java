@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 
 import java.net.URISyntaxException;
 
-public class  BommerApplication extends GameApplication {
+public class BommerApplication extends GameApplication {
     public static Text count;
 
     public static void main(String[] args) {

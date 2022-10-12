@@ -3,31 +3,22 @@ package com.ethnicthv.bigproject.client;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.ethnicthv.bigproject.asset.TextureProvider;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
+import com.ethnicthv.bigproject.entity.entities.Player;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
-import com.almasb.fxgl.entity.Entity;
-import com.ethnicthv.bigproject.input.InputControler;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.*;
 import com.ethnicthv.bigproject.ui.CooldownIcon;
 import com.ethnicthv.bigproject.ui.ProgressBar;
 import com.ethnicthv.bigproject.ui.StackingCooldownIcon;
-import com.ethnicthv.bigproject.util.Util;
-import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
 import javafx.scene.paint.Color;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.util.Objects;
 
 import static com.ethnicthv.bigproject.util.Util.SS;
 
 public class GameManager {
-    public static Player player ;
+    public static Player player;
     public static GameData data = new GameData();
     public static GameUI ui = new GameUI();
     public static final int OFFSETX = 5;
@@ -40,14 +31,15 @@ public class GameManager {
 
     public static GameMap grid = new GameMap();
 
-    private GameManager(){}
+    private GameManager() {
+    }
 
-    public static void init(){
+    public static void init() {
         //init item
 
     }
 
-    public static void setting(GameSettings gameSettings){
+    public static void setting(GameSettings gameSettings) {
         WIDTH = SS(WIDTH);
         HEIGHT = SS(HEIGHT);
         gameSettings.setWidth(WIDTH + OFFSETX * 2);
@@ -78,7 +70,7 @@ public class GameManager {
         grid.resetLevel();
     }
 
-    public static void initUI(){
+    public static void initUI() {
         ui.text = FXGL.addText("0", WIDTH - 100, 500);
         ui.shield = new CooldownIcon(TextureProvider.INSTANCE.SHIELD_ICON.copy(), player.getPlayerData()::getShielddelay, 20);
         ui.shield.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2));
@@ -95,11 +87,15 @@ public class GameManager {
         ui.boom = new StackingCooldownIcon(TextureProvider.INSTANCE.BOOM_ICON.copy(), player.getPlayerData()::getBomcooldown, 10, player.getPlayerData()::getBoms, 5);
         ui.boom.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2) + 64);
         ui.boom.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
+        ui.block = new StackingCooldownIcon(TextureProvider.INSTANCE.BLOCK_ICON, player.getPlayerData()::getBlockcooldown, 10, player.getPlayerData()::getBlocks, 5);
+        ui.block.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2) + 96);
+        ui.block.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
         FXGL.getGameScene().addUINode(ui.shield);
         FXGL.getGameScene().addUINode(ui.speed);
         FXGL.getGameScene().addUINode(ui.health);
         FXGL.getGameScene().addUINode(ui.mana);
         FXGL.getGameScene().addUINode(ui.boom);
+        FXGL.getGameScene().addUINode(ui.block);
     }
 
     public static void onUpdate(double tdf) {

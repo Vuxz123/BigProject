@@ -9,7 +9,7 @@ public class OffscreenDelayCleanComponent extends Component {
     private Viewport viewport;
     private Duration duration;
 
-    public OffscreenDelayCleanComponent(){
+    public OffscreenDelayCleanComponent() {
         this.viewport = FXGL.getGameScene().getViewport();
         this.duration = Duration.millis(1000);
     }
@@ -43,7 +43,7 @@ public class OffscreenDelayCleanComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        if(entity.isActive()) {
+        if (entity.isActive()) {
             if (entity.getBoundingBoxComponent().isOutside(viewport.getVisibleArea())) {
                 FXGL.getGameTimer().runOnceAfter(entity::removeFromWorld, duration);
                 pause();

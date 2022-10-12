@@ -1,6 +1,6 @@
 package com.ethnicthv.bigproject.util;
 
-public class Pair <K,V> {
+public class Pair<K, V> {
     K key;
     V value;
 

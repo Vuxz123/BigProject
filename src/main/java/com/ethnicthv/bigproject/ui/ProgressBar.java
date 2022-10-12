@@ -1,7 +1,6 @@
 package com.ethnicthv.bigproject.ui;
 
 import com.almasb.fxgl.core.Updatable;
-import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -32,8 +31,8 @@ public class ProgressBar extends Group implements Updatable {
         list.add(TextureProvider.INSTANCE.BARFRAME.copy());
     }
 
-    public ProgressBar(Color color ,Supplier<Double> valuelisten, double max) {
-        this(new Rectangle(16*13, 32, color), valuelisten, max);
+    public ProgressBar(Color color, Supplier<Double> valuelisten, double max) {
+        this(new Rectangle(16 * 13, 32, color), valuelisten, max);
     }
 
     @Override

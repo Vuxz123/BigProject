@@ -10,7 +10,7 @@ public abstract class Item {
         this.texture = texture;
     }
 
-    public int maxItem(){
+    public int maxItem() {
         return 5;
     }
 

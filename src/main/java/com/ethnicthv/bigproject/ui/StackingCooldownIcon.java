@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 
 import java.util.function.Supplier;
 
-public class StackingCooldownIcon extends CooldownIcon{
+public class StackingCooldownIcon extends CooldownIcon {
     private int maxstack = 1;
     Supplier<Integer> stacklisten;
     Text amount;
@@ -17,8 +17,8 @@ public class StackingCooldownIcon extends CooldownIcon{
         this.maxstack = maxstack;
         this.amount = new Text(String.valueOf(maxstack));
         this.amount.setFill(Color.RED);
-        this.amount.setX(32-amount.getLayoutX() - 8);
-        this.amount.setY(32-amount.getLayoutY());
+        this.amount.setX(32 - amount.getLayoutX() - 8);
+        this.amount.setY(32 - amount.getLayoutY());
         this.amount.setText("");
         this.getChildren().add(amount);
     }

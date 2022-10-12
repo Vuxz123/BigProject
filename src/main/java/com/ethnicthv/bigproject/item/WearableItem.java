@@ -14,7 +14,7 @@ public abstract class WearableItem extends Item {
         return 1;
     }
 
-    public ItemStack getItemStack(){
+    public ItemStack getItemStack() {
         return null;
     }
 }

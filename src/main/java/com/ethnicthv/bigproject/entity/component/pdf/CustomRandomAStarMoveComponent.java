@@ -78,12 +78,12 @@ public class CustomRandomAStarMoveComponent extends Component {
 
     private void moveToRandomCell() {
         astar.getCurrentCell().ifPresent(currentCell -> astar.getGrid().getRandomCell(aStarCell -> aStarCell.isWalkable()
-                        && cellFilter.test(aStarCell)
-                        && currentCell.distance(aStarCell) >= minDistance
-                        && currentCell.distance(aStarCell) <= maxDistance).ifPresent((aStarCell)-> {
-                            WrappedBoolean isunsafe = new WrappedBoolean(false);
-                            astar.moveToCell(aStarCell, isunsafe);
-                            if(isunsafe.get()) astar.stopMovement();
-                        }));
+                && cellFilter.test(aStarCell)
+                && currentCell.distance(aStarCell) >= minDistance
+                && currentCell.distance(aStarCell) <= maxDistance).ifPresent((aStarCell) -> {
+            WrappedBoolean isunsafe = new WrappedBoolean(false);
+            astar.moveToCell(aStarCell, isunsafe);
+            if (isunsafe.get()) astar.stopMovement();
+        }));
     }
 }

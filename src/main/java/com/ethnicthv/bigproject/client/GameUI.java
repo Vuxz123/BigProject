@@ -15,4 +15,6 @@ public class GameUI {
     public ProgressBar mana;
 
     public StackingCooldownIcon boom;
+
+    public StackingCooldownIcon block;
 }

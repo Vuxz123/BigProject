@@ -12,6 +12,7 @@ import com.ethnicthv.bigproject.util.WrappedBoolean;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.value.ChangeListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class CustomAStarMoveComponent extends Component {
     private LazyValue<CustomAstarPartFinder> pathfinder;
     private List<SafeCell> path;
     private Runnable delayedPathCalc = EmptyRunnable.INSTANCE;
-    private ReadOnlyBooleanWrapper isAtDestinationProp  = new ReadOnlyBooleanWrapper(true);
+    private ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
     private ChangeListener<Boolean> isAtDestinationListener = (o, old, isAtDestination) -> {
         if (isAtDestination) {
             this.delayedPathCalc.run();
@@ -123,11 +124,11 @@ public class CustomAStarMoveComponent extends Component {
         this.moveToCell(startX, startY, x, y, isUnSafe);
     }
 
-    public void moveToCell(int startX, int startY, int targetX, int targetY,WrappedBoolean isUnSafe) {
+    public void moveToCell(int startX, int startY, int targetX, int targetY, WrappedBoolean isUnSafe) {
         this.isAtDestinationProp.set(false);
         if (this.moveComponent.isAtDestination()) {
             this.path = this.pathfinder.get().findPath(startX, startY, targetX, targetY);
-            if(isUnSafe != null) isUnSafe.set(this.path.stream().anyMatch(SafeCell::isNotSafe));
+            if (isUnSafe != null) isUnSafe.set(this.path.stream().anyMatch(SafeCell::isNotSafe));
         } else {
             this.delayedPathCalc = () -> this.path = this.pathfinder.get().findPath(this.moveComponent.getCellX(), this.moveComponent.getCellY(), targetX, targetY);
         }

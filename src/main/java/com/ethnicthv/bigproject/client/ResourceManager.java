@@ -1,6 +1,8 @@
 package com.ethnicthv.bigproject.client;
 
-import java.io.*;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,8 +28,7 @@ public class ResourceManager implements Serializable {
         Object o = load(fileName);
         if (o == null) {
             playerData = new ArrayList<>();
-        }
-        else {
+        } else {
             playerData = (ArrayList<Data>) o;
         }
     }
@@ -38,6 +39,7 @@ public class ResourceManager implements Serializable {
             oos.writeObject(data);
         }
     }
+
     public static Object load(String fileName) throws Exception {
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
             return ois.readObject();

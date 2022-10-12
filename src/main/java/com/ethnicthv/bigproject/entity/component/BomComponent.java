@@ -2,7 +2,6 @@ package com.ethnicthv.bigproject.entity.component;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.time.LocalTimer;
 import com.almasb.fxgl.time.TimerAction;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
@@ -32,9 +31,10 @@ public class BomComponent extends Component {
     @Override
     public void onAdded() {
         super.onAdded();
-        if(boom != null) this.bomfunction = boom.getBoomFunc(GameManager.grid.getGridX((int) entity.getX()), GameManager.grid.getGridY((int) entity.getY()));
+        if (boom != null)
+            this.bomfunction = boom.getBoomFunc(GameManager.grid.getGridX((int) entity.getX()), GameManager.grid.getGridY((int) entity.getY()));
         action = FXGL.getGameTimer().runOnceAfter(bomfunction, duration);
-        FXGL.getGameTimer().runOnceAfter(()->{
+        FXGL.getGameTimer().runOnceAfter(() -> {
             GameManager.grid.pfg.setUnSafe(GameManager.grid.getGridX((int) this.entity.getX()), GameManager.grid.getGridY((int) this.entity.getY()), function);
         }, duration.subtract(Duration.seconds(1)));
     }
@@ -42,7 +42,7 @@ public class BomComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        if(action.isExpired()){
+        if (action.isExpired()) {
             entity.removeFromWorld();
         }
     }

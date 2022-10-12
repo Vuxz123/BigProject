@@ -30,7 +30,7 @@ public class CustomProjectileComponent extends Component implements CopyableComp
         this.direction = direction;
         this.speed = speed;
         this.velocity = direction.normalize().multiply(speed);
-        this.speedProp =  new SimpleDoubleProperty(speed);
+        this.speedProp = new SimpleDoubleProperty(speed);
         this.type = type;
     }
 

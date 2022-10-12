@@ -37,11 +37,9 @@ public class GameMechanicComponent extends Component {
         FXGL.run(() -> {
             int x = FXGLMath.random(2, 22);
             int y = FXGLMath.random(2, 14);
-            System.out.println("a");
             if (GameManager.grid.pfg.get(x, y).isWalkable()
                     && FXGL.getGameWorld().getEntitiesByType(EntityType.ENTITY).size() < GameManager.grid.max_entity
                     && GameManager.grid.pfg.get(x, y).getWorldPosition().distance(GameManager.grid.pfg.get(2, 2).getWorldPosition()) < 150) {
-                System.out.println("b");
                 Util.spawnNPC(x, y);
             }
         }, Duration.seconds(1));
@@ -59,8 +57,8 @@ public class GameMechanicComponent extends Component {
                 if (GameManager.grid.pfg.get(x, y).getState() != SafeCellState.NOT_WALKABLE) {
                     //System.out.println("" + p.getKey() + " " + p.getValue() + " " + GameManager.grid.pfg.get(x, y).isWalkable() + " " + x + " " + y + " " + GameManager.grid.pfg.get(x, y).getState());
                     FXGL.spawn("block", x * GameManager.grid.gridsize + GameManager.OFFSETX, y * GameManager.grid.gridsize + GameManager.OFFSETY);
-                    Point2D v = GameManager.grid.pfg.get(x, y).getWorldPosition().add(8,8);
-                    if(GameManager.getPlayer().getPosition().getX() == v.getX() && GameManager.getPlayer().getPosition().getY() == v.getY()) {
+                    Point2D v = GameManager.grid.pfg.get(x, y).getWorldPosition().add(8, 8);
+                    if (GameManager.getPlayer().getPosition().getX() == v.getX() && GameManager.getPlayer().getPosition().getY() == v.getY()) {
                         GameManager.getPlayer().getPlayerData().dealDamage(100);
                     }
                 }
@@ -94,16 +92,16 @@ public class GameMechanicComponent extends Component {
             int x = FXGLMath.random(2, 22);
             int y = FXGLMath.random(2, 14);
             if (GameManager.grid.pfg.get(x, y).isWalkable()) {
-                double r = FXGLMath.random(0,1);
-                if(r <= 0.33) {
+                double r = FXGLMath.random(0, 1);
+                if (r <= 0.33) {
                     ItemEntityFactory.spawnItem(new CoinItem(TextureProvider.INSTANCE.EMBER.copy()),
-                            GameManager.grid.pfg.get(x,y).getWorldPosition());
+                            GameManager.grid.pfg.get(x, y).getWorldPosition());
                 } else if (r <= 0.66) {
                     ItemEntityFactory.spawnItem(new HealthItem(),
-                            GameManager.grid.pfg.get(x,y).getWorldPosition());
+                            GameManager.grid.pfg.get(x, y).getWorldPosition());
                 } else {
                     ItemEntityFactory.spawnItem(new ManaItem(),
-                            GameManager.grid.pfg.get(x,y).getWorldPosition());
+                            GameManager.grid.pfg.get(x, y).getWorldPosition());
                 }
             }
             timer.capture();

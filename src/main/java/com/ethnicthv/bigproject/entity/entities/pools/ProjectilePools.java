@@ -1,13 +1,13 @@
 package com.ethnicthv.bigproject.entity.entities.pools;
 
-import com.almasb.fxgl.core.pool.Pool;
 import com.ethnicthv.bigproject.entity.entities.Projectile;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProjectilePools {
-    private ProjectilePools(){}
+    private ProjectilePools() {
+    }
 
     private static final Map<Class, ProjectilePool> typePools = new HashMap<>();
 

@@ -1,13 +1,5 @@
 package com.ethnicthv.bigproject.client.controller;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.almasb.fxgl.ui.UIController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,6 +11,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameSoundMenuController implements Initializable, UIController {
 
@@ -71,9 +71,9 @@ public class GameSoundMenuController implements Initializable, UIController {
         }
         files = directory.listFiles();
         //System.out.println(files.toString());
-        if(files != null) {
+        if (files != null) {
 
-            for(File file : files) {
+            for (File file : files) {
 
                 songs.add(file);
             }
@@ -84,9 +84,9 @@ public class GameSoundMenuController implements Initializable, UIController {
 
         songLabel.setText(songs.get(songNumber).getName());
 
-        for(int i = 0; i < speeds.length; i++) {
+        for (int i = 0; i < speeds.length; i++) {
 
-            speedBox.getItems().add(Integer.toString(speeds[i])+"%");
+            speedBox.getItems().add(Integer.toString(speeds[i]) + "%");
         }
 
         speedBox.setOnAction(this::changeSpeed);
@@ -125,13 +125,13 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void previousMedia() {
 
-        if(songNumber > 0) {
+        if (songNumber > 0) {
 
             songNumber--;
 
             mediaPlayer.stop();
 
-            if(running) {
+            if (running) {
 
                 cancelTimer();
             }
@@ -142,14 +142,13 @@ public class GameSoundMenuController implements Initializable, UIController {
             songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
-        }
-        else {
+        } else {
 
             songNumber = songs.size() - 1;
 
             mediaPlayer.stop();
 
-            if(running) {
+            if (running) {
 
                 cancelTimer();
             }
@@ -165,13 +164,13 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void nextMedia() {
 
-        if(songNumber < songs.size() - 1) {
+        if (songNumber < songs.size() - 1) {
 
             songNumber++;
 
             mediaPlayer.stop();
 
-            if(running) {
+            if (running) {
 
                 cancelTimer();
             }
@@ -182,8 +181,7 @@ public class GameSoundMenuController implements Initializable, UIController {
             songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
-        }
-        else {
+        } else {
 
             songNumber = 0;
 
@@ -200,11 +198,10 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void changeSpeed(ActionEvent event) {
 
-        if(speedBox.getValue() == null) {
+        if (speedBox.getValue() == null) {
 
             mediaPlayer.setRate(1);
-        }
-        else {
+        } else {
 
             //mediaPlayer.setRate(Integer.parseInt(speedBox.getValue()) * 0.01);
 
@@ -223,9 +220,9 @@ public class GameSoundMenuController implements Initializable, UIController {
                 running = true;
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
-                songProgressBar.setProgress(current/end);
+                songProgressBar.setProgress(current / end);
 
-                if(current/end == 1) {
+                if (current / end == 1) {
                     resetMedia();
                     cancelTimer();
 

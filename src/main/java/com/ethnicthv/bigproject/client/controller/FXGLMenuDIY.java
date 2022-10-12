@@ -12,12 +12,13 @@ public class FXGLMenuDIY extends FXGLMenu {
 
     public static UI soundMenu;
     public static UI optionMenu;
+
     public FXGLMenuDIY() {
         super(MenuType.MAIN_MENU);
         MenuController menuController = new MenuController();
-         mainMenu = FXGL.getAssetLoader().loadUI("Menu.fxml", menuController);
+        mainMenu = FXGL.getAssetLoader().loadUI("Menu.fxml", menuController);
 
-         getRoot().getChildren().add(mainMenu.getRoot());
+        getRoot().getChildren().add(mainMenu.getRoot());
 
         OptionController optionController = new OptionController();
 

@@ -27,8 +27,8 @@ public class BlockBoom extends AbstractBoom {
                 if (GameManager.grid.pfg.get(x, y).getState() != SafeCellState.NOT_WALKABLE) {
                     //System.out.println("" + p.getKey() + " " + p.getValue() + " " + GameManager.grid.pfg.get(x, y).isWalkable() + " " + x + " " + y + " " + GameManager.grid.pfg.get(x, y).getState());
                     FXGL.spawn("block", x * GameManager.grid.gridsize + GameManager.OFFSETX, y * GameManager.grid.gridsize + GameManager.OFFSETY);
-                    Point2D v = GameManager.grid.pfg.get(x, y).getWorldPosition().add(8,8);
-                    if(GameManager.getPlayer().getPosition().getX() == v.getX() && GameManager.getPlayer().getPosition().getY() == v.getY()) {
+                    Point2D v = GameManager.grid.pfg.get(x, y).getWorldPosition().add(8, 8);
+                    if (GameManager.getPlayer().getPosition().getX() == v.getX() && GameManager.getPlayer().getPosition().getY() == v.getY()) {
                         GameManager.getPlayer().getPlayerData().dealDamage(100);
                     }
                 }

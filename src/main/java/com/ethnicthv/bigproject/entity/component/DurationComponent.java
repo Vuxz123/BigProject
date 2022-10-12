@@ -12,8 +12,9 @@ public class DurationComponent extends Component {
 
     /**
      * Hàm khởi tạo nhận vào một duration.
-     * @param type Kiểu đơn vị thời gian;
-     *             được chọn từ enum Type;
+     *
+     * @param type     Kiểu đơn vị thời gian;
+     *                 được chọn từ enum Type;
      * @param duration Quãng thời gian entity này tồn tại;
      *                 duration là hằng số, sẽ không thể thay đổi được.
      */

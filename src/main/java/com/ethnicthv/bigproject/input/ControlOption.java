@@ -1,6 +1,6 @@
 package com.ethnicthv.bigproject.input;
 
-enum ControlOption{
+enum ControlOption {
     KEYBOARD,
     MOUSE
 }

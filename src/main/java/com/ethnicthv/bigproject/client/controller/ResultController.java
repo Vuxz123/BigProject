@@ -10,6 +10,7 @@ public class ResultController implements UIController {
     Label nameLabel;
     @FXML
     Label highestScore;
+
     public void displayName(String username, int Score) {
         nameLabel.setText("Yo: " + username);
         highestScore.setText("Your score is: " + Score);

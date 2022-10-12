@@ -1,7 +1,6 @@
 package com.ethnicthv.bigproject.item.items;
 
 import com.almasb.fxgl.inventory.ItemStack;
-import com.almasb.fxgl.texture.Texture;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.item.Item;

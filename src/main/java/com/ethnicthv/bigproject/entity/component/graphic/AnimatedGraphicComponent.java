@@ -5,10 +5,10 @@ import com.almasb.fxgl.texture.AnimationChannel;
 
 import java.util.HashMap;
 
-public class AnimatedGraphicComponent extends GraphicComponent{
+public class AnimatedGraphicComponent extends GraphicComponent {
     private final AnimatedTexture animatedTexture;
 
-    private final HashMap<String,AnimationChannel> channels = new HashMap<>();
+    private final HashMap<String, AnimationChannel> channels = new HashMap<>();
 
     private String cchannel = "idle";
 
@@ -45,7 +45,7 @@ public class AnimatedGraphicComponent extends GraphicComponent{
     }
 
     public AnimatedGraphicComponent addChannel(String name, AnimationChannel channel) {
-        channels.put(name,channel);
+        channels.put(name, channel);
         return this;
     }
 
