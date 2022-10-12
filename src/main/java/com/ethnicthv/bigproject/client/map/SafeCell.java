@@ -62,7 +62,7 @@ public class SafeCell extends Cell {
     public void setState(SafeCellState state) {
         this.state = state;
         if (state == SafeCellState.SAFE || state == SafeCellState.NOTSAFE) {
-            markedcell.add(new Pair<SafeCell, Double>(this, 1d));
+            markedcell.add(new Pair<>(this, 1d));
         }
     }
 

@@ -4,7 +4,7 @@ import com.almasb.fxgl.inventory.ItemStack;
 import com.almasb.fxgl.texture.Texture;
 
 public abstract class Item {
-    private Texture texture;
+    private final Texture texture;
 
     public Item(Texture texture) {
         this.texture = texture;
@@ -15,4 +15,8 @@ public abstract class Item {
     }
 
     public abstract ItemStack getItemStack();
+
+    public Texture getTexture() {
+        return texture;
+    }
 }

@@ -2,8 +2,10 @@ package com.ethnicthv.bigproject.entity.component.pdf;
 
 import com.almasb.fxgl.core.collection.grid.Cell;
 import com.almasb.fxgl.entity.component.Component;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 
 public class CustomCellMoveComponent extends Component {
@@ -13,7 +15,7 @@ public class CustomCellMoveComponent extends Component {
     private int offsetY;
     private int cellWidth;
     private int cellHeight;
-    private double speed;
+    private DoubleProperty speed = new SimpleDoubleProperty();
     private boolean isAllowRotation = false;
     private ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
     private boolean isMovingUp = false;
@@ -26,7 +28,7 @@ public class CustomCellMoveComponent extends Component {
         this.offsetY = offsetY;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
-        this.speed = speed;
+        this.speed.set(speed);
     }
 
     public ReadOnlyBooleanProperty atDestinationProperty() {
@@ -73,12 +75,12 @@ public class CustomCellMoveComponent extends Component {
         this.cellHeight = cellHeight;
     }
 
-    public double getSpeed() {
+    public DoubleProperty getSpeed() {
         return this.speed;
     }
 
     public void setSpeed(double speed) {
-        this.speed = speed;
+        this.speed.set(speed);
     }
 
     public int getCellX() {
@@ -122,7 +124,7 @@ public class CustomCellMoveComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         if (!this.isAtDestination()) {
-            double tpfSpeed = tpf * this.speed;
+            double tpfSpeed = tpf * this.speed.get();
             int cx = this.nextCellX * this.cellWidth + this.cellWidth / 2 + offsetX;
             int cy = this.nextCellY * this.cellHeight + this.cellHeight / 2 + offsetY;
             Point2D entityAnchoredPosition = this.entity.getAnchoredPosition();

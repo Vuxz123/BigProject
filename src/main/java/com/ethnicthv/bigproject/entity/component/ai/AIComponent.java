@@ -28,7 +28,7 @@ public class AIComponent extends Component {
 
     @Override
     public void onAdded() {
-        player = GameManager.player;
+        player = GameManager.getPlayer().toEntity();
         rdastar = entity.getComponent(CustomRandomAStarMoveComponent.class);
         stateComponent = entity.getComponent(StateComponent.class);
         astar = entity.getComponent(CustomAStarMoveComponent.class);

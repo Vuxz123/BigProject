@@ -1,12 +1,12 @@
 package com.ethnicthv.bigproject.input;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.UserAction;
+import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
-import com.ethnicthv.bigproject.client.map.SafeCell;
-import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
+import com.ethnicthv.bigproject.item.ItemEntityFactory;
+import com.ethnicthv.bigproject.item.items.CoinItem;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -24,15 +24,16 @@ public class InputControler {
             protected void onAction() {
                 super.onAction();
                 Point2D mouse = FXGL.getInput().getMousePositionWorld();
-                GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
+                GameManager.getPlayer().toEntity().
+                        getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
             }
         }, MouseButton.PRIMARY);
 
-        FXGL.getInput().addAction(new UserAction("CHECK STATE") {
+        FXGL.getInput().addAction(new UserAction("SHIELD") {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                Point2D mouse = FXGL.getInput().getMousePositionWorld();
+                GameManager.getPlayer().getPCC().activateShield();
             }
         }, KeyCode.K);
 
@@ -40,13 +41,33 @@ public class InputControler {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
-                Point2D pos = GameManager.player.getPosition();
-                SafeCell cell = GameManager.grid.pfg.getCell(pos);
-                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
-                    return;
-                }
-                FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
+                GameManager.getPlayer().getPCC().placeBoom();
             }
         }, KeyCode.SPACE);
+
+        FXGL.getInput().addAction(new UserAction("Test") {
+            @Override
+            protected void onActionBegin() {
+                super.onActionBegin();
+                ItemEntityFactory.spawnItem(new CoinItem(TextureProvider.INSTANCE.EMBER.copy()),
+                        GameManager.grid.pfg.getCell(FXGL.getInput().getMousePositionWorld()).getWorldPosition());
+            }
+        }, MouseButton.SECONDARY);
+
+        FXGL.getInput().addAction(new UserAction("Test2") {
+            @Override
+            protected void onActionBegin() {
+                super.onActionBegin();
+                GameManager.getPlayer().getPCC().speedUP();
+            }
+        }, KeyCode.L);
+
+        FXGL.getInput().addAction(new UserAction("Test3") {
+            @Override
+            protected void onActionBegin() {
+                super.onActionBegin();
+                GameManager.getPlayer().getPCC().blockWay();
+            }
+        }, KeyCode.M);
     }
 }
