@@ -9,6 +9,7 @@ import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.*;
 import com.ethnicthv.bigproject.ui.CooldownIcon;
 import com.ethnicthv.bigproject.ui.ProgressBar;
+import com.ethnicthv.bigproject.ui.StackingCooldownIcon;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -46,6 +47,7 @@ public class GameManager {
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
         gameSettings.setDeveloperMenuEnabled(true);
+        gameSettings.setMainMenuEnabled(true);
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
     }
 
@@ -60,10 +62,10 @@ public class GameManager {
         PhysicControler.INSTACNE.add("b", new EtoECollision());
         PhysicControler.INSTACNE.add("c", new EtoShieldCollision());
         PhysicControler.INSTACNE.add("d", new PlayerToItemCollision());
-        //PhysicControler.INSTACNE.add("e", new PARTICLEtWallCollision());
         PhysicControler.INSTACNE.add("e", new ParticletoBlockCollision());
         PhysicControler.INSTACNE.add("f", new PtoParCollision());
         PhysicControler.INSTACNE.add("g", new PtoECollision());
+        PhysicControler.INSTACNE.add("h", new PARTICLEtWallCollision());
         grid.resetLevel();
     }
 
@@ -77,14 +79,18 @@ public class GameManager {
         ui.speed.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
         ui.health = new ProgressBar(Color.RED, player.getPlayerData()::getHealth, 100);
         ui.health.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + 8);
-        ui.health.setTranslateY(OFFSETY + grid.gridsize * 1 + ((double) grid.maxGridY / 2));
+        ui.health.setTranslateY(OFFSETY + grid.gridsize + ((double) grid.maxGridY / 2));
         ui.mana = new ProgressBar(Color.BLUE, player.getPlayerData()::getMana, 100);
         ui.mana.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + 8);
         ui.mana.setTranslateY(OFFSETY + grid.gridsize * 4 - 8 + ((double) grid.maxGridY / 2));
+        ui.boom = new StackingCooldownIcon(TextureProvider.INSTANCE.BOOM_ICON.copy(), player.getPlayerData()::getBomcooldown, 10, player.getPlayerData()::getBoms, 5);
+        ui.boom.setTranslateX(OFFSETX + grid.gridsize * grid.maxGridX + ((double) grid.maxGridX / 2) + 64);
+        ui.boom.setTranslateY(OFFSETY + grid.gridsize * 6 + ((double) grid.maxGridY / 2));
         FXGL.getGameScene().addUINode(ui.shield);
         FXGL.getGameScene().addUINode(ui.speed);
         FXGL.getGameScene().addUINode(ui.health);
         FXGL.getGameScene().addUINode(ui.mana);
+        FXGL.getGameScene().addUINode(ui.boom);
     }
 
     public static void onUpdate(double tdf) {

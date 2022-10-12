@@ -8,6 +8,8 @@ public class PlayerData {
     private Double Bomdelay = (double) 0;
     private Double Shielddelay = (double) 0;
     private Double SpeedUpdelay = (double) 0;
+    private Double Bomcooldown = 10d;
+    private Integer Boms = 5;
 
     public void onUpdate(double tpf) {
         if (Bomdelay > 0) Bomdelay -= tpf;
@@ -18,6 +20,19 @@ public class PlayerData {
 
         if (SpeedUpdelay > 0) SpeedUpdelay -= tpf;
         else SpeedUpdelay = (double) 0;
+
+        if (Bomcooldown > 0) Bomcooldown -= tpf;
+        else {
+            Boms ++;
+            if(Boms == 5) Bomcooldown = (double) 0;
+            else Bomcooldown = 10d;
+        }
+    }
+
+    public boolean placeBoom() {
+        if(this.Boms - 1 < 0) return false;
+        this.Boms --;
+        return true;
     }
 
     public boolean isBomDelay() {
@@ -62,6 +77,14 @@ public class PlayerData {
 
     public Double getSpeedUpdelay() {
         return SpeedUpdelay;
+    }
+
+    public Integer getBoms() {
+        return Boms;
+    }
+
+    public Double getBomcooldown() {
+        return Bomcooldown;
     }
 
     public boolean hasEnoughMana(double amount) {

@@ -24,7 +24,7 @@ public class ParticleFactory implements EntityFactory {
                 .bbox(BoundingShape.circle(16))
                 .view(TextureProvider.INSTANCE.BLAST.copy())
                 .anchorFromCenter()
-                .at(5 + x * 16, 5 + y * 16 - 16)
+                .at(5 + x * 16 + 8, 5 + y * 16 - 8)
                 .type(EntityType.PARTICLE)
                 .with(new ProjectileComponent(data.get("dir"), data.get("spe")))
                 .with(new DurationComponent(DurationComponent.Type.MILLISECOND, data.get("du")))

@@ -27,6 +27,8 @@ public class TextureProvider {
 
     public final Texture BLOCK_ICON = FXGL.getAssetLoader().loadTexture("ui/blockicon.png", 32, 32);
 
+    public final Texture BOOM_ICON = FXGL.getAssetLoader().loadTexture("ui/boomicon.png", 32, 32);
+
     private TextureProvider(){
     }
 

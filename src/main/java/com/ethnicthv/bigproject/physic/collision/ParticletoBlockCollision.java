@@ -12,6 +12,7 @@ public class ParticletoBlockCollision extends CollisionHandler {
     @Override
     protected void onCollision(Entity a, Entity b) {
         super.onCollisionBegin(a, b);
+
         a.removeFromWorld();
     }
 }
