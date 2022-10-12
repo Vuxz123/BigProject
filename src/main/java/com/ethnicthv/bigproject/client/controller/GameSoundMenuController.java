@@ -1,6 +1,7 @@
 package com.ethnicthv.bigproject.client.controller;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -62,7 +63,11 @@ public class GameSoundMenuController implements Initializable, UIController {
         //System.out.println(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString());
 
         //directory = new File(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString()).getParentFile();
-        directory = new File(Object.class.getResource("assets\\music").toURI());
+        try {
+            directory = new File(Object.class.getClassLoader().getResource("assets\\music").toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         files = directory.listFiles();
         //System.out.println(files.toString());
         if(files != null) {
