@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="529.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="529.0" prefWidth="1022.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="musicButton" layoutX="407.0" layoutY="105.0" mnemonicParsing="false" onAction="#music" prefHeight="73.0" prefWidth="206.0" text="Music">
          <font>

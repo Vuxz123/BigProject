@@ -46,8 +46,8 @@ public class SaveDataController implements Initializable, UIController {
         UI loader = FXGL.getAssetLoader().loadUI("Result.fxml", resultController);
         System.out.println(GameManager.data.killed);
         ResourceManager.Data hs = ResourceManager.INSTANCE.playerData.stream().filter((data -> data.getName().equals(nameTextField.getText()))).max(Comparator.comparingInt(ResourceManager.Data::getScore))
-                .orElseGet(() -> new ResourceManager.Data(0, "0"));
-        resultController.display(nameTextField.getText(), GameManager.data.killed, hs.getName() + " " + hs.getScore());
+                .orElseGet(() -> new ResourceManager.Data(0, nameTextField.getText()));
+        resultController.display(nameTextField.getText(), GameManager.data.killed, "" +hs.getScore());
         ResourceManager.INSTANCE.add(nameTextField.getText());
         FXGL.getWindowService().popSubScene();
         SubScene scene = new SubScene() {

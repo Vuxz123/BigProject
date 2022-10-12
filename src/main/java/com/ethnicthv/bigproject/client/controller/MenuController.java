@@ -42,14 +42,11 @@ public class MenuController implements UIController, Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            System.out.println("fdssdagdfs");
             ResourceManager.INSTANCE.load();
             System.out.println(ResourceManager.INSTANCE.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Do this shit pls");
-        System.out.println(ResourceManager.INSTANCE.toString());
     }
     MenuController() {}
     private Stage stage;

@@ -66,7 +66,7 @@ public class InputControler {
                     // 4. add UI to game scene
                     getGameScene().addUI(fxmlUI);
                 }
-            }, KeyCode.O);
+            }, KeyCode.NUMPAD0);
         //if (c.equals(MOUSE)) {
 
         //}
@@ -144,7 +144,7 @@ public class InputControler {
                 FXGL.getWindowService().pushSubScene(scene);
 
             }
-        }, KeyCode.ESCAPE);
+        }, KeyCode.P);
         FXGL.getInput().addAction(new UserAction("PLACE BOOM") {
             @Override
             protected void onActionBegin() {
@@ -153,14 +153,7 @@ public class InputControler {
             }
         }, KeyCode.SPACE);
 
-        FXGL.getInput().addAction(new UserAction("Test") {
-            @Override
-            protected void onActionBegin() {
-                super.onActionBegin();
-                ItemEntityFactory.spawnItem(new CoinItem(TextureProvider.INSTANCE.EMBER.copy()),
-                        GameManager.grid.pfg.getCell(FXGL.getInput().getMousePositionWorld()).getWorldPosition());
-            }
-        }, MouseButton.SECONDARY);
+
 
         FXGL.getInput().addAction(new UserAction("SPEED UP") {
             @Override

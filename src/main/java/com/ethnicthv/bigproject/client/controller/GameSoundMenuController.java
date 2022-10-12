@@ -64,16 +64,13 @@ public class GameSoundMenuController implements Initializable, UIController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songs = new ArrayList<File>();
-        //System.out.println(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString());
 
-        //directory = new File(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString()).getParentFile();
         try {
             directory = new File(getClass().getClassLoader().getResource("assets/music").toURI());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
         files = directory.listFiles();
-        //System.out.println(files.toString());
         if(files != null) {
 
             songs.addAll(Arrays.asList(files));
@@ -104,6 +101,7 @@ public class GameSoundMenuController implements Initializable, UIController {
         songProgressBar.setStyle("-fx-accent: #00FF00;");
 
         mediaPlayer.play();
+        playMedia();
     }
 
 
