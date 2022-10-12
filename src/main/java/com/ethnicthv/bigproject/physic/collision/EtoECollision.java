@@ -19,9 +19,9 @@ public class EtoECollision extends CollisionHandler {
     @Override
     protected void onCollisionEnd(Entity a, Entity b) {
         super.onCollisionEnd(a, b);
-        try{
+        try {
             a.getComponent(CustomCellMoveComponent.class).resume();
-        }catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException ignored) {
         }
     }
 }

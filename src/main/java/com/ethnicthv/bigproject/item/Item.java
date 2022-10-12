@@ -10,11 +10,13 @@ public abstract class Item {
         this.texture = texture;
     }
 
-    public int maxItem(){
+    public int maxItem() {
         return 5;
     }
 
     public abstract ItemStack getItemStack();
+
+    public abstract void run();
 
     public Texture getTexture() {
         return texture;

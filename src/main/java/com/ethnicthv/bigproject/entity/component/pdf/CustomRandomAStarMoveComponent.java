@@ -22,11 +22,12 @@ public class CustomRandomAStarMoveComponent extends Component {
 
     private CustomAStarMoveComponent astar;
 
-    private LocalTimer moveTimer = FXGL.newLocalTimer();
+    private final LocalTimer moveTimer = FXGL.newLocalTimer();
 
     private Duration delay = Duration.seconds(random(minDelay.toSeconds(), maxDelay.toSeconds()));
 
-    private Predicate<SafeCell> cellFilter = safeCell -> true;
+    private final Predicate<SafeCell> cellFilter = safeCell -> true;
+    private boolean wasAtDestination = true;
 
     public CustomRandomAStarMoveComponent() {
     }
@@ -54,8 +55,6 @@ public class CustomRandomAStarMoveComponent extends Component {
         moveTimer.capture();
     }
 
-    private boolean wasAtDestination = true;
-
     @Override
     public void onUpdate(double tpf) {
         var isAtDestination = astar.isAtDestination();
@@ -77,13 +76,13 @@ public class CustomRandomAStarMoveComponent extends Component {
     }
 
     private void moveToRandomCell() {
-        astar.getCurrentCell().ifPresent(currentCell -> astar.getGrid().getRandomCell(aStarCell -> aStarCell.isWalkable()
-                        && cellFilter.test(aStarCell)
-                        && currentCell.distance(aStarCell) >= minDistance
-                        && currentCell.distance(aStarCell) <= maxDistance).ifPresent((aStarCell)-> {
-                            WrappedBoolean isunsafe = new WrappedBoolean(false);
-                            astar.moveToCell(aStarCell, isunsafe);
-                            if(isunsafe.get()) astar.stopMovement();
-                        }));
+        astar.getCurrentCell().flatMap(currentCell -> astar.getGrid().getRandomCell(aStarCell -> aStarCell.isWalkable()
+                && cellFilter.test(aStarCell)
+                && currentCell.distance(aStarCell) >= minDistance
+                && currentCell.distance(aStarCell) <= maxDistance)).ifPresent((aStarCell) -> {
+            WrappedBoolean isunsafe = new WrappedBoolean(false);
+            astar.moveToCell(aStarCell, isunsafe);
+            if (isunsafe.get()) astar.stopMovement();
+        });
     }
 }

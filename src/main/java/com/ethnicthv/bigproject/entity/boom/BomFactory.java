@@ -11,7 +11,6 @@ import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.BomComponent;
 import com.ethnicthv.bigproject.entity.component.graphic.AnimatedGraphicComponent;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class BomFactory implements EntityFactory {
@@ -20,28 +19,27 @@ public class BomFactory implements EntityFactory {
     public Entity hb(SpawnData data) {
         int x = GameManager.grid.getGridX((int) data.getX());
         int y = GameManager.grid.getGridY((int) data.getY());
-        Entity e = FXGL.entityBuilder(data)
+        return FXGL.entityBuilder(data)
                 .at(GameManager.OFFSETX + x * GameManager.grid.gridsize, GameManager.OFFSETY + y * GameManager.grid.gridsize)
                 .type(EntityType.BOM)
                 .with(new BomComponent(Duration.seconds(5), new HBoom()))
                 .with(new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.BOOM)).setOffsetY(-16))
                 .zIndex(11)
                 .build();
-        return e;
     }
 
     @Spawns("blockbom,bb")
     public Entity bb(SpawnData data) {
         int x = GameManager.grid.getGridX((int) data.getX());
         int y = GameManager.grid.getGridY((int) data.getY());
-        Entity e = FXGL.entityBuilder(data)
+
+        return FXGL.entityBuilder(data)
                 .at(GameManager.OFFSETX + x * GameManager.grid.gridsize, GameManager.OFFSETY + y * GameManager.grid.gridsize)
                 .type(EntityType.BOM)
                 .with(new BomComponent(Duration.seconds(3), new BlockBoom()))
                 .with(new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.BOOM)).setOffsetY(-16))
                 .zIndex(11)
                 .build();
-        return e;
     }
 
 }

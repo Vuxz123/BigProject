@@ -7,10 +7,9 @@ import com.ethnicthv.bigproject.client.GameManager;
 import java.util.LinkedList;
 
 public class EnemyPool {
-    public static EnemyPool INSTANCE = new EnemyPool();
+    public static final EnemyPool INSTANCE = new EnemyPool();
+    final LinkedList<CommonEnemy> commonEnemiesPool = new LinkedList<>();
     private int max = 10;
-    LinkedList<CommonEnemy> commonEnemiesPool = new LinkedList<>();
-
 
     public static void spawnCommonEntity(int x, int y) {
         CommonEnemy entity = INSTANCE.newCommonEnemyInstance();

@@ -42,8 +42,8 @@ public class FeaturedRendererComponent extends GraphicComponent {
     private void render(double tpf) {
         synchronized (features) {
             try {
-                for(Feature feature: features) feature.onUpdate(renderer, tpf);
-            }catch (ConcurrentModificationException ignored){
+                for (Feature feature : features) feature.onUpdate(renderer, tpf);
+            } catch (ConcurrentModificationException ignored) {
             }
         }
     }

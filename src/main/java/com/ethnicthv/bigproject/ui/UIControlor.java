@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIControlor {
-    public static UIControlor INSTANCE = new UIControlor();
+    public static final UIControlor INSTANCE = new UIControlor();
 
-    private List<Updatable> updatedNode = new ArrayList<>();
+    private final List<Updatable> updatedNode = new ArrayList<>();
+
     private UIControlor() {
         updatedNode.add(GameManager.ui.shield);
         updatedNode.add(GameManager.ui.speed);
         updatedNode.add(GameManager.ui.health);
         updatedNode.add(GameManager.ui.mana);
+        updatedNode.add(GameManager.ui.boom);
+        updatedNode.add(GameManager.ui.block);
     }
 
     public void onUpdate(double tpf) {

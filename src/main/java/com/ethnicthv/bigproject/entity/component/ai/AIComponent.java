@@ -9,7 +9,6 @@ import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomRandomAStarMoveComponent;
-import com.ethnicthv.bigproject.util.WrappedBoolean;
 
 @Required(StateComponent.class)
 @Required(CustomRandomAStarMoveComponent.class)
@@ -21,7 +20,7 @@ public class AIComponent extends Component {
     private StateComponent stateComponent;
     private CustomAStarMoveComponent astar;
 
-    private EnemyAIState states = new EnemyAIState();
+    private final EnemyAIState states = new EnemyAIState();
 
     public AIComponent() {
     }
@@ -38,9 +37,9 @@ public class AIComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        if(GameManager.grid.pfg.getCell(entity.getPosition()).isNotSafe()){
+        if (GameManager.grid.pfg.getCell(entity.getPosition()).isNotSafe()) {
             stateComponent.changeState(states.DODGE);
-        }else if (player.distance(entity) < 50 && !GameManager.grid.pfg.getCell(entity.getPosition()).isSafe()) {
+        } else if (player.distance(entity) < 50 && !GameManager.grid.pfg.getCell(entity.getPosition()).isSafe()) {
             stateComponent.changeState(states.PURSUEING);
         } else {
             stateComponent.changeState(states.RANDOM);

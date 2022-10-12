@@ -22,14 +22,12 @@ import static com.ethnicthv.bigproject.client.GameManager.OFFSETY;
 
 public class GameMap {
     public final int gridsize = 16;
-
-    public Level level;
-
-    private LevelLoader loader;
     public final int maxGridX = 48; // 46
     public final int maxGridY = GameManager.HEIGHT / gridsize + 1; // 32
-
     public SafeGrid pfg = new SafeGrid(maxGridX, maxGridY);
+    public final int max_entity = 10;
+    public int numberOfEntities = 10;
+    public Level level;
 
     public GameMap() {
     }
@@ -39,7 +37,7 @@ public class GameMap {
         FactoryManager.INSTANCE.addFactory(new BomFactory());
         FactoryManager.INSTANCE.addFactory(new ParticleFactory());
         FactoryManager.INSTANCE.addFactory(new ItemEntityFactory());
-        loader = new CustomTextLevelLoader(gridsize, gridsize, OFFSETX, OFFSETY, '1', MappingFunction::apply);
+        LevelLoader loader = new CustomTextLevelLoader(gridsize, gridsize, OFFSETX, OFFSETY, '1', MappingFunction::apply);
         level = FXGL.getAssetLoader().loadLevel("map3", loader);
         FXGL.getGameWorld().setLevel(level);
     }
@@ -89,7 +87,7 @@ public class GameMap {
         var lcell = pfg.getWalkableCell();
         for (int v = 0; v < 10; v++) {
             var cell = FXGLMath.random(lcell);
-            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 50) {
+            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 150) {
                 v--;
                 continue;
             }

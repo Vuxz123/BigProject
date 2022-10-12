@@ -11,13 +11,13 @@ import javafx.geometry.Point2D;
 public class CustomCellMoveComponent extends Component {
     private int nextCellX;
     private int nextCellY;
-    private int offsetX;
-    private int offsetY;
+    private final int offsetX;
+    private final int offsetY;
     private int cellWidth;
     private int cellHeight;
-    private DoubleProperty speed = new SimpleDoubleProperty();
+    private final DoubleProperty speed = new SimpleDoubleProperty();
     private boolean isAllowRotation = false;
-    private ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
+    private final ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
     private boolean isMovingUp = false;
     private boolean isMovingDown = false;
     private boolean isMovingLeft = false;
@@ -63,12 +63,12 @@ public class CustomCellMoveComponent extends Component {
         return this.cellWidth;
     }
 
-    public int getCellHeight() {
-        return this.cellHeight;
-    }
-
     public void setCellWidth(int cellWidth) {
         this.cellWidth = cellWidth;
+    }
+
+    public int getCellHeight() {
+        return this.cellHeight;
     }
 
     public void setCellHeight(int cellHeight) {
@@ -84,11 +84,11 @@ public class CustomCellMoveComponent extends Component {
     }
 
     public int getCellX() {
-        return (int)((this.entity.getAnchoredPosition().getX() - offsetX ) / (double)this.cellWidth);
+        return (int) ((this.entity.getAnchoredPosition().getX() - offsetX) / (double) this.cellWidth);
     }
 
     public int getCellY() {
-        return (int)((this.entity.getAnchoredPosition().getY() - offsetY )/ (double)this.cellHeight);
+        return (int) ((this.entity.getAnchoredPosition().getY() - offsetY) / (double) this.cellHeight);
     }
 
     public void setPositionToCell(Cell cell) {
@@ -128,14 +128,14 @@ public class CustomCellMoveComponent extends Component {
             int cx = this.nextCellX * this.cellWidth + this.cellWidth / 2 + offsetX;
             int cy = this.nextCellY * this.cellHeight + this.cellHeight / 2 + offsetY;
             Point2D entityAnchoredPosition = this.entity.getAnchoredPosition();
-            double dx = (double)cx - entityAnchoredPosition.getX();
-            double dy = (double)cy - entityAnchoredPosition.getY();
+            double dx = (double) cx - entityAnchoredPosition.getX();
+            double dy = (double) cy - entityAnchoredPosition.getY();
             if (this.isAllowRotation) {
                 this.updateRotation(dx, dy);
             }
 
-            int offsetX = (int)(entityAnchoredPosition.getX() - this.entity.getX());
-            int offsetY = (int)(entityAnchoredPosition.getY() - this.entity.getY());
+            int offsetX = (int) (entityAnchoredPosition.getX() - this.entity.getX());
+            int offsetY = (int) (entityAnchoredPosition.getY() - this.entity.getY());
             if (Math.abs(dx) <= tpfSpeed) {
                 this.isMovingLeft = false;
                 this.isMovingRight = false;
@@ -157,7 +157,7 @@ public class CustomCellMoveComponent extends Component {
             }
 
             entityAnchoredPosition = this.entity.getAnchoredPosition();
-            if ((int)entityAnchoredPosition.getX() == cx && (int)entityAnchoredPosition.getY() == cy) {
+            if ((int) entityAnchoredPosition.getX() == cx && (int) entityAnchoredPosition.getY() == cy) {
                 this.setPositionToCell(this.nextCellX, this.nextCellY);
             }
 

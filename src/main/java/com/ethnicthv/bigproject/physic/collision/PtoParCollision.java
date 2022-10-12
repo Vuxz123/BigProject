@@ -1,6 +1,5 @@
 package com.ethnicthv.bigproject.physic.collision;
 
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
@@ -22,9 +21,7 @@ public class PtoParCollision extends CollisionHandler {
         point.add(8, 8);
         if (boxB.getCenterWorld().distance(point) <= 8.8) {
             b.removeFromWorld();
-            if (GameManager.getPlayer().getPlayerData().dealDamage(25)) {
-                FXGL.getWindowService().startNewGame();
-            }
+            GameManager.getPlayer().getPlayerData().dealDamage(25);
         }
     }
 }

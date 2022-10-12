@@ -2,7 +2,6 @@ package com.ethnicthv.bigproject.entity.particle;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
-import com.almasb.fxgl.dsl.components.ProjectileWithAccelerationComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
@@ -11,16 +10,13 @@ import com.almasb.fxgl.physics.BoundingShape;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.DurationComponent;
-import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class ParticleFactory implements EntityFactory {
     @Spawns("f")
     public Entity f(SpawnData data) {
         int x = (int) data.getX();
         int y = (int) data.getY();
-        Entity e = FXGL.entityBuilder(data)
+        return FXGL.entityBuilder(data)
                 .bbox(BoundingShape.circle(16))
                 .view(TextureProvider.INSTANCE.BLAST.copy())
                 .anchorFromCenter()
@@ -30,6 +26,5 @@ public class ParticleFactory implements EntityFactory {
                 .with(new DurationComponent(DurationComponent.Type.MILLISECOND, data.get("du")))
                 .collidable()
                 .build();
-        return e;
     }
 }

@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Duration;
 
 public abstract class DurationFeature extends Feature {
-    private BooleanProperty ispause = new SimpleBooleanProperty(false);
-    private Duration duration;
+    private final BooleanProperty ispause = new SimpleBooleanProperty(false);
+    private final Duration duration;
     private LocalTimer localTimer = null;
 
     public DurationFeature(Duration duration) {
@@ -25,7 +25,7 @@ public abstract class DurationFeature extends Feature {
 
     @Override
     public void onUpdate(Renderer renderer, double tpf) {
-        if(ispause.get()) {
+        if (ispause.get()) {
             return;
         }
         if (localTimer.elapsed(duration)) {

@@ -9,21 +9,19 @@ import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.PlayerData;
 import com.ethnicthv.bigproject.entity.EntityType;
-import com.ethnicthv.bigproject.entity.component.graphic.AnimatedGraphicComponent;
 import com.ethnicthv.bigproject.entity.component.PlayerControlerComponent;
+import com.ethnicthv.bigproject.entity.component.graphic.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.entity.component.graphic.FeaturedRendererComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
-import com.ethnicthv.bigproject.entity.component.graphic.FeaturedRendererComponent;
-import javafx.scene.effect.*;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.effect.DropShadow;
 
 import static com.ethnicthv.bigproject.client.GameManager.grid;
 
-public class Player extends Entity implements SealedPlayer{
-
-    PlayerData playerData = new PlayerData();
+public class Player extends Entity implements SealedPlayer {
 
     public DropShadow effect;
+    final PlayerData playerData = new PlayerData();
 
     public Player() {
         this.setType(EntityType.PLAYER);
@@ -40,7 +38,7 @@ public class Player extends Entity implements SealedPlayer{
         this.addComponent(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY, grid.gridsize, grid.gridsize, 300));
         this.addComponent(new CustomAStarMoveComponent(grid.pfg));
 
-        AnimatedGraphicComponent agc = new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.PLAYER_IDLE) );
+        AnimatedGraphicComponent agc = new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.PLAYER_IDLE));
         effect = new DropShadow();
         agc.addEffect(effect, 0);
 
@@ -52,7 +50,7 @@ public class Player extends Entity implements SealedPlayer{
         this.addComponent(new PlayerControlerComponent());
         this.addComponent(new FeaturedRendererComponent());
         this.setZIndex(1);
-        this.setPosition( GameManager.OFFSETX + grid.gridsize * 2, GameManager.OFFSETY + grid.gridsize * 2);
+        this.setPosition(GameManager.OFFSETX + grid.gridsize * 2, GameManager.OFFSETY + grid.gridsize * 2);
 
         //this.getBoundingBoxComponent().addHitBox();
 

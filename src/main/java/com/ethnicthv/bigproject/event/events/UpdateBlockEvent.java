@@ -1,9 +1,7 @@
 package com.ethnicthv.bigproject.event.events;
 
 import javafx.event.Event;
-import javafx.event.EventTarget;
 import javafx.event.EventType;
-import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 public class UpdateBlockEvent extends Event {

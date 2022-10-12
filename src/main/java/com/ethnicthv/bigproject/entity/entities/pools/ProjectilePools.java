@@ -1,20 +1,21 @@
 package com.ethnicthv.bigproject.entity.entities.pools;
 
-import com.almasb.fxgl.core.pool.Pool;
 import com.ethnicthv.bigproject.entity.entities.Projectile;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class ProjectilePools {
-    private ProjectilePools(){}
-
     private static final Map<Class, ProjectilePool> typePools = new HashMap<>();
+
+    private ProjectilePools() {
+    }
 
     private static <T extends Projectile> ProjectilePool<T> get(Class<T> type, int max) {
         ProjectilePool<T> pool = typePools.get(type);
         if (pool == null) {
-            pool = new ProjectilePool<T>(30, max, type);
+            pool = new ProjectilePool<>(30, max, type);
             typePools.put(type, pool);
         }
         return pool;
