@@ -23,10 +23,6 @@ public class BommerApplication extends GameApplication {
     @Override
     protected void initSettings(GameSettings gameSettings) {
         GameManager.setting(gameSettings);
-        //gameSettings.setIntroEnabled(true);
-        //gameSettings.setGameMenuEnabled(false);
-        //gameSettings.setGameMenuEnabled(false);
-        //gameSettings.setSoundMenuBack("level.wav");
         GameManager.init();
         gameSettings.setSceneFactory(new SceneFactoryDIY());
         gameSettings.setMainMenuEnabled(true);
@@ -40,16 +36,6 @@ public class BommerApplication extends GameApplication {
         GameManager.initUI();
 
 
-//        SaveDataController controller = new SaveDataController();
-//
-//        // 2. place fxml file in "assets/ui" and load it
-//        UI fxmlUI = getAssetLoader().loadUI("SaveData.fxml", controller);
-//
-//
-//        // 4. add UI to game scene
-//        getGameScene().addUI(fxmlUI);
-
-        //getContentRoot().getChildren().add(fxmlUI.getRoot());
     }
 
     @SuppressWarnings("deprecation")
@@ -58,17 +44,13 @@ public class BommerApplication extends GameApplication {
         super.initGame();
 
 
-        try{
+        try {
             FactoryManager.INSTANCE.setup();
             InputControler.INSTANCE.setup();
-        }catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException ignored) {
         }
 
-        try {
-            GameManager.initGame();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        GameManager.initGame();
     }
 
     @SuppressWarnings("deprecation")

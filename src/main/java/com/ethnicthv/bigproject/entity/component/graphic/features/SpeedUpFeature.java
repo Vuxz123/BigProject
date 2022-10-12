@@ -17,9 +17,9 @@ import java.util.LinkedList;
 
 public class SpeedUpFeature extends DurationFeature {
 
-    private Duration delay = Duration.seconds(0.05);
+    private final Duration delay = Duration.seconds(0.05);
 
-    private LocalTimer timer = FXGL.newLocalTimer();
+    private final LocalTimer timer = FXGL.newLocalTimer();
     private Entity entity;
 
     private LinkedList<Node> queue;

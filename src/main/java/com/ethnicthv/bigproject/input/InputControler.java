@@ -2,44 +2,30 @@ package com.ethnicthv.bigproject.input;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.almasb.fxgl.scene.SubScene;
 import com.almasb.fxgl.ui.UI;
-import com.ethnicthv.bigproject.asset.Config;
-import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
-//import com.ethnicthv.bigproject.client.GameMenu;
 import com.ethnicthv.bigproject.client.controller.FXGLMenuDIY;
 import com.ethnicthv.bigproject.client.controller.SaveDataController;
-import com.ethnicthv.bigproject.client.map.SafeCell;
-import com.ethnicthv.bigproject.entity.EntityType;
-import com.ethnicthv.bigproject.entity.component.DurationComponent;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomAStarMoveComponent;
-import com.ethnicthv.bigproject.item.ItemEntityFactory;
-import com.ethnicthv.bigproject.item.items.CoinItem;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 
+import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
+import static com.almasb.fxgl.dsl.FXGL.getGameScene;
+
 public class InputControler {
 
-    private ControlOption c;
-
     public static final InputControler INSTANCE = new InputControler();
-    private int maxBom = 4;
-    private int bombsPlaced = 0;
-
-    public int getBombPlaced() {
-        return bombsPlaced;
-    }
 
     private InputControler() {
     }
 
     public void getControlOption(ControlOption c) {
-        this.c = c;
     }
 
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     public void setup() {
         FXGL.getInput().addAction(new UserAction("MOVE") {
@@ -51,23 +37,23 @@ public class InputControler {
                         getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
             }
         }, MouseButton.PRIMARY);
-            FXGL.getInput().addAction(new UserAction("END GAME") {
-                @Override
-                protected void onAction() {
-                    SaveDataController controller = new SaveDataController();
+        FXGL.getInput().addAction(new UserAction("END GAME") {
+            @Override
+            protected void onAction() {
+                SaveDataController controller = new SaveDataController();
 
-                    // 2. place fxml file in "assets/ui" and load it
-                    UI fxmlUI = getAssetLoader().loadUI("SaveData.fxml", controller);
+                // 2. place fxml file in "assets/ui" and load it
+                UI fxmlUI = getAssetLoader().loadUI("SaveData.fxml", controller);
 
 
-                    // 4. add UI to game scene
-                    getGameScene().addUI(fxmlUI);
-                }
-            }, KeyCode.NUMPAD0);
+                // 4. add UI to game scene
+                getGameScene().addUI(fxmlUI);
+            }
+        }, KeyCode.NUMPAD0);
         //if (c.equals(MOUSE)) {
 
         //}
-       // if (c.equals(KEYBOARD)) {
+        // if (c.equals(KEYBOARD)) {
         FXGL.getInput().addAction(new UserAction("OPEN MENU") {
             @Override
             protected void onAction() {
@@ -84,13 +70,10 @@ public class InputControler {
                 FXGL.getWindowService().pushSubScene(scene);
             }
         }, KeyCode.N);
-            FXGL.getInput().addAction(new UserAction("GO RIGHT") {
-                @Override
-                protected void onAction() {
-                    super.onAction();
-//                if (GameManager.player.getX() < GameManager.WIDTH && GameManager.player.getX() > 0) {
-//                    GameManager.player.translateX(3);
-//                }
+        FXGL.getInput().addAction(new UserAction("GO RIGHT") {
+            @Override
+            protected void onAction() {
+                super.onAction();
 
                 GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToRightCell();
             }
@@ -149,7 +132,6 @@ public class InputControler {
                 GameManager.getPlayer().getPCC().placeBoom();
             }
         }, KeyCode.SPACE);
-
 
 
         FXGL.getInput().addAction(new UserAction("SPEED UP") {

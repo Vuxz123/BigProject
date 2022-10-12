@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.paint.Color;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -23,6 +24,40 @@ public class SafeGrid extends Grid<SafeCell> {
      */
     public SafeGrid(int width, int height) {
         super(SafeCell.class, width, height, (x, y) -> new SafeCell(x, y, SafeCellState.NULL));
+    }
+
+    /**
+     * Method này nhằm mục đích shield.
+     * Không nên dùng.
+     * Xem chi tiết bản gốc: {@link AStarGrid}
+     */
+    public static SafeGrid fromWorld(GameWorld world, int worldWidth, int worldHeight, int cellWidth, int cellHeight, Function<Object, SafeCellState> mapping) {
+
+        SafeGrid grid = new SafeGrid(worldWidth, worldHeight);
+        grid.populate((x, y) -> {
+
+            int worldX = GameManager.OFFSETX + x * cellWidth + cellWidth / 2;
+            int worldY = GameManager.OFFSETY + y * cellHeight + cellWidth / 2;
+
+            boolean isWalkable;
+
+            System.out.println(world.getEntitiesInRange(new Rectangle2D(worldX - 2, worldY - 2, 4, 4)).size());
+            // size 4 is a "good enough" value
+            List<Object> collidingTypes = //world.getEntitiesInRange(new Rectangle2D(worldX-2, worldY-2, 4, 4))
+                    Collections.singletonList(world.getEntitiesAt(new Point2D(worldX, worldY)).stream().map(Entity::getType).toList());
+
+            if (collidingTypes.isEmpty()) {
+                // if no types found at given worldX, worldY, then just see what mapping returns by default
+                isWalkable = mapping.apply("") == SafeCellState.NULL;
+            } else {
+                isWalkable = collidingTypes.stream().map(mapping).noneMatch(state -> state == SafeCellState.NOT_WALKABLE);
+            }
+
+
+            return new SafeCell(x, y, isWalkable ? SafeCellState.NULL : SafeCellState.NOT_WALKABLE);
+        });
+
+        return grid;
     }
 
     /**
@@ -89,10 +124,10 @@ public class SafeGrid extends Grid<SafeCell> {
         }
     }
 
-
     /**
      * hàm nhằm mục đích Test
      */
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     public void setUnSafe(int cellX, int cellY, boolean a) {
         try {
@@ -130,40 +165,6 @@ public class SafeGrid extends Grid<SafeCell> {
 
     public boolean isNotSafe(int cellX, int cellY) {
         return get(cellX, cellY).isNotSafe();
-    }
-
-    /**
-     * Method này nhằm mục đích shield.
-     * Không nên dùng.
-     * Xem chi tiết bản gốc: {@link AStarGrid}
-     */
-    public static SafeGrid fromWorld(GameWorld world, int worldWidth, int worldHeight, int cellWidth, int cellHeight, Function<Object, SafeCellState> mapping) {
-
-        SafeGrid grid = new SafeGrid(worldWidth, worldHeight);
-        grid.populate((x, y) -> {
-
-            int worldX = GameManager.OFFSETX + x * cellWidth + cellWidth / 2;
-            int worldY = GameManager.OFFSETY + y * cellHeight + cellWidth / 2;
-
-            boolean isWalkable;
-
-            System.out.println(world.getEntitiesInRange(new Rectangle2D(worldX - 2, worldY - 2, 4, 4)).size());
-            // size 4 is a "good enough" value
-            List<Object> collidingTypes = //world.getEntitiesInRange(new Rectangle2D(worldX-2, worldY-2, 4, 4))
-                    world.getEntitiesAt(new Point2D(worldX, worldY)).stream().map(Entity::getType).collect(Collectors.toList());
-
-            if (collidingTypes.isEmpty()) {
-                // if no types found at given worldX, worldY, then just see what mapping returns by default
-                isWalkable = mapping.apply("") == SafeCellState.NULL;
-            } else {
-                isWalkable = collidingTypes.stream().map(mapping).noneMatch(state -> state == SafeCellState.NOT_WALKABLE);
-            }
-
-
-            return new SafeCell(x, y, isWalkable ? SafeCellState.NULL : SafeCellState.NOT_WALKABLE);
-        });
-
-        return grid;
     }
 
     public interface CellUnSafeFunction {

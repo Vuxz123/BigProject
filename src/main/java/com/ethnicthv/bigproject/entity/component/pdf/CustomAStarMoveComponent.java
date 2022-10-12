@@ -24,11 +24,11 @@ import java.util.Random;
 @Required(CustomCellMoveComponent.class)
 public class CustomAStarMoveComponent extends Component {
     private CustomCellMoveComponent moveComponent;
-    private LazyValue<CustomAstarPartFinder> pathfinder;
+    private final LazyValue<CustomAstarPartFinder> pathfinder;
     private List<SafeCell> path;
     private Runnable delayedPathCalc = EmptyRunnable.INSTANCE;
-    private ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
-    private ChangeListener<Boolean> isAtDestinationListener = (o, old, isAtDestination) -> {
+    private final ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
+    private final ChangeListener<Boolean> isAtDestinationListener = (o, old, isAtDestination) -> {
         if (isAtDestination) {
             this.delayedPathCalc.run();
             this.delayedPathCalc = EmptyRunnable.INSTANCE;

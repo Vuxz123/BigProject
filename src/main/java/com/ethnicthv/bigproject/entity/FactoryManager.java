@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FactoryManager {
-    public static FactoryManager INSTANCE = new FactoryManager();
-    private List<EntityFactory> entityFactories = new ArrayList<>();
+    public static final FactoryManager INSTANCE = new FactoryManager();
+    private final List<EntityFactory> entityFactories = new ArrayList<>();
 
     private FactoryManager() {
     }
@@ -23,6 +23,7 @@ public class FactoryManager {
         entityFactories.add(factory);
     }
 
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     public void setup() {
         entityFactories.forEach((entityFactory) -> FXGL.getGameWorld().addEntityFactory(entityFactory));

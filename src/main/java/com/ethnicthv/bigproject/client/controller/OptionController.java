@@ -20,11 +20,10 @@ public class OptionController implements UIController, Initializable {
     private ChoiceBox<String> controlChoiceBox;
     @FXML
     private Button Back;
+    private String[] selection = {"MOUSE", "KEYBOARD"};
 
     OptionController() {
     }
-
-    private String[] selection = {"MOUSE", "KEYBOARD"};
 
     @Override
     public void init() {
@@ -42,10 +41,6 @@ public class OptionController implements UIController, Initializable {
         // 4. add UI to game scene
         FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.soundMenu.getRoot());
     }
-//    public void getSelection(ActionEvent event) {
-//
-//        String myFood = choiceBox.getValue();
-//    }
 
     public void control(ActionEvent event) {
 

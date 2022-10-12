@@ -20,9 +20,8 @@ import static com.ethnicthv.bigproject.client.GameManager.grid;
 
 public class Player extends Entity implements SealedPlayer {
 
-    PlayerData playerData = new PlayerData();
-
     public DropShadow effect;
+    final PlayerData playerData = new PlayerData();
 
     public Player() {
         this.setType(EntityType.PLAYER);

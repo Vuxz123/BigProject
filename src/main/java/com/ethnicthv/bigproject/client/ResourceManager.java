@@ -2,10 +2,7 @@ package com.ethnicthv.bigproject.client;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.EOFException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,15 +11,16 @@ import java.util.ArrayList;
 
 public class ResourceManager implements Serializable {
     public static final ResourceManager INSTANCE = new ResourceManager();
+    @Serial
     private static final long serialVersionUID = 1L;
-    private static String fileName = "1.txt";
-    public ArrayList<Data> playerData = new ArrayList<Data>();
+    private static final String fileName = "1.txt";
+    public ArrayList<Data> playerData = new ArrayList<>();
 
     public static void save(Serializable data, String fileName) throws Exception {
         URI uri = ClassLoader.getSystemResource("1.txt").toURI();
         String mainPath = Paths.get(uri).toString();
         Path path = Paths.get(mainPath);
-        ObjectOutputStream ois = null;
+        ObjectOutputStream ois;
         ois = new ObjectOutputStream(Files.newOutputStream(path));
         ois.writeObject(data);
     }
@@ -45,10 +43,9 @@ public class ResourceManager implements Serializable {
 
     public void load() throws Exception {
         Object o = null;
-        try{
+        try {
             o = load(fileName);
-        }catch (EOFException ignored) {
-            System.out.println("error");
+        } catch (EOFException ignored) {
         }
         if (o == null) {
             playerData = new ArrayList<>();
@@ -60,9 +57,10 @@ public class ResourceManager implements Serializable {
     }
 
     public static class Data implements Serializable, Comparable<Data> {
+        @Serial
         private static final long serialVersionUID = 1L;
-        int score;
-        String name;
+        final int score;
+        final String name;
 
         public Data(int score, String name) {
             this.score = score;

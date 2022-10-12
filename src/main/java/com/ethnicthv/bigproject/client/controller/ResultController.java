@@ -13,6 +13,7 @@ public class ResultController implements UIController {
     Label nameLabel;
     @FXML
     Label highestScore;
+
     public void display(String username, int Score, String highestScore) {
         nameLabel.setText("Yo: " + username);
         this.highestScore.setText("Your highest score is: " + highestScore);

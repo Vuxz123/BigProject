@@ -16,13 +16,13 @@ import javafx.animation.Interpolator;
 import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class PlayerControlerComponent extends Component {
-    TimerAction action = null;
     //Feature
-    public static ShieldFeature SHIELD = new ShieldFeature(Duration.seconds(5));
-
-    public static SpeedUpFeature SPEED = new SpeedUpFeature();
-
+    public static final ShieldFeature SHIELD = new ShieldFeature(Duration.seconds(5));
+    public static final SpeedUpFeature SPEED = new SpeedUpFeature();
+    TimerAction action = null;
     private boolean invincible = false;
 
     //Component
@@ -44,11 +44,11 @@ public class PlayerControlerComponent extends Component {
     }
 
     public void blockWay() {
-        if (!GameManager.getPlayer().getPlayerData().isBomDelay()) {
+        if (GameManager.getPlayer().getPlayerData().isBomDelay()) {
             if (GameManager.getPlayer().getPlayerData().placeBlock()) {
                 Point2D pos = GameManager.getPlayer().getPosition();
                 SafeCell cell = GameManager.grid.pfg.getCell(pos);
-                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
+                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> Objects.equals(e.getType().toString(), EntityType.BOM.toString()))) {
                     return;
                 }
                 GameManager.getPlayer().getPlayerData().resetBomDelay();
@@ -64,19 +64,15 @@ public class PlayerControlerComponent extends Component {
                 this.entity.getComponent(FeaturedRendererComponent.class).pushFeature(SPEED);
                 FXGL.animationBuilder()
                         .interpolator(Interpolator.SPLINE(0.5, 1, 0.75, 0.5))
-                        .onFinished(() -> {
-                            FXGL.animationBuilder()
-                                    .interpolator(Interpolator.SPLINE(0.5, 1, 0.75, 0.5))
-                                    .onFinished(() -> {
-                                        this.entity.getComponent(FeaturedRendererComponent.class).popFeature(SPEED);
-                                    })
-                                    .duration(Duration.seconds(2))
-                                    .autoReverse(true)
-                                    .animate(this.entity.getComponent(CustomCellMoveComponent.class).getSpeed())
-                                    .from(GameManager.player.getComponent(CustomCellMoveComponent.class).getSpeed().doubleValue())
-                                    .to(GameManager.player.getComponent(CustomCellMoveComponent.class).getSpeed().doubleValue() - 200)
-                                    .buildAndPlay();
-                        })
+                        .onFinished(() -> FXGL.animationBuilder()
+                                .interpolator(Interpolator.SPLINE(0.5, 1, 0.75, 0.5))
+                                .onFinished(() -> this.entity.getComponent(FeaturedRendererComponent.class).popFeature(SPEED))
+                                .duration(Duration.seconds(2))
+                                .autoReverse(true)
+                                .animate(this.entity.getComponent(CustomCellMoveComponent.class).getSpeed())
+                                .from(GameManager.player.getComponent(CustomCellMoveComponent.class).getSpeed().doubleValue())
+                                .to(GameManager.player.getComponent(CustomCellMoveComponent.class).getSpeed().doubleValue() - 200)
+                                .buildAndPlay())
                         .duration(Duration.seconds(5))
                         .autoReverse(true)
                         .animate(this.entity.getComponent(CustomCellMoveComponent.class).getSpeed())
@@ -95,11 +91,11 @@ public class PlayerControlerComponent extends Component {
     }
 
     public void placeBoom() {
-        if (!GameManager.getPlayer().getPlayerData().isBomDelay()) {
+        if (GameManager.getPlayer().getPlayerData().isBomDelay()) {
             if (GameManager.getPlayer().getPlayerData().placeBoom()) {
                 Point2D pos = GameManager.getPlayer().getPosition();
                 SafeCell cell = GameManager.grid.pfg.getCell(pos);
-                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
+                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> Objects.equals(e.getType().toString(), EntityType.BOM.toString()))) {
                     return;
                 }
                 GameManager.getPlayer().getPlayerData().resetBomDelay();

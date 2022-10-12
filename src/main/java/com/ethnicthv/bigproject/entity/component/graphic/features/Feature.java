@@ -19,8 +19,7 @@ public abstract class Feature implements Cloneable {
     @Override
     public Feature clone() {
         try {
-            Feature clone = (Feature) super.clone();
-            return clone;
+            return (Feature) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }

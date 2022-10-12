@@ -12,15 +12,14 @@ import javafx.util.Duration;
 
 public class PickupableComponent extends Component {
 
-    private BooleanProperty pickupable = new SimpleBooleanProperty(false);
+    private final BooleanProperty pickupable = new SimpleBooleanProperty(false);
 
-    private Item item;
+    private final Item item;
 
-    private DropShadow effect = new DropShadow();
+    private final DropShadow effect = new DropShadow();
 
     private double time = 0;
 
-    private double speed = 5;
     private int dir = 1;
 
     public PickupableComponent(Item item) {
@@ -46,6 +45,7 @@ public class PickupableComponent extends Component {
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
         effect.setSpread(time / 15);
+        double speed = 5;
         tpf *= speed;
         time = time + dir * tpf;
         if (dir == 1) dir = (time > 10) ? -1 : 1;

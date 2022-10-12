@@ -20,7 +20,7 @@ public class AIComponent extends Component {
     private StateComponent stateComponent;
     private CustomAStarMoveComponent astar;
 
-    private EnemyAIState states = new EnemyAIState();
+    private final EnemyAIState states = new EnemyAIState();
 
     public AIComponent() {
     }

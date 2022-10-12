@@ -10,17 +10,16 @@ import javafx.scene.transform.Scale;
 import java.util.function.Supplier;
 
 public class CooldownIcon extends Group implements Updatable {
-    private Rectangle rec;
-    private double max;
-    private Supplier<Double> valuelisten;
-    private Scale scale;
+    private final double max;
+    private final Supplier<Double> valuelisten;
+    private final Scale scale;
 
     public CooldownIcon(Texture texture, Supplier<Double> valuelisten, double max) {
         super(texture);
         this.valuelisten = valuelisten;
         this.max = max;
         var list = this.getChildren();
-        rec = new Rectangle(texture.getWidth(), texture.getHeight(), Color.WHITE);
+        Rectangle rec = new Rectangle(texture.getWidth(), texture.getHeight(), Color.WHITE);
         rec.setOpacity(0.5);
         scale = new Scale();
         scale.setPivotX(0);

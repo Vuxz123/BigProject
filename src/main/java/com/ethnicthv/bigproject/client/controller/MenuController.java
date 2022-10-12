@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,49 +23,46 @@ public class MenuController implements UIController, Initializable {
 
     @FXML
     Button playButton;
+    @FXML
+    Button optionButton, exitButton;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    MenuController() {
+    }
 
     @Override
     public void init() {
 
     }
 
-    @FXML
-    Button optionButton, exitButton;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             ResourceManager.INSTANCE.load();
-            System.out.println(ResourceManager.INSTANCE.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    MenuController() {
-    }
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    public void play(ActionEvent event) throws IOException{
+    public void play(ActionEvent event) {
         if (count == 0) {
             FXGL.getWindowService().startNewGame();
             count++;
-        }
-        else {
+        } else {
             FXGL.getWindowService().gotoPlay();
         }
     }
 
-    public void option(ActionEvent event) throws IOException {
+    public void option(ActionEvent event) {
 
         FXGL.getWindowService().getCurrentScene().getRoot().getChildren().clear();
         // 4. add UI to game scene
         FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.optionMenu.getRoot());
 
     }
+
     public void exit(ActionEvent event) throws Exception {
         ResourceManager.INSTANCE.save();
         Platform.exit();

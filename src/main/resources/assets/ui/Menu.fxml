@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="523.0" prefWidth="1017.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button fx:id="playButton" layoutX="439.0" layoutY="92.0" mnemonicParsing="false" onAction="#play" prefHeight="51.0" prefWidth="139.0" text="Play">
-         <font>
-            <Font size="33.0" />
-         </font></Button>
-      <Button fx:id="optionButton" layoutX="410.0" layoutY="201.0" mnemonicParsing="false" onAction="#option" prefHeight="59.0" prefWidth="197.0" text="Option">
-         <font>
-            <Font size="33.0" />
-         </font></Button>
-      <Button fx:id="exitButton" layoutX="449.0" layoutY="318.0" mnemonicParsing="false" onAction="#exit" prefHeight="59.0" prefWidth="120.0" text="Exit">
-         <font>
-            <Font size="33.0" />
-         </font></Button>
-   </children>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<!--suppress ALL, JavaFxDefaultTag, XmlHighlighting -->
+Highlighting -->
+Highlighting -->
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="523.0" prefWidth="1017.0"
+            style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/11.0.14-internal">
+    <children>
+        <Button fx:id="playButton" layoutX="439.0" layoutY="92.0" mnemonicParsing="false" onAction="#play"
+                prefHeight="51.0" prefWidth="139.0" text="Play">
+            <font>
+                <Font size="33.0"/>
+            </font>
+        </Button>
+        <Button fx:id="optionButton" layoutX="410.0" layoutY="201.0" mnemonicParsing="false" onAction="#option"
+                prefHeight="59.0" prefWidth="197.0" text="Option">
+            <font>
+                <Font size="33.0"/>
+            </font>
+        </Button>
+        <Button fx:id="exitButton" layoutX="449.0" layoutY="318.0" mnemonicParsing="false" onAction="#exit"
+                prefHeight="59.0" prefWidth="120.0" text="Exit">
+            <font>
+                <Font size="33.0"/>
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

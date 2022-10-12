@@ -11,13 +11,13 @@ import javafx.geometry.Point2D;
 public class CustomCellMoveComponent extends Component {
     private int nextCellX;
     private int nextCellY;
-    private int offsetX;
-    private int offsetY;
+    private final int offsetX;
+    private final int offsetY;
     private int cellWidth;
     private int cellHeight;
-    private DoubleProperty speed = new SimpleDoubleProperty();
+    private final DoubleProperty speed = new SimpleDoubleProperty();
     private boolean isAllowRotation = false;
-    private ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
+    private final ReadOnlyBooleanWrapper isAtDestinationProp = new ReadOnlyBooleanWrapper(true);
     private boolean isMovingUp = false;
     private boolean isMovingDown = false;
     private boolean isMovingLeft = false;
@@ -63,12 +63,12 @@ public class CustomCellMoveComponent extends Component {
         return this.cellWidth;
     }
 
-    public int getCellHeight() {
-        return this.cellHeight;
-    }
-
     public void setCellWidth(int cellWidth) {
         this.cellWidth = cellWidth;
+    }
+
+    public int getCellHeight() {
+        return this.cellHeight;
     }
 
     public void setCellHeight(int cellHeight) {

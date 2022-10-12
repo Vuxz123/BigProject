@@ -78,7 +78,7 @@ public class PlayerData {
     }
 
     public boolean isBomDelay() {
-        return Bomdelay > 0;
+        return Bomdelay <= 0;
     }
 
     public boolean isShielddelay() {
@@ -160,6 +160,7 @@ public class PlayerData {
         return true;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean dealDamage(double damage) {
         if (GameManager.getPlayer().getPCC().isInvincible()) return false;
         this.Health = this.Health - damage;

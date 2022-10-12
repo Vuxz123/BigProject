@@ -4,9 +4,8 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.scene.SubScene;
 import com.ethnicthv.bigproject.asset.TextureProvider;
-import com.ethnicthv.bigproject.entity.entities.Player;
 import com.ethnicthv.bigproject.client.controller.FXGLMenuDIY;
-import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
+import com.ethnicthv.bigproject.entity.entities.Player;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.*;
@@ -21,18 +20,17 @@ import java.net.URISyntaxException;
 import static com.ethnicthv.bigproject.util.Util.SS;
 
 public class GameManager {
-    public static Player player;
-    public static GameData data = new GameData();
-    public static GameUI ui = new GameUI();
     public static final int OFFSETX = 5;
     public static final int OFFSETY = 5;
-    public static int WIDTH = 1000;
-    public static int HEIGHT = 500;
     public static final int TICKS = 64;
     public static final String TITLE = "Bomman";
     public static final String VERSION = "0.1";
-
-    public static GameMap grid = new GameMap();
+    public static Player player;
+    public static final GameData data = new GameData();
+    public static final GameUI ui = new GameUI();
+    public static int WIDTH = 1000;
+    public static int HEIGHT = 500;
+    public static final GameMap grid = new GameMap();
 
     private GameManager() {
     }
@@ -52,10 +50,9 @@ public class GameManager {
         gameSettings.setTicksPerSecond(TICKS);
         gameSettings.setDeveloperMenuEnabled(true);
         gameSettings.setMainMenuEnabled(true);
-        System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
     }
 
-    public static void initGame() throws URISyntaxException {
+    public static void initGame() {
         Logger.setLevel(Logger.DEBUG);
         FXGL.getEventBus().setLoggingEnabled(true);
         grid.setup();

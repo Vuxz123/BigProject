@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Code gốc tại {@link com.almasb.fxgl.pathfinding.astar.AStarPathfinder}
  */
+@SuppressWarnings("ProtectedMemberInFinalClass")
 public record CustomAstarPartFinder(SafeGrid grid) implements Pathfinder<SafeCell> {
 
     @Override

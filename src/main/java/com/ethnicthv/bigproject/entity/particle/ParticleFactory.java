@@ -16,7 +16,7 @@ public class ParticleFactory implements EntityFactory {
     public Entity f(SpawnData data) {
         int x = (int) data.getX();
         int y = (int) data.getY();
-        Entity e = FXGL.entityBuilder(data)
+        return FXGL.entityBuilder(data)
                 .bbox(BoundingShape.circle(16))
                 .view(TextureProvider.INSTANCE.BLAST.copy())
                 .anchorFromCenter()
@@ -26,6 +26,5 @@ public class ParticleFactory implements EntityFactory {
                 .with(new DurationComponent(DurationComponent.Type.MILLISECOND, data.get("du")))
                 .collidable()
                 .build();
-        return e;
     }
 }

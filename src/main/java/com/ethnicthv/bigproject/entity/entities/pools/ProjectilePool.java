@@ -11,7 +11,7 @@ import com.ethnicthv.bigproject.entity.entities.Projectile;
  */
 public class ProjectilePool<T extends Projectile> extends Pool<T> {
 
-    private Class<T> type;
+    private final Class<T> type;
 
     public ProjectilePool(int initialCapacity, int max, Class<T> type) {
         super(initialCapacity, max);

@@ -11,6 +11,12 @@ import javafx.geometry.Point2D;
 
 public class ItemEntityFactory implements EntityFactory {
 
+    public static void spawnItem(Item item, Point2D pos) {
+        SpawnData data = new SpawnData(pos);
+        data.put("item", item);
+        FXGL.getGameWorld().spawn("ie", data);
+    }
+
     @Spawns("ie, itementity")
     public Entity itemEntity(SpawnData data) {
         return FXGL.entityBuilder(data)
@@ -20,11 +26,5 @@ public class ItemEntityFactory implements EntityFactory {
                 .with(new PickupableComponent(data.get("item")))
                 .collidable()
                 .build();
-    }
-
-    public static void spawnItem(Item item, Point2D pos) {
-        SpawnData data = new SpawnData(pos);
-        data.put("item", item);
-        FXGL.getGameWorld().spawn("ie", data);
     }
 }

@@ -85,9 +85,7 @@ public class GameMechanicComponent extends Component {
             }
             pair.setValue(pair.getValue() - tpf);
         });
-        removed.forEach(pair -> {
-            SafeCell.markedcell.remove(pair);
-        });
+        removed.forEach(pair -> SafeCell.markedcell.remove(pair));
         if (timer.elapsed(Duration.seconds(20))) {
             int x = FXGLMath.random(2, 22);
             int y = FXGLMath.random(2, 14);

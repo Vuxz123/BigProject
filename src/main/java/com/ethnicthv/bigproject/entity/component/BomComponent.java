@@ -9,9 +9,9 @@ import com.ethnicthv.bigproject.entity.boom.AbstractBoom;
 import javafx.util.Duration;
 
 public class BomComponent extends Component {
-    private TimerAction action;
     private final Duration duration;
     private final SafeGrid.CellUnSafeFunction function;
+    private TimerAction action;
     private Runnable bomfunction;
     private AbstractBoom boom = null;
 
@@ -34,9 +34,7 @@ public class BomComponent extends Component {
         if (boom != null)
             this.bomfunction = boom.getBoomFunc(GameManager.grid.getGridX((int) entity.getX()), GameManager.grid.getGridY((int) entity.getY()));
         action = FXGL.getGameTimer().runOnceAfter(bomfunction, duration);
-        FXGL.getGameTimer().runOnceAfter(() -> {
-            GameManager.grid.pfg.setUnSafe(GameManager.grid.getGridX((int) this.entity.getX()), GameManager.grid.getGridY((int) this.entity.getY()), function);
-        }, duration.subtract(Duration.seconds(1)));
+        FXGL.getGameTimer().runOnceAfter(() -> GameManager.grid.pfg.setUnSafe(GameManager.grid.getGridX((int) this.entity.getX()), GameManager.grid.getGridY((int) this.entity.getY()), function), duration.subtract(Duration.seconds(1)));
     }
 
     @Override

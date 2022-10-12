@@ -10,8 +10,6 @@ public class AnimatedGraphicComponent extends GraphicComponent {
 
     private final HashMap<String, AnimationChannel> channels = new HashMap<>();
 
-    private String cchannel = "idle";
-
     public AnimatedGraphicComponent(AnimatedTexture texture) {
         super(texture);
         this.animatedTexture = texture;
@@ -50,7 +48,6 @@ public class AnimatedGraphicComponent extends GraphicComponent {
     }
 
     public void playChannel(String name) {
-        cchannel = name;
-        animatedTexture.loopNoOverride(channels.get(cchannel));
+        animatedTexture.loopNoOverride(channels.get(name));
     }
 }

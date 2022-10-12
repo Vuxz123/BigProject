@@ -46,16 +46,6 @@ public class GraphicComponent extends Component {
         return this;
     }
 
-    public GraphicComponent setOffsetX(int offsetX) {
-        this.OffsetX = offsetX;
-        return this;
-    }
-
-    public GraphicComponent setOffsetY(int offsetY) {
-        this.OffsetY = offsetY;
-        return this;
-    }
-
     public void setScaleOrigin(Point2D origin) {
         this.graphic.getTransformComponent().setScaleOrigin(origin);
     }
@@ -69,8 +59,18 @@ public class GraphicComponent extends Component {
         return OffsetX;
     }
 
+    public GraphicComponent setOffsetX(int offsetX) {
+        this.OffsetX = offsetX;
+        return this;
+    }
+
     public int getOffsetY() {
         return OffsetY;
+    }
+
+    public GraphicComponent setOffsetY(int offsetY) {
+        this.OffsetY = offsetY;
+        return this;
     }
 
     public Entity getGraphic() {

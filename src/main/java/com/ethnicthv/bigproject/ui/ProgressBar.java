@@ -12,18 +12,15 @@ import java.util.function.Supplier;
 
 public class ProgressBar extends Group implements Updatable {
     private final Supplier<Double> valuelisten;
-
-    private Node processbar;
     private final double max;
-
-    private Scale scale;
+    private final Scale scale;
 
     public ProgressBar(Node texture, Supplier<Double> valuelisten, double max) {
         super(texture);
         this.valuelisten = valuelisten;
         this.max = max;
         var list = this.getChildren();
-        this.processbar = list.get(0);
+        Node processbar = list.get(0);
         scale = new Scale();
         scale.setPivotY(0);
         scale.setPivotX(0);

@@ -28,18 +28,6 @@ public class Util {
     }
 
     public static void spawnNPC(int x, int y) {
-//        var e = entityBuilder()
-//                .viewWithBBox(new Rectangle(16, 16, FXGLMath.randomColor()))
-//                .type(EntityType.ENTITY)
-//                .at(5 + x*16, 5 + y*16)
-//                .anchorFromCenter()
-//                .with(new CustomCellMoveComponent(GameManager.OFFSETX, GameManager.OFFSETY ,GameManager.grid.gridsize, GameManager.grid.gridsize, 150))
-//                .with(new CustomAStarMoveComponent(GameManager.grid.pfg))
-//                .with(new CustomRandomAStarMoveComponent(Duration.seconds(0), Duration.seconds(0.5)))
-//                .with(new StateComponent())
-//                .with(new AIComponent())
-//                .collidable()
-//                .buildAndAttach();
         EnemyPool.spawnCommonEntity(x, y);
     }
 

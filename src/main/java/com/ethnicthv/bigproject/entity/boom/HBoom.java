@@ -10,7 +10,7 @@ import javafx.geometry.Point2D;
 
 public class HBoom extends AbstractBoom {
 
-    Pos[] pair = {
+    final Pos[] pair = {
             new Pos(-3, 0), new Pos(-3, 1), new Pos(-3, 2),
             new Pos(-2, 0), new Pos(-2, 1), new Pos(-2, 2),
             new Pos(-1, 0), new Pos(-1, 1), new Pos(-4, 2),
@@ -25,8 +25,7 @@ public class HBoom extends AbstractBoom {
     @Override
     public Runnable getBoomFunc(int centerX, int centerY) {
         return () -> {
-            int x = centerX;
-            int l = x + 9;
+            int l = centerX + 9;
             SpawnData data = new SpawnData(centerX - 1, centerY);
             data.put("spe", GameManager.getPlayer().getPlayerData().getBoomSpe());
             data.put("du", GameManager.getPlayer().getPlayerData().getBoomDuration());
@@ -50,6 +49,7 @@ public class HBoom extends AbstractBoom {
             for (Pos p : pair) {
                 int i = x + p.getKey();
                 int j = y + p.getValue();
+                //noinspection deprecation
                 GameManager.grid.pfg.setUnSafe(i, j, true);
             }
         };

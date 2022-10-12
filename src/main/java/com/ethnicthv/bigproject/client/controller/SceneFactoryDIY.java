@@ -14,11 +14,4 @@ public class SceneFactoryDIY extends SceneFactory {
         return new FXGLMenuDIY();
     }
 
-//    @NotNull
-//    @Override
-//    public FXGLMenu newGameMenu() {
-//        MenuController menuController = new MenuController();
-//        UI mainMenu = FXGL.getAssetLoader().loadUI("Menu.fxml", menuController);
-//        return null;
-//    }
 }

@@ -10,7 +10,7 @@ import javafx.geometry.Point2D;
 
 public class BlockBoom extends AbstractBoom {
 
-    public static Pos[] pair = {
+    public static final Pos[] pair = {
             new Pos(0, 0), new Pos(0, 1), new Pos(0, 2),
             new Pos(1, 0), new Pos(1, 1), new Pos(1, 2),
             new Pos(2, 0), new Pos(2, 1), new Pos(2, 2)
@@ -37,6 +37,7 @@ public class BlockBoom extends AbstractBoom {
         };
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public SafeGrid.CellUnSafeFunction getCellFunc() {
         return (cell, centerX, centerY) -> {
@@ -45,8 +46,11 @@ public class BlockBoom extends AbstractBoom {
             int l = x + 3;
             int l2 = y + 3;
             for (; x < l; x++) {
+                //noinspection deprecation
                 GameManager.grid.pfg.setUnSafe(x, y, true);
+                //noinspection deprecation
                 GameManager.grid.pfg.setUnSafe(x, y + 1, true);
+                //noinspection deprecation
                 GameManager.grid.pfg.setUnSafe(x, y + 2, true);
             }
         };

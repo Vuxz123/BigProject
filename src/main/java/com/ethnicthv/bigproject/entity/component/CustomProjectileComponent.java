@@ -10,15 +10,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Point2D;
 
 public class CustomProjectileComponent extends Component implements CopyableComponent<CustomProjectileComponent> {
-    private Class<? extends GraphicComponent> type;
+    private final Class<? extends GraphicComponent> type;
     private GraphicComponent graphicComponent;
-    private Point2D direction;
-    private Double speed;
-    private DoubleProperty speedProp;
+    private final Point2D direction;
+    private final Double speed;
+    private final DoubleProperty speedProp;
     private Point2D velocity;
     private Boolean isAllowRotation = true;
 
-    private ChangeListener<Number> speedListener = new ChangeListener<Number>() {
+    private final ChangeListener<Number> speedListener = new ChangeListener<>() {
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newSpeed) {
             velocity = velocity.normalize().multiply(newSpeed.doubleValue());
