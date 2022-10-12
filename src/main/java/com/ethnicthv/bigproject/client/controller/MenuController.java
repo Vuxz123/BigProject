@@ -3,6 +3,7 @@ package com.ethnicthv.bigproject.client.controller;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.UI;
 import com.almasb.fxgl.ui.UIController;
+import com.ethnicthv.bigproject.client.ResourceManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +24,10 @@ import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
 import static com.almasb.fxgl.dsl.FXGL.getGameScene;
 
 public class MenuController implements UIController, Initializable {
+
+    static public int count = 0;
+
+
     @FXML
     Button playButton;
 
@@ -35,7 +41,15 @@ public class MenuController implements UIController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            System.out.println("fdssdagdfs");
+            ResourceManager.INSTANCE.load();
+            System.out.println(ResourceManager.INSTANCE.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Do this shit pls");
+        System.out.println(ResourceManager.INSTANCE.toString());
     }
     MenuController() {}
     private Stage stage;
@@ -43,8 +57,13 @@ public class MenuController implements UIController, Initializable {
     private Parent root;
 
     public void play(ActionEvent event) throws IOException{
-
-        FXGL.getWindowService().startNewGame();
+        if (count == 0) {
+            FXGL.getWindowService().startNewGame();
+            count++;
+        }
+        else {
+            FXGL.getWindowService().gotoPlay();
+        }
     }
     public void option(ActionEvent event) throws IOException {
 
@@ -53,7 +72,8 @@ public class MenuController implements UIController, Initializable {
         FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.optionMenu.getRoot());
 
     }
-    public void exit(ActionEvent event) throws IOException  {
+    public void exit(ActionEvent event) throws Exception {
+        ResourceManager.INSTANCE.save();
         Platform.exit();
     }
 }

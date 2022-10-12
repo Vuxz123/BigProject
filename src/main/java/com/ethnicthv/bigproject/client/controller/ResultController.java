@@ -6,13 +6,18 @@ import javafx.scene.control.Label;
 
 public class ResultController implements UIController {
 
+
+    @FXML
+    Label scoreLabel;
     @FXML
     Label nameLabel;
     @FXML
     Label highestScore;
-    public void displayName(String username, int Score) {
+    public void display(String username, int Score, String highestScore) {
         nameLabel.setText("Yo: " + username);
-        highestScore.setText("Your score is: " + Score);
+        this.highestScore.setText("Your highest score is: " + highestScore);
+
+        scoreLabel.setText("Your score is " + Score);
 
     }
 

@@ -14,6 +14,8 @@ public class FXGLMenuDIY extends FXGLMenu {
     public static UI optionMenu;
 
     public static UI resultMenu;
+    public static UI saveData;
+
     public FXGLMenuDIY() {
         super(MenuType.MAIN_MENU);
         MenuController menuController = new MenuController();
@@ -31,6 +33,9 @@ public class FXGLMenuDIY extends FXGLMenu {
 
         ResultController resultController = new ResultController();
         resultMenu = getAssetLoader().loadUI("Result.fxml", resultController);
+
+        SaveDataController saveDataController = new SaveDataController();
+        saveData = getAssetLoader().loadUI("SaveData.fxml", saveDataController);
     }
 
     public UI getLoader() {

@@ -1,8 +1,12 @@
 package com.ethnicthv.bigproject.client;
 
+import com.almasb.fxgl.app.FXGLApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.FXGLScene;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.scene.SubScene;
 import com.ethnicthv.bigproject.asset.TextureProvider;
+import com.ethnicthv.bigproject.client.controller.FXGLMenuDIY;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
 import com.almasb.fxgl.entity.Entity;
@@ -15,9 +19,12 @@ import com.ethnicthv.bigproject.ui.StackingCooldownIcon;
 import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
+import javafx.beans.property.DoubleProperty;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -111,6 +118,14 @@ public class GameManager {
     }
 
     public static void onPlayerDeath() {
-
+        SubScene scene = new SubScene() {
+            @Override
+            public void onCreate() {
+                super.onCreate();
+                this.getRoot().getChildren().add(FXGLMenuDIY.saveData.getRoot());
+            }
+        };
+        FXGL.getWindowService().pushSubScene(scene);
+        // 4. add UI to game scene
     }
 }

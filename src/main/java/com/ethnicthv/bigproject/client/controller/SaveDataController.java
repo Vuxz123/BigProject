@@ -1,18 +1,14 @@
 package com.ethnicthv.bigproject.client.controller;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.scene.SubScene;
 import com.almasb.fxgl.ui.UI;
 import com.almasb.fxgl.ui.UIController;
-import com.ethnicthv.bigproject.client.GameData;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.ResourceManager;
-import com.ethnicthv.bigproject.client.controller.ResultController;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 
@@ -29,6 +26,9 @@ public class SaveDataController implements Initializable, UIController {
     Button loginButton;
     @FXML
     TextField nameTextField;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,58 +39,28 @@ public class SaveDataController implements Initializable, UIController {
 
     }
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     @FXML
     public void login(Event event) throws Exception {
 
-
-        ResourceManager.INSTANCE.add(nameTextField.getText());
-
         ResultController resultController = new ResultController();
         UI loader = FXGL.getAssetLoader().loadUI("Result.fxml", resultController);
-        resultController.displayName(nameTextField.getText(), GameManager.data.killed);
-        FXGL.getGameScene().addUI(loader);
-//        ResultController scene2Controller = mainMenu.getController();
-//        scene2Controller.displayName(username, highestScore);
-//
-//        //root = FXMLLoader.load(getClass().getResource("Result.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//        GameData gameData = new GameData();
-//        gameData.name = nameTextField.getText();
-//        gameData.score= 13;// jj do . score
-//        try {
-//            ResourceManager.save(1L, "1.save");
-//        }
-//        catch (Exception e) {
-//            System.out.println("Couldnt save" + e.getMessage());
-//        }
-//        try{
-//            GameData data = new GameData();
-//            data.name= ((GameData) ResourceManager.load("1.save")).name;
-//            nameTextField.setText(data.name);
-//            data.toString();
-//        }
-//        catch (Exception e) {
-//            System.out.println("couldnt load save data " + e.getMessage());
-//        }
-//        FXMLLoader mainMenu = new FXMLLoader(getClass().getResource("Result.fxml"));
-//        root = mainMenu.load();
-//
-//        ResultController scene2Controller = mainMenu.getController();
-//
-//        scene2Controller.displayName(gameData.name, (String.valueOf(gameData.score)));
-//
-//        //root = FXMLLoader.load(getClass().getResource("Result.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
+        System.out.println(GameManager.data.killed);
+        ResourceManager.Data hs = ResourceManager.INSTANCE.playerData.stream().filter((data -> data.getName().equals(nameTextField.getText()))).max(Comparator.comparingInt(ResourceManager.Data::getScore))
+                .orElseGet(() -> new ResourceManager.Data(0, "0"));
+        resultController.display(nameTextField.getText(), GameManager.data.killed, hs.getName() + " " + hs.getScore());
+        ResourceManager.INSTANCE.add(nameTextField.getText());
+        FXGL.getWindowService().popSubScene();
+        SubScene scene = new SubScene() {
+            @Override
+            public void onCreate() {
+                super.onCreate();
+                this.getRoot().getChildren().add(loader.getRoot());
+            }
+        };
+        ResourceManager.INSTANCE.save();
+
+        FXGL.getWindowService().pushSubScene(scene);
+
     }
 
 }

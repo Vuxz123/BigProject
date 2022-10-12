@@ -3,11 +3,13 @@ package com.ethnicthv.bigproject.input;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
+import com.almasb.fxgl.scene.SubScene;
 import com.almasb.fxgl.ui.UI;
 import com.ethnicthv.bigproject.asset.Config;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 //import com.ethnicthv.bigproject.client.GameMenu;
+import com.ethnicthv.bigproject.client.controller.FXGLMenuDIY;
 import com.ethnicthv.bigproject.client.controller.SaveDataController;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.EntityType;
@@ -64,12 +66,27 @@ public class InputControler {
                     // 4. add UI to game scene
                     getGameScene().addUI(fxmlUI);
                 }
-            }, KeyCode.Q);
+            }, KeyCode.O);
         //if (c.equals(MOUSE)) {
 
         //}
        // if (c.equals(KEYBOARD)) {
+        FXGL.getInput().addAction(new UserAction("OPEN MENU") {
+            @Override
+            protected void onAction() {
+                // 4. add UI to game scene
+                FXGL.getWindowService().popSubScene();
+                SubScene scene = new SubScene() {
+                    @Override
+                    public void onCreate() {
+                        super.onCreate();
+                        this.getRoot().getChildren().add(FXGLMenuDIY.soundMenu.getRoot());
+                    }
+                };
 
+                FXGL.getWindowService().pushSubScene(scene);
+            }
+        }, KeyCode.N);
             FXGL.getInput().addAction(new UserAction("GO RIGHT") {
                 @Override
                 protected void onAction() {
@@ -111,11 +128,20 @@ public class InputControler {
                 super.onActionBegin();
                 GameManager.getPlayer().getPCC().activateShield();
             }
-        }, KeyCode.K);
+        }, KeyCode.Q);
         FXGL.getInput().addAction(new UserAction("GO MENU") {
             @Override
             protected void onActionEnd() {
-                super.onActionEnd();
+                FXGL.getWindowService().popSubScene();
+                SubScene scene = new SubScene() {
+                    @Override
+                    public void onCreate() {
+                        super.onCreate();
+                        this.getRoot().getChildren().add(FXGLMenuDIY.mainMenu.getRoot());
+                    }
+                };
+
+                FXGL.getWindowService().pushSubScene(scene);
 
             }
         }, KeyCode.ESCAPE);
@@ -136,13 +162,13 @@ public class InputControler {
             }
         }, MouseButton.SECONDARY);
 
-        FXGL.getInput().addAction(new UserAction("Test2") {
+        FXGL.getInput().addAction(new UserAction("SPEED UP") {
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
                 GameManager.getPlayer().getPCC().speedUP();
             }
-        }, KeyCode.L);
+        }, KeyCode.E);
 
         FXGL.getInput().addAction(new UserAction("Test3") {
             @Override

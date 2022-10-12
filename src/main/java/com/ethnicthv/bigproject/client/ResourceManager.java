@@ -1,21 +1,42 @@
 package com.ethnicthv.bigproject.client;
 
-import java.io.*;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.EOFException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.net.URI;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ResourceManager implements Serializable {
     public static final ResourceManager INSTANCE = new ResourceManager();
-
-    private static String fileName = "1.txt";
     private static final long serialVersionUID = 1L;
-
+    private static String fileName = "1.txt";
     public ArrayList<Data> playerData = new ArrayList<Data>();
 
+    public static void save(Serializable data, String fileName) throws Exception {
+        URI uri = ClassLoader.getSystemResource("1.txt").toURI();
+        String mainPath = Paths.get(uri).toString();
+        Path path = Paths.get(mainPath);
+        ObjectOutputStream ois = null;
+        ois = new ObjectOutputStream(Files.newOutputStream(path));
+        ois.writeObject(data);
+    }
+
+    public static Object load(String fileName) throws Exception {
+        URI uri = ClassLoader.getSystemResource("1.txt").toURI();
+        String mainPath = Paths.get(uri).toString();
+        Path path = Paths.get(mainPath);
+        ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(path));
+        return ois.readObject();
+    }
+
     public void add(String name) {
-        playerData.add(new Data(GameManager.data.score, name));
-        GameManager.data.reset();
+        playerData.add(new Data(GameManager.data.killed, name));
     }
 
     public void save() throws Exception {
@@ -23,28 +44,22 @@ public class ResourceManager implements Serializable {
     }
 
     public void load() throws Exception {
-        Object o = load(fileName);
+        Object o = null;
+        try{
+            o = load(fileName);
+        }catch (EOFException ignored) {
+            System.out.println("error");
+        }
         if (o == null) {
             playerData = new ArrayList<>();
-        }
-        else {
-            playerData = (ArrayList<Data>) o;
+        } else {
+            playerData = ((ResourceManager) o).playerData;
+            System.out.println(playerData);
+
         }
     }
 
-
-    public static void save(Serializable data, String fileName) throws Exception {
-        try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
-            oos.writeObject(data);
-        }
-    }
-    public static Object load(String fileName) throws Exception {
-        try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
-            return ois.readObject();
-        }
-    }
-
-    public class Data implements Serializable {
+    public static class Data implements Serializable, Comparable<Data> {
         private static final long serialVersionUID = 1L;
         int score;
         String name;
@@ -52,6 +67,27 @@ public class ResourceManager implements Serializable {
         public Data(int score, String name) {
             this.score = score;
             this.name = name;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "score=" + score +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(@NotNull Data o) {
+            return Integer.compare(this.score, o.score);
         }
     }
 }

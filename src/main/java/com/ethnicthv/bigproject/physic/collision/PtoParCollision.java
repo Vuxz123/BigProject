@@ -23,7 +23,6 @@ public class PtoParCollision extends CollisionHandler {
         if (boxB.getCenterWorld().distance(point) <= 8.8) {
             b.removeFromWorld();
             if (GameManager.getPlayer().getPlayerData().dealDamage(25)) {
-                FXGL.getWindowService().startNewGame();
             }
         }
     }
