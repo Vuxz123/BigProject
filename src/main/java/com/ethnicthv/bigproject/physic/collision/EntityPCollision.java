@@ -21,6 +21,7 @@ public class EntityPCollision extends CollisionHandler {
     protected void onCollisionBegin(Entity entity, Entity particle) {
         super.onCollisionBegin(entity, particle);
         entity.removeFromWorld();
+        particle.removeFromWorld();
         GameManager.data.killed ++;
         play(Asset.SOUND_LOSE_LIFE);
         System.out.println("playing sound");

@@ -2,41 +2,52 @@ package com.ethnicthv.bigproject.entity.boom;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
-import com.ethnicthv.bigproject.asset.Config;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
+import com.ethnicthv.bigproject.util.Pos;
 import javafx.geometry.Point2D;
 
-import static com.almasb.fxgl.dsl.FXGL.play;
-
 public class HBoom extends AbstractBoom {
+
+    Pos[] pair = {
+                                                         new Pos(-3, 0), new Pos(-3, 1), new Pos(-3, 2),
+                                                         new Pos(-2, 0), new Pos(-2, 1), new Pos(-2, 2),
+                                                         new Pos(-1, 0), new Pos(-1, 1), new Pos(-4, 2),
+            new Pos(0, -3), new Pos(0, -2), new Pos(0, -1), new Pos(0, 0), new Pos(0, 1), new Pos(0, 2), new Pos(0, 3), new Pos(0, 4), new Pos(0, 5),
+            new Pos(1, -3), new Pos(1, -2), new Pos(1, -1), new Pos(1, 0), new Pos(1, 1), new Pos(1, 2), new Pos(1, 3), new Pos(1, 4), new Pos(1, 5),
+            new Pos(2, -3), new Pos(2, -2), new Pos(2, -1), new Pos(2, 0), new Pos(2, 1), new Pos(2, 2), new Pos(2, 3), new Pos(2, 4), new Pos(2, 5),
+                                                         new Pos(3, 0), new Pos(3, 1), new Pos(3, 2),
+                                                         new Pos(4, 0), new Pos(4, 1), new Pos(4, 2),
+                                                         new Pos(5, 0), new Pos(5, 1), new Pos(5, 2)
+    };
     @Override
     public Runnable getBoomFunc(int centerX, int centerY) {
         return () -> {
             int x = centerX;
             int l = x + 9;
-            SpawnData data = new SpawnData(centerX, centerY);
+            SpawnData data = new SpawnData(centerX - 1, centerY);
+            data.put("spe", 200d);
+            data.put("du", 250d);
             data.put("dir", new Point2D(-1, 0));
             FXGL.getGameWorld().spawn("f", data);
-            data = new SpawnData(centerX, centerY);
             data.put("dir", new Point2D(1, 0));
             FXGL.getGameWorld().spawn("f", data);
-            //why i put here
-            play(Config.Asset.SOUNG_EXPLOSION);
+            data.put("dir", new Point2D(0, -1));
+            FXGL.getGameWorld().spawn("f", data);
+            data.put("dir", new Point2D(0, 1));
+            FXGL.getGameWorld().spawn("f", data);
         };
     }
 
     @Override
     public SafeGrid.CellUnSafeFunction getCellFunc() {
         return (cell, centerX, centerY) -> {
-            int x = centerX - 4;
+            int x = centerX - 1;
             int y = centerY - 1;
-            int l = x + 9;
-            int l2 = y + 3;
-            for (; x < l; x++) {
-                GameManager.grid.pfg.setUnSafe(x, y, true);
-                GameManager.grid.pfg.setUnSafe(x, y + 1, true);
-                GameManager.grid.pfg.setUnSafe(x, y + 2, true);
+            for(Pos p : pair) {
+                int i = x + p.getKey();
+                int j = y + p.getValue();
+                GameManager.grid.pfg.setUnSafe(i, j, true);
             }
         };
     }
