@@ -2,8 +2,11 @@ package com.ethnicthv.bigproject.client;
 
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.scene.SubScene;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.entity.entities.Player;
+import com.ethnicthv.bigproject.client.controller.FXGLMenuDIY;
+import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.*;
@@ -107,6 +110,14 @@ public class GameManager {
     }
 
     public static void onPlayerDeath() {
-
+        SubScene scene = new SubScene() {
+            @Override
+            public void onCreate() {
+                super.onCreate();
+                this.getRoot().getChildren().add(FXGLMenuDIY.saveData.getRoot());
+            }
+        };
+        FXGL.getWindowService().pushSubScene(scene);
+        // 4. add UI to game scene
     }
 }

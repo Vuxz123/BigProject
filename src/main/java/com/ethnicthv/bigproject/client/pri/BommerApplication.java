@@ -57,8 +57,13 @@ public class BommerApplication extends GameApplication {
     protected void initGame() {
         super.initGame();
 
-        FactoryManager.INSTANCE.setup();
-        InputControler.INSTANCE.setup();
+
+        try{
+            FactoryManager.INSTANCE.setup();
+            InputControler.INSTANCE.setup();
+        }catch (IllegalArgumentException ignored) {
+        }
+
         try {
             GameManager.initGame();
         } catch (URISyntaxException e) {

@@ -1,5 +1,11 @@
 package com.ethnicthv.bigproject.client.controller;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.*;
+
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.UIController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,17 +18,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class GameSoundMenuController implements Initializable, UIController {
 
     public static GameSoundMenuController gameMenu = new GameSoundMenuController();
+
+    @FXML
+    private Button backToGameButton;
+    @FXML
+    private Button backToOptionButton;
+    @FXML
+    private Button backToOptionMenu;
     @FXML
     private Pane pane;
     @FXML
@@ -36,14 +41,13 @@ public class GameSoundMenuController implements Initializable, UIController {
     @FXML
     private ProgressBar songProgressBar;
 
-    private Media media;
-    private MediaPlayer mediaPlayer;
+    public Media media;
+    public MediaPlayer mediaPlayer;
 
     private File directory;
     private File[] files;
 
-    private ArrayList<File> songs;
-
+    public ArrayList<File> songs;
     private int songNumber;
     private int[] speeds = {25, 50, 75, 100, 125, 150, 175, 200};
     private String path;
@@ -60,33 +64,27 @@ public class GameSoundMenuController implements Initializable, UIController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songs = new ArrayList<File>();
-        //System.out.println(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString());
 
-        //directory = new File(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString()).getParentFile();
         try {
             directory = new File(getClass().getClassLoader().getResource("assets/music").toURI());
-            System.out.println(directory.toPath().toAbsolutePath());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
         files = directory.listFiles();
-        //System.out.println(files.toString());
-        if (files != null) {
+        if(files != null) {
 
-            for (File file : files) {
-
-                songs.add(file);
-            }
+            songs.addAll(Arrays.asList(files));
         }
         songNumber = 0;
-        media = new Media(songs.get(songNumber).toURI().toString());
+
+        media = new Media(songs.stream().filter(s -> s.getName().equals("gameaudio.wav")).toList().get(0).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
-        songLabel.setText(songs.get(songNumber).getName());
+        songLabel.setText("gameaudio.wav");
 
-        for (int i = 0; i < speeds.length; i++) {
+        for(int i = 0; i < speeds.length; i++) {
 
-            speedBox.getItems().add(Integer.toString(speeds[i]) + "%");
+            speedBox.getItems().add(Integer.toString(speeds[i])+"%");
         }
 
         speedBox.setOnAction(this::changeSpeed);
@@ -101,7 +99,38 @@ public class GameSoundMenuController implements Initializable, UIController {
         });
 
         songProgressBar.setStyle("-fx-accent: #00FF00;");
+
+        mediaPlayer.play();
+        playMedia();
     }
+
+
+    public void backToGame() {
+        if (MenuController.count != 0) {
+            FXGL.getWindowService().gotoPlay();
+            MenuController.count++;
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Bro you havent start game yet");
+            alert.setContentText("Press Ok");
+            alert.showAndWait();
+        }
+    }
+    public void backToOption() {
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().clear();
+        // 4. add UI to game scene
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.optionMenu.getRoot());
+    }
+
+    public void backToMenu(){
+
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().clear();
+        // 4. add UI to game scene
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.mainMenu.getRoot());
+    }
+
 
     public void playMedia() {
 
@@ -125,13 +154,13 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void previousMedia() {
 
-        if (songNumber > 0) {
+        if(songNumber > 0) {
 
             songNumber--;
 
             mediaPlayer.stop();
 
-            if (running) {
+            if(running) {
 
                 cancelTimer();
             }
@@ -142,13 +171,14 @@ public class GameSoundMenuController implements Initializable, UIController {
             songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
-        } else {
+        }
+        else {
 
             songNumber = songs.size() - 1;
 
             mediaPlayer.stop();
 
-            if (running) {
+            if(running) {
 
                 cancelTimer();
             }
@@ -164,13 +194,13 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void nextMedia() {
 
-        if (songNumber < songs.size() - 1) {
+        if(songNumber < songs.size() - 1) {
 
             songNumber++;
 
             mediaPlayer.stop();
 
-            if (running) {
+            if(running) {
 
                 cancelTimer();
             }
@@ -181,7 +211,8 @@ public class GameSoundMenuController implements Initializable, UIController {
             songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
-        } else {
+        }
+        else {
 
             songNumber = 0;
 
@@ -198,10 +229,11 @@ public class GameSoundMenuController implements Initializable, UIController {
 
     public void changeSpeed(ActionEvent event) {
 
-        if (speedBox.getValue() == null) {
+        if(speedBox.getValue() == null) {
 
             mediaPlayer.setRate(1);
-        } else {
+        }
+        else {
 
             //mediaPlayer.setRate(Integer.parseInt(speedBox.getValue()) * 0.01);
 
@@ -220,9 +252,9 @@ public class GameSoundMenuController implements Initializable, UIController {
                 running = true;
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
-                songProgressBar.setProgress(current / end);
+                songProgressBar.setProgress(current/end);
 
-                if (current / end == 1) {
+                if(current/end == 1) {
                     resetMedia();
                     cancelTimer();
 

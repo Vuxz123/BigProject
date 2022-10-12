@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Button fx:id="playButton" layoutX="215.0" layoutY="75.0" mnemonicParsing="false" onAction="#play"
-                prefHeight="51.0" prefWidth="139.0" text="Play"/>
-        <Button fx:id="optionButton" layoutX="186.0" layoutY="157.0" mnemonicParsing="false" onAction="#option"
-                prefHeight="59.0" prefWidth="197.0" text="Option"/>
-        <Button fx:id="exitButton" layoutX="225.0" layoutY="246.0" mnemonicParsing="false" onAction="#exit"
-                prefHeight="59.0" prefWidth="120.0" text="Exit"/>
-    </children>
+<AnchorPane prefHeight="523.0" prefWidth="1017.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="playButton" layoutX="439.0" layoutY="92.0" mnemonicParsing="false" onAction="#play" prefHeight="51.0" prefWidth="139.0" text="Play">
+         <font>
+            <Font size="33.0" />
+         </font></Button>
+      <Button fx:id="optionButton" layoutX="410.0" layoutY="201.0" mnemonicParsing="false" onAction="#option" prefHeight="59.0" prefWidth="197.0" text="Option">
+         <font>
+            <Font size="33.0" />
+         </font></Button>
+      <Button fx:id="exitButton" layoutX="449.0" layoutY="318.0" mnemonicParsing="false" onAction="#exit" prefHeight="59.0" prefWidth="120.0" text="Exit">
+         <font>
+            <Font size="33.0" />
+         </font></Button>
+   </children>
 </AnchorPane>
