@@ -66,14 +66,7 @@ public class InputControler {
                 }
             }, KeyCode.Q);
         //if (c.equals(MOUSE)) {
-            FXGL.getInput().addAction(new UserAction("MOVE") {
-                @Override
-                protected void onAction() {
-                    super.onAction();
-                    Point2D mouse = FXGL.getInput().getMousePositionWorld();
-                    GameManager.player.getComponent(CustomAStarMoveComponent.class).moveToCell(GameManager.grid.pfg.getCell(mouse));
-                }
-            }, MouseButton.PRIMARY);
+
         //}
        // if (c.equals(KEYBOARD)) {
 

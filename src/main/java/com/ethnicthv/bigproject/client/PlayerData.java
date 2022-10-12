@@ -12,6 +12,9 @@ public class PlayerData {
     private Integer Boms = 5;
 
     public void onUpdate(double tpf) {
+        if (Health <= 0) {
+            GameManager.onPlayerDeath();
+        }
         if (Bomdelay > 0) Bomdelay -= tpf;
         else Bomdelay = (double) 0;
 

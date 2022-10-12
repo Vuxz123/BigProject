@@ -109,4 +109,8 @@ public class GameManager {
     public static SealedPlayer getPlayer() {
         return player;
     }
+
+    public static void onPlayerDeath() {
+
+    }
 }
