@@ -2,6 +2,8 @@ package com.ethnicthv.bigproject.entity.boom;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
+import com.ethnicthv.bigproject.asset.Config;
+import com.ethnicthv.bigproject.client.GameData;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
 import com.ethnicthv.bigproject.util.Pos;
@@ -26,8 +28,8 @@ public class HBoom extends AbstractBoom {
             int x = centerX;
             int l = x + 9;
             SpawnData data = new SpawnData(centerX - 1, centerY);
-            data.put("spe", 200d);
-            data.put("du", 250d);
+            data.put("spe", GameManager.getPlayer().getPlayerData().getBoomSpe());
+            data.put("du", GameManager.getPlayer().getPlayerData().getBoomDuration());
             data.put("dir", new Point2D(-1, 0));
             FXGL.getGameWorld().spawn("f", data);
             data.put("dir", new Point2D(1, 0));
@@ -36,6 +38,7 @@ public class HBoom extends AbstractBoom {
             FXGL.getGameWorld().spawn("f", data);
             data.put("dir", new Point2D(0, 1));
             FXGL.getGameWorld().spawn("f", data);
+            FXGL.play(Config.Asset.SOUNG_EXPLOSION);
         };
     }
 

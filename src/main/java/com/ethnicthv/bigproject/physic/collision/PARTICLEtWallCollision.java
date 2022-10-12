@@ -21,7 +21,6 @@ public class PARTICLEtWallCollision extends CollisionHandler {
         HitBox boxA = a.getBoundingBoxComponent().hitBoxesProperty().get(0);
         HitBox boxB = b.getBoundingBoxComponent().hitBoxesProperty().get(0);
         Point2D point = boxA.getCenterWorld();
-        point.add(8, 8);
         if (boxB.getCenterWorld().distance(point) <= 6.6) {
             b.removeFromWorld();
         }

@@ -1,10 +1,12 @@
 package com.ethnicthv.bigproject.entity.boom;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.ethnicthv.bigproject.asset.Config;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.client.map.SafeCellState;
 import com.ethnicthv.bigproject.client.map.SafeGrid;
 import com.ethnicthv.bigproject.util.Pos;
+import javafx.geometry.Point2D;
 
 public class BlockBoom extends AbstractBoom {
 
@@ -25,8 +27,13 @@ public class BlockBoom extends AbstractBoom {
                 if (GameManager.grid.pfg.get(x, y).getState() != SafeCellState.NOT_WALKABLE) {
                     //System.out.println("" + p.getKey() + " " + p.getValue() + " " + GameManager.grid.pfg.get(x, y).isWalkable() + " " + x + " " + y + " " + GameManager.grid.pfg.get(x, y).getState());
                     FXGL.spawn("block", x * GameManager.grid.gridsize + GameManager.OFFSETX, y * GameManager.grid.gridsize + GameManager.OFFSETY);
+                    Point2D v = GameManager.grid.pfg.get(x, y).getWorldPosition().add(8,8);
+                    if(GameManager.getPlayer().getPosition().getX() == v.getX() && GameManager.getPlayer().getPosition().getY() == v.getY()) {
+                        GameManager.getPlayer().getPlayerData().dealDamage(100);
+                    }
                 }
             }
+            FXGL.play(Config.Asset.SOUNG_EXPLOSION);
         };
     }
 

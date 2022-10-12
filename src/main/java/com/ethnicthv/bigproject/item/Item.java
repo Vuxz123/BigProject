@@ -16,6 +16,8 @@ public abstract class Item {
 
     public abstract ItemStack getItemStack();
 
+    public abstract void run();
+
     public Texture getTexture() {
         return texture;
     }

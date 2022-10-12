@@ -21,6 +21,10 @@ import static com.ethnicthv.bigproject.client.GameManager.OFFSETX;
 import static com.ethnicthv.bigproject.client.GameManager.OFFSETY;
 
 public class GameMap {
+    public int max_entity = 10;
+
+    public int numberOfEntities = 10;
+
     public final int gridsize = 16;
 
     public Level level;
@@ -89,7 +93,7 @@ public class GameMap {
         var lcell = pfg.getWalkableCell();
         for (int v = 0; v < 10; v++) {
             var cell = FXGLMath.random(lcell);
-            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 50) {
+            if (cell.isEmpty() || cell.get().getWorldPosition().distance(pfg.get(2, 2).getWorldPosition()) < 150) {
                 v--;
                 continue;
             }

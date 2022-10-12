@@ -15,6 +15,7 @@ public class UIControlor {
         updatedNode.add(GameManager.ui.speed);
         updatedNode.add(GameManager.ui.health);
         updatedNode.add(GameManager.ui.mana);
+        updatedNode.add(GameManager.ui.boom);
     }
 
     public void onUpdate(double tpf) {

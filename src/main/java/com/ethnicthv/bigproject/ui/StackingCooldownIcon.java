@@ -17,9 +17,7 @@ public class StackingCooldownIcon extends CooldownIcon{
         this.maxstack = maxstack;
         this.amount = new Text(String.valueOf(maxstack));
         this.amount.setFill(Color.RED);
-        this.amount.setScaleX(0.5);
-        this.amount.setScaleY(0.5);
-        this.amount.setX(32-amount.getLayoutX());
+        this.amount.setX(32-amount.getLayoutX() - 8);
         this.amount.setY(32-amount.getLayoutY());
         this.amount.setText("");
         this.getChildren().add(amount);

@@ -93,13 +93,15 @@ public class PlayerControlerComponent extends Component {
 
     public void placeBoom() {
         if(!GameManager.getPlayer().getPlayerData().isBomDelay()) {
-            Point2D pos = GameManager.getPlayer().getPosition();
-            SafeCell cell = GameManager.grid.pfg.getCell(pos);
-            if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
-                return;
+            if(GameManager.getPlayer().getPlayerData().placeBoom()) {
+                Point2D pos = GameManager.getPlayer().getPosition();
+                SafeCell cell = GameManager.grid.pfg.getCell(pos);
+                if (FXGL.getGameWorld().getEntitiesAt(cell.getWorldPosition()).stream().anyMatch(e -> e.getType().toString() == EntityType.BOM.toString())) {
+                    return;
+                }
+                GameManager.getPlayer().getPlayerData().resetBomDelay();
+                FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
             }
-            GameManager.getPlayer().getPlayerData().resetBomDelay();
-            FXGL.getGameWorld().spawn("hb", new SpawnData(pos));
         }
     }
 

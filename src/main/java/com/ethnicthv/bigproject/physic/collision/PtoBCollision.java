@@ -1,6 +1,5 @@
 package com.ethnicthv.bigproject.physic.collision;
 
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
@@ -8,9 +7,9 @@ import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.EntityType;
 import javafx.geometry.Point2D;
 
-public class PtoParCollision extends CollisionHandler {
-    public PtoParCollision() {
-        super(EntityType.PLAYER, EntityType.PARTICLE);
+public class PtoBCollision extends CollisionHandler {
+    public PtoBCollision() {
+        super(EntityType.PLAYER, EntityType.BREAKABLE_BLOCK);
     }
 
     @Override
@@ -20,9 +19,9 @@ public class PtoParCollision extends CollisionHandler {
         HitBox boxB = b.getBoundingBoxComponent().hitBoxesProperty().get(0);
         Point2D point = boxA.getCenterWorld();
         point.add(8, 8);
-        if (boxB.getCenterWorld().distance(point) <= 8.8) {
-            b.removeFromWorld();
-            GameManager.getPlayer().getPlayerData().dealDamage(25);
+        if (boxB.getCenterWorld().distance(point) <= 4) {
+            System.out.println(boxB.getCenterWorld().distance(point));
+            GameManager.getPlayer().getPlayerData().dealDamage(100);
         }
     }
 }

@@ -21,7 +21,8 @@ public class TextureProvider {
     public final Texture SHIELD_1 = FXGL.getAssetLoader().loadTexture("feature/shield.png");
 
     public final Texture SHIELD_2 = FXGL.getAssetLoader().loadTexture("feature/shield_layer2.png");
-
+    public final Texture HEALTH = FXGL.getAssetLoader().loadTexture("ui/healthbottle.png", 32, 32);
+    public final Texture MANA = FXGL.getAssetLoader().loadTexture("ui/manabottle.png", 32, 32);
     public final Texture SHIELD_ICON = FXGL.getAssetLoader().loadTexture("ui/shieldicon.png", 32, 32);
     public final Texture SPEED_ICON = FXGL.getAssetLoader().loadTexture("ui/speedicon.png", 32, 32);
 

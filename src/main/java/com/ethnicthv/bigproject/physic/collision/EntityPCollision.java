@@ -24,6 +24,5 @@ public class EntityPCollision extends CollisionHandler {
         particle.removeFromWorld();
         GameManager.data.killed ++;
         play(Asset.SOUND_LOSE_LIFE);
-        System.out.println("playing sound");
     }
 }
