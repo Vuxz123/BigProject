@@ -64,7 +64,8 @@ public class GameSoundMenuController implements Initializable, UIController {
 
         //directory = new File(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString()).getParentFile();
         try {
-            directory = new File(Object.class.getClassLoader().getResource("assets\\music").toURI());
+            directory = new File(getClass().getClassLoader().getResource("assets/music").toURI());
+            System.out.println(directory.toPath().toAbsolutePath());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
