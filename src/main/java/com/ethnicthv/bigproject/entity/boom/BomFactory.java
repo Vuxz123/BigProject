@@ -10,7 +10,7 @@ import com.ethnicthv.bigproject.asset.AnimatedChannelProvider;
 import com.ethnicthv.bigproject.client.GameManager;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.BomComponent;
-import com.ethnicthv.bigproject.entity.component.graphic.AnimatedGraphicComponent;
+import com.ethnicthv.bigproject.input.InputControler;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -41,6 +41,7 @@ public class BomFactory implements EntityFactory {
                 .with(new AnimatedGraphicComponent(new AnimatedTexture(AnimatedChannelProvider.INSTANCE.BOOM)).setOffsetY(-16))
                 .zIndex(11)
                 .build();
+
         return e;
     }
 

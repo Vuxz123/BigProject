@@ -5,6 +5,8 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.ethnicthv.bigproject.asset.TextureProvider;
 import com.ethnicthv.bigproject.entity.component.pdf.CustomCellMoveComponent;
 import com.ethnicthv.bigproject.entity.entities.SealedPlayer;
+import com.almasb.fxgl.entity.Entity;
+import com.ethnicthv.bigproject.input.InputControler;
 import com.ethnicthv.bigproject.physic.PhysicControler;
 import com.ethnicthv.bigproject.physic.collision.*;
 import com.ethnicthv.bigproject.ui.CooldownIcon;
@@ -14,6 +16,13 @@ import com.ethnicthv.bigproject.util.Util;
 import com.ethnicthv.bigproject.entity.entities.Player;
 import com.sun.media.jfxmedia.logging.Logger;
 import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 import static com.ethnicthv.bigproject.util.Util.SS;
 
@@ -51,7 +60,7 @@ public class GameManager {
         System.out.println("" + grid.getMaxGridX() + " " + grid.getMaxGridY());
     }
 
-    public static void initGame(){
+    public static void initGame() throws URISyntaxException {
         Logger.setLevel(Logger.DEBUG);
         FXGL.getEventBus().setLoggingEnabled(true);
         grid.setup();
