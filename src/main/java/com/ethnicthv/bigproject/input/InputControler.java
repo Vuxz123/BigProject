@@ -4,9 +4,11 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
+import com.almasb.fxgl.ui.UI;
 import com.ethnicthv.bigproject.asset.Config;
 import com.ethnicthv.bigproject.client.GameManager;
 //import com.ethnicthv.bigproject.client.GameMenu;
+import com.ethnicthv.bigproject.client.controller.SaveDataController;
 import com.ethnicthv.bigproject.client.map.SafeCell;
 import com.ethnicthv.bigproject.entity.EntityType;
 import com.ethnicthv.bigproject.entity.component.DurationComponent;
@@ -17,7 +19,7 @@ import javafx.scene.input.MouseButton;
 
 import java.time.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.play;
+import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ethnicthv.bigproject.input.ControlOption.*;
 
 public class InputControler {
@@ -39,6 +41,19 @@ public class InputControler {
 
     @Deprecated
     public void setup() {
+            FXGL.getInput().addAction(new UserAction("END GAME") {
+                @Override
+                protected void onAction() {
+                    SaveDataController controller = new SaveDataController();
+
+                    // 2. place fxml file in "assets/ui" and load it
+                    UI fxmlUI = getAssetLoader().loadUI("SaveData.fxml", controller);
+
+
+                    // 4. add UI to game scene
+                    getGameScene().addUI(fxmlUI);
+                }
+            }, KeyCode.Q);
         //if (c.equals(MOUSE)) {
             FXGL.getInput().addAction(new UserAction("MOVE") {
                 @Override
@@ -50,6 +65,7 @@ public class InputControler {
             }, MouseButton.PRIMARY);
         //}
        // if (c.equals(KEYBOARD)) {
+
             FXGL.getInput().addAction(new UserAction("GO RIGHT") {
                 @Override
                 protected void onAction() {

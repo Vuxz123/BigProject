@@ -74,8 +74,8 @@ public class GameManager {
 
 
     public static void onUpdate(double tdf) {
-        GameManager.ui.text.setText(String.valueOf(GameManager.data.killed));
-        GameManager.ui.text.setText(String.valueOf(InputControler.INSTANCE.getBombPlaced()));
+        //GameManager.ui.text.setText(String.valueOf(GameManager.data.killed));
+      //  GameManager.ui.text.setText(String.valueOf(InputControler.INSTANCE.getBombPlaced()));
     }
 
 }

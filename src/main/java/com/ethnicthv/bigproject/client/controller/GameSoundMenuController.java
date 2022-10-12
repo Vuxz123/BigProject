@@ -1,4 +1,4 @@
-package com.ethnicthv.bigproject.client;
+package com.ethnicthv.bigproject.client.controller;
 
 import java.io.File;
 import java.net.URL;
@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.UIController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,9 +19,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-public class GameMenu implements Initializable, UIController {
+public class GameSoundMenuController implements Initializable, UIController {
 
-    public static GameMenu gameMenu = new GameMenu();
+    public static GameSoundMenuController gameMenu = new GameSoundMenuController();
     @FXML
     private Pane pane;
     @FXML
@@ -65,7 +64,7 @@ public class GameMenu implements Initializable, UIController {
         //directory = new File(FXGL.getAssetLoader().getURL("assets/music/HeySun.mp3").toString()).getParentFile();
         directory = new File("D:\\Java\\BigProject4\\BigProject\\src\\main\\resources\\assets\\music");
         files = directory.listFiles();
-
+        //System.out.println(files.toString());
         if(files != null) {
 
             for(File file : files) {
@@ -73,7 +72,7 @@ public class GameMenu implements Initializable, UIController {
                 songs.add(file);
             }
         }
-
+        songNumber = 0;
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
@@ -100,10 +99,10 @@ public class GameMenu implements Initializable, UIController {
 
     public void playMedia() {
 
-//        beginTimer();
-//        changeSpeed(null);
-//        mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
-//        mediaPlayer.play();
+        beginTimer();
+        changeSpeed(null);
+        mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
+        mediaPlayer.play();
     }
 
     public void pauseMedia() {
@@ -152,7 +151,7 @@ public class GameMenu implements Initializable, UIController {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
-            //songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
         }
@@ -174,7 +173,7 @@ public class GameMenu implements Initializable, UIController {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
-            //songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
         }
@@ -187,7 +186,7 @@ public class GameMenu implements Initializable, UIController {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
-           // songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName());
 
             playMedia();
         }
@@ -202,13 +201,14 @@ public class GameMenu implements Initializable, UIController {
         else {
 
             //mediaPlayer.setRate(Integer.parseInt(speedBox.getValue()) * 0.01);
+
             mediaPlayer.setRate(Integer.parseInt(speedBox.getValue().substring(0, speedBox.getValue().length() - 1)) * 0.01);
         }
     }
 
     public void beginTimer() {
 
-        //timer = new Timer();
+        timer = new Timer();
 
         task = new TimerTask() {
 
@@ -220,19 +220,20 @@ public class GameMenu implements Initializable, UIController {
                 songProgressBar.setProgress(current/end);
 
                 if(current/end == 1) {
-
+                    resetMedia();
                     cancelTimer();
+
                 }
             }
         };
 
-       // timer.scheduleAtFixedRate(task, 0, 1000);
+        timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
     public void cancelTimer() {
 
         running = false;
-        //timer.cancel();
+        timer.cancel();
     }
 
     @Override
