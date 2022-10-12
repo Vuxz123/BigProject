@@ -12,6 +12,8 @@ public class FXGLMenuDIY extends FXGLMenu {
 
     public static UI soundMenu;
     public static UI optionMenu;
+
+    public static UI resultMenu;
     public FXGLMenuDIY() {
         super(MenuType.MAIN_MENU);
         MenuController menuController = new MenuController();
@@ -26,6 +28,9 @@ public class FXGLMenuDIY extends FXGLMenu {
 
         GameSoundMenuController gameSoundMenuController = new GameSoundMenuController();
         soundMenu = getAssetLoader().loadUI("GameSoundMenu.fxml", gameSoundMenuController);
+
+        ResultController resultController = new ResultController();
+        resultMenu = getAssetLoader().loadUI("Result.fxml", resultController);
     }
 
     public UI getLoader() {

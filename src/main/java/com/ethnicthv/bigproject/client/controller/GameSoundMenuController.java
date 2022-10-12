@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.UIController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +23,11 @@ import javafx.util.Duration;
 public class GameSoundMenuController implements Initializable, UIController {
 
     public static GameSoundMenuController gameMenu = new GameSoundMenuController();
+
+    @FXML
+    private Button backToOptionButton;
+    @FXML
+    private Button backToOptionMenu;
     @FXML
     private Pane pane;
     @FXML
@@ -96,6 +102,19 @@ public class GameSoundMenuController implements Initializable, UIController {
 
         songProgressBar.setStyle("-fx-accent: #00FF00;");
     }
+
+    public void backToOption() {
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().clear();
+        // 4. add UI to game scene
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.optionMenu.getRoot());
+    }
+
+    public void backToMenu(){
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().clear();
+        // 4. add UI to game scene
+        FXGL.getWindowService().getCurrentScene().getRoot().getChildren().add(FXGLMenuDIY.mainMenu.getRoot());
+    }
+
 
     public void playMedia() {
 
