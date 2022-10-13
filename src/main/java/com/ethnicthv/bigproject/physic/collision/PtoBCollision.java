@@ -20,7 +20,6 @@ public class PtoBCollision extends CollisionHandler {
         Point2D point = boxA.getCenterWorld();
         point.add(8, 8);
         if (boxB.getCenterWorld().distance(point) <= 4) {
-            System.out.println(boxB.getCenterWorld().distance(point));
             GameManager.getPlayer().getPlayerData().dealDamage(100);
         }
     }
