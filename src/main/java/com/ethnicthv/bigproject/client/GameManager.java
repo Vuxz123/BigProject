@@ -48,7 +48,6 @@ public class GameManager {
         gameSettings.setTitle(TITLE);
         gameSettings.setVersion(VERSION);
         gameSettings.setTicksPerSecond(TICKS);
-        gameSettings.setDeveloperMenuEnabled(true);
         gameSettings.setMainMenuEnabled(true);
     }
 
