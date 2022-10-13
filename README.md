@@ -1,4 +1,3 @@
-Đoàn Vũ Quang Phú
 # Bomberman Game
 ### For learning propose
 #### Contributors
@@ -59,3 +58,4 @@
 ### Preview
 ![image](https://user-images.githubusercontent.com/87368494/195485248-72063523-1a1e-407d-ae1e-fff1941bf3dc.png)
 ![image](https://user-images.githubusercontent.com/87368494/195485270-8effd8a8-6ce6-4d71-a284-586a9ff17136.png)
+
