@@ -4,8 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <!--suppress ALL, JavaFxDefaultTag, XmlHighlighting -->
-Highlighting -->
-Highlighting -->
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="523.0" prefWidth="1017.0"
             style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/11.0.14-internal">
     <children>

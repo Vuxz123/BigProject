@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<!--suppress JavaFxDefaultTag -->
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="517.0" prefWidth="1022.0" style="-fx-background-color: #222222;"
             xmlns="http://javafx.com/javafx/18">
